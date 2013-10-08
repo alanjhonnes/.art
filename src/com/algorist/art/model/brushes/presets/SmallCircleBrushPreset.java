@@ -13,5 +13,12 @@ public class SmallCircleBrushPreset extends Preset {
     public SmallCircleBrushPreset() {
         
     }
+
+    @Override
+    public String toString() {
+        return "Pequeno";
+    }
+    
+    
     
 }

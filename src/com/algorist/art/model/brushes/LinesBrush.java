@@ -4,6 +4,8 @@
  */
 package com.algorist.art.model.brushes;
 
+import java.util.Map;
+
 /**
  *
  * @author alan.jbssa
@@ -23,6 +25,11 @@ public class LinesBrush extends Brush {
     @Override
     public void loadDefaultPresets() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Map<String, Class> getParamTypes() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

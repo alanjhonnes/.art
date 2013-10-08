@@ -8,6 +8,7 @@ import com.algorist.art.model.brushes.presets.Preset;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -30,6 +31,8 @@ public abstract class Brush {
     abstract public void draw();
     
     public abstract void loadDefaultPresets();
+    
+    public abstract Map<String, Class> getParamTypes();
     
     public void loadPreset(Preset preset){
         if(preset.getBrushClass() != this.getClass()){
