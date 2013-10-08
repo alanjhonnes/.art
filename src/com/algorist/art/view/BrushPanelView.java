@@ -41,10 +41,8 @@ public class BrushPanelView extends AbstractView<JPanel> implements Observer {
         comboBrushes.addItem(new LinesBrush());
         
         JComboBox<Preset> comboPresets = new JComboBox<>();
-        comboBrushes.setMaximumSize(new Dimension(200, 20));
+        comboPresets.setMaximumSize(new Dimension(200, 20));
         
-        comboBrushes.addItem(new LinesBrush());
-        comboBrushes.addItem(new CirclesBrush());
         
         
         panel.add(comboBrushes);
