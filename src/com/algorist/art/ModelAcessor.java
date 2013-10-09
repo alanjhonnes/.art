@@ -8,7 +8,6 @@ import com.algorist.art.model.Art;
 import com.algorist.art.model.History;
 import com.algorist.art.model.Layers;
 import com.algorist.art.model.Preferences;
-import com.algorist.art.model.State;
 import com.algorist.art.model.brushes.Brushes;
 
 /**
