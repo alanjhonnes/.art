@@ -5,6 +5,7 @@
 package com.algorist.art;
 
 import com.algorist.art.model.Art;
+import com.algorist.art.model.brushes.Brushes;
 import com.algorist.art.view.MainFrame;
 import com.algorist.art.view.MainView;
 
@@ -23,8 +24,7 @@ public class Main {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Main.setupModel();
-                new MainFrame().show();
+                new MainFrame(new ModelAcessor()).show();
 
             }
         });
@@ -33,6 +33,6 @@ public class Main {
 
     private static void setupModel() {
         Art artModel = new Art();
-        
+        Brushes brushes = new Brushes();
     }
 }

@@ -1,6 +1,7 @@
 package com.algorist.art.view;
 
 
+import com.algorist.art.ModelAcessor;
 import com.algorist.art.controller.BrushPanelController;
 import com.algorist.art.controller.DrawingAreaController;
 import com.algorist.art.controller.LayerPanelController;
@@ -29,15 +30,17 @@ public class MainFrame extends AbstractFrame {
     public JPanel panelContainer;
     public JPanel brushContainer;
     public JPanel layerContainer;
+    private ModelAcessor modelAcessor;
     
 
-    public MainFrame() {
+    public MainFrame(ModelAcessor modelAcessor) {
         super();
+        this.modelAcessor = modelAcessor;
     }
 
     @Override
     protected void registerAllViews() {
-        views.put(BrushPanelView.class, new BrushPanelView(this));
+        views.put(BrushPanelView.class, new BrushPanelView(this, null));
         views.put(LayerPanelView.class, new LayerPanelView(this));
         views.put(DrawingAreaView.class, new DrawingAreaView(this));
         views.put(MenuView.class, new MenuView(this));
@@ -85,14 +88,5 @@ public class MainFrame extends AbstractFrame {
         
         return jFrame;
     }
-
-    public static void main(String[] args) {
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-
-            @Override
-            public void run() {
-                new MainFrame().show();
-            }
-        });
-    }
+    
 }

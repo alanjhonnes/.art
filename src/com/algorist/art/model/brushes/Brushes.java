@@ -6,12 +6,13 @@ package com.algorist.art.model.brushes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 /**
  *
  * @author senac2012
  */
-public class Brushes {
+public class Brushes extends Observable {
     
     private List<Brush> brushes;
 
