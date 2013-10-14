@@ -4,6 +4,7 @@
  */
 package com.algorist.art.view;
 
+import com.algorist.art.controller.BrushPanelController;
 import com.algorist.art.model.brushes.presets.Preset;
 import com.algorist.art.model.brushes.Brush;
 import com.algorist.art.model.brushes.Brushes;
@@ -33,6 +34,8 @@ import mvc.AbstractView;
  * @author senac2012
  */
 public class BrushPanelView extends AbstractView<JPanel> implements Observer {
+    
+    private BrushPanelController controller;
 
     public Brushes brushesModel;
     
@@ -44,20 +47,20 @@ public class BrushPanelView extends AbstractView<JPanel> implements Observer {
     public BrushPanelView(AbstractFrame mainFrame, Brushes brushesModel) {
         super(mainFrame);
         this.brushesModel = brushesModel;
+        this.controller = mainFrame.getController(BrushPanelController.class);
     }
 
     @Override
     protected JPanel layout() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-        panel.setBorder(new EmptyBorder(5, 5, 5, 5));
+        panel.setBorder(new EmptyBorder(5, 0, 5, 5));
         comboBrushes = new JComboBox<>();
         comboBrushes.setMaximumSize(new Dimension(200, 20));
 
-
-        CirclesBrush circlesBrush = new CirclesBrush();
-
-        comboBrushes.addItem(circlesBrush);
+        
+        
+        comboBrushes.addItem(new CirclesBrush());
         comboBrushes.addItem(new LinesBrush());
 
         comboPresets = new JComboBox<>();
@@ -73,7 +76,7 @@ public class BrushPanelView extends AbstractView<JPanel> implements Observer {
             }
         });
 
-        repopulatePresets(circlesBrush.getPresets());
+        repopulatePresets(comboBrushes.getItemAt(comboBrushes.getSelectedIndex()).getPresets());
 
 
         labelBrush = new JLabel("Pincel:");
