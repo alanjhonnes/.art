@@ -44,6 +44,11 @@ public class Preset extends Observable {
     public void setBrushClass(Class brushClass) {
         this.brushClass = brushClass;
     }
+
+  @Override
+  public String toString() {
+    return this.name;
+  }
     
     
     

@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  *
@@ -32,11 +34,16 @@ public abstract class Brush {
     
     public abstract void loadDefaultPresets();
     
+    
+    
     public abstract Map<String, Class> getParamTypes();
     
     public void loadPreset(Preset preset){
-        if(preset.getBrushClass() != this.getClass()){
+        if(preset.getBrushClass() == this.getClass()){
             
+        }
+        else {
+            System.err.println("Error loading preset. Preset brushClass is diferent from brush class.");
         }
     }
 

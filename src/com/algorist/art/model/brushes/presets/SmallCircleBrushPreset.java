@@ -4,6 +4,8 @@
  */
 package com.algorist.art.model.brushes.presets;
 
+import com.algorist.art.model.brushes.CirclesBrush;
+
 /**
  *
  * @author senac2012
@@ -11,14 +13,7 @@ package com.algorist.art.model.brushes.presets;
 public class SmallCircleBrushPreset extends Preset {
 
     public SmallCircleBrushPreset() {
-        
+        this.setName("Pequeno");
+        this.setBrushClass(CirclesBrush.class);
     }
-
-    @Override
-    public String toString() {
-        return "Pequeno";
-    }
-    
-    
-    
 }
