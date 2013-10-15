@@ -11,7 +11,7 @@ import com.algorist.art.model.Preferences;
 import com.algorist.art.model.brushes.Brushes;
 
 /**
- *
+ * Class to store persistent user variables (Preferences, presets).
  * @author user
  */
 public class Storage {

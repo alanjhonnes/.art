@@ -8,6 +8,7 @@ import com.algorist.art.model.Art;
 import com.algorist.art.model.brushes.Brushes;
 import com.algorist.art.view.MainFrame;
 import com.algorist.art.view.MainView;
+import javax.swing.JFormattedTextField;
 
 /**
  *
@@ -32,6 +33,7 @@ public class Main {
     }
 
     private static void setupModel() {
+        
         Art artModel = new Art();
         Brushes brushes = new Brushes();
     }

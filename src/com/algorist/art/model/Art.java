@@ -5,83 +5,25 @@
 package com.algorist.art.model;
 
 import com.algorist.art.model.brushes.Brush;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
+import javax.swing.JTable;
 
 /**
- * Model class for each document 
+ * Main model class, contains the whole list of openned documents. 
  * @author senac2012
  */
 public class Art extends Observable {
     
-    private State currentState;
-    
-    private Layer selectedLayer;
-    
-    private History history;
-    
-    private Layers layers;
-    
-    private int width;
-    private int height;
-    
     private Brush selectedBrush;
+    private Documents documents;
+    private Document currentDocument;
     
 
     public Art() {
-        layers = new Layers();
-        layers.addLayer();
-    }
-    
-    public void saveState(){
+        documents = new Documents();
         
-    }
-
-    public State getCurrentState() {
-        return currentState;
-    }
-
-    public void setCurrentState(State currentState) {
-        this.currentState = currentState;
-    }
-
-    public Layer getSelectedLayer() {
-        return selectedLayer;
-    }
-
-    public void setSelectedLayer(Layer selectedLayer) {
-        this.selectedLayer = selectedLayer;
-    }
-
-    public History getHistory() {
-        return history;
-    }
-
-    public void setHistory(History history) {
-        this.history = history;
-    }
-
-    public Layers getLayers() {
-        return layers;
-    }
-
-    public void setLayers(Layers layers) {
-        this.layers = layers;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
     }
 
     public Brush getSelectedBrush() {
