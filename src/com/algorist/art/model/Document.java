@@ -8,7 +8,7 @@ import com.alanjhonnes.event.EventDispatcher;
 import java.util.Observable;
 
 /**
- * Represents an openned file
+ * Represents an opened file
  * @author alan.jbssa
  */
 public class Document extends EventDispatcher {

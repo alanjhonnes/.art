@@ -5,6 +5,8 @@
 package com.alanjhonnes.event;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +37,7 @@ public class EventDispatcher implements IEventDispatcher {
         EventData eventData = new EventData(type, callback);
         if(!listeners.contains(eventData)){
             listeners.add(eventData);
+            Collections.sort(listeners);
         }
     }
 
