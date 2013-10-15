@@ -14,14 +14,13 @@ import mvc.AbstractView;
  *
  * @author alan.jbssa
  */
-public class DocumentsPanelView extends AbstractView<JTabbedPane> implements Observer{
+public class DocumentsPanelView extends AbstractView<JTabbedPane> {
 
     private Art artModel;
 
     public DocumentsPanelView(AbstractFrame mainFrame, Art artModel) {
         super(mainFrame);
         this.artModel = artModel;
-        artModel.addObserver(this);
     }
     
     
