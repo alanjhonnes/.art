@@ -4,11 +4,11 @@
  */
 package com.algorist.art;
 
-import com.algorist.art.model.Art;
-import com.algorist.art.model.brushes.Brushes;
+import com.algorist.art.controller.LayerController;
+import com.algorist.art.model.Layer;
 import com.algorist.art.view.MainFrame;
 import com.algorist.art.view.MainView;
-import javax.swing.JFormattedTextField;
+import java.util.Collections;
 
 /**
  *
@@ -25,16 +25,14 @@ public class Main {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainFrame(new ModelAcessor()).show();
-
+                MainFrame mainFrame = new MainFrame(new ModelAcessor());
+                mainFrame.show();
+                
             }
         });
 
     }
-
-    private static void setupModel() {
-        
-        Art artModel = new Art();
-        Brushes brushes = new Brushes();
-    }
+    
+    
+    
 }

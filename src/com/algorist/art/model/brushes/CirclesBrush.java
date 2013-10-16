@@ -4,6 +4,7 @@
  */
 package com.algorist.art.model.brushes;
 
+import com.algorist.art.model.brushes.presets.Preset;
 import com.algorist.art.model.brushes.presets.SmallCircleBrushPreset;
 import com.algorist.art.model.brushes.presets.ThickCircleBrushPreset;
 import java.util.HashMap;
@@ -47,5 +48,16 @@ public class CirclesBrush extends Brush {
         map.put("hardness", Float.class);
         return map;
     }
+
+    @Override
+    public void loadPreset(Preset preset) {
+        Map<Object, Object> map = preset.getParams();
+        this.thickness = (Integer) map.get("thickness");
+        
+    }
+    
+    
+    
+    
     
 }
