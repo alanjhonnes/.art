@@ -4,6 +4,10 @@
  */
 package com.algorist.art.controller;
 
+import com.alanjhonnes.event.CallbackFunction;
+import com.alanjhonnes.event.Event;
+import com.algorist.art.event.LayerEvent;
+import com.algorist.art.model.Layer;
 import mvc.AbstractController;
 import mvc.AbstractFrame;
 
@@ -13,8 +17,12 @@ import mvc.AbstractFrame;
  */
 public class LayerController extends AbstractController {
     
-    public LayerController(AbstractFrame mainFrame) {
+    private Layer layer;
+    
+    public LayerController(AbstractFrame mainFrame, Layer layer) {
         super(mainFrame);
+        this.layer = layer;
+        
     }
     
 }

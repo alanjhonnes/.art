@@ -4,6 +4,8 @@
  */
 package com.algorist.art.model;
 
+import com.alanjhonnes.event.EventDispatcher;
+import com.algorist.art.event.LayerEvent;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.WritableRaster;
@@ -14,7 +16,7 @@ import java.util.Observable;
  *
  * @author alan.jbssa
  */
-public class Layer extends Observable implements Serializable {
+public class Layer extends EventDispatcher {
 
     private float opacity = 1;
     private BufferedImage image;
@@ -37,7 +39,8 @@ public class Layer extends Observable implements Serializable {
     }
 
     public void setSize(int width, int height) {
-        
+        ///
+        dispatchEvent(new LayerEvent(this, LayerEvent.SIZE_CHANGED));
     }
 
     public void refreshThumbnail() {
@@ -56,7 +59,6 @@ public class Layer extends Observable implements Serializable {
 
     public void setOpacity(float opacity) {
         this.opacity = opacity;
-        notifyObservers(this);
     }
 
     public BufferedImage getImage() {

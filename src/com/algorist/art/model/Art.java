@@ -4,6 +4,7 @@
  */
 package com.algorist.art.model;
 
+import com.alanjhonnes.event.EventDispatcher;
 import com.algorist.art.model.brushes.Brush;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,7 @@ import javax.swing.JTable;
  * Main model class, contains the whole list of openned documents. 
  * @author senac2012
  */
-public class Art extends Observable {
+public class Art extends EventDispatcher {
     
     private Brush selectedBrush;
     private Documents documents;
