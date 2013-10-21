@@ -4,7 +4,10 @@
  */
 package com.algorist.art;
 
+import com.alanjhonnes.event.CallbackFunction;
+import com.alanjhonnes.event.Event;
 import com.algorist.art.controller.LayerController;
+import com.algorist.art.event.LayerEvent;
 import com.algorist.art.model.Layer;
 import com.algorist.art.view.MainFrame;
 import com.algorist.art.view.MainView;
@@ -27,7 +30,6 @@ public class Main {
             public void run() {
                 MainFrame mainFrame = new MainFrame(new ModelAcessor());
                 mainFrame.show();
-                
             }
         });
 

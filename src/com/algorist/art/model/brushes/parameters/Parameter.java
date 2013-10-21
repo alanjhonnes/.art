@@ -18,6 +18,8 @@ public abstract class Parameter {
     public void setType(Class type) {
         this.type = type;
     }
+    
+    public abstract Object getValue();
   
   
   

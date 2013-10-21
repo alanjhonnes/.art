@@ -10,8 +10,23 @@ package com.algorist.art.model.brushes.parameters;
  */
 public class IntParameter extends Parameter {
 
+    public int min;
+    public int max;
+    
   public IntParameter() {
       this.type = Integer.class;
   }
+
+    public IntParameter(int min, int max) {
+        this.min = min;
+        this.max = max;
+        this.type = Integer.class;
+    }
+  
+
+    @Override
+    public Integer getValue() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
   
 }
