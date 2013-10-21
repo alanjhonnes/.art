@@ -41,7 +41,7 @@ public class MainFrame extends AbstractFrame {
     @Override
     protected void registerAllViews() {
         views.put(BrushPanelView.class, new BrushPanelView(this, null));
-        views.put(LayerPanelView.class, new LayerPanelView(this));
+        views.put(LayersPanelView.class, new LayersPanelView(this));
         views.put(DrawingAreaView.class, new DrawingAreaView(this));
         views.put(MenuView.class, new MenuView(this));
     }
@@ -75,7 +75,7 @@ public class MainFrame extends AbstractFrame {
         panelContainer.setBorder(new LineBorder(Color.BLACK));
         
         brushContainer = getView(BrushPanelView.class).getContentPane();
-        layerContainer = getView(LayerPanelView.class).getContentPane();
+        layerContainer = getView(LayersPanelView.class).getContentPane();
         
         jFrame.add(drawingContainer, BorderLayout.CENTER);
         

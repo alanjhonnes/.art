@@ -4,8 +4,7 @@
  */
 package com.algorist.art.view;
 
-import java.util.Observable;
-import java.util.Observer;
+import com.algorist.art.model.Layer;
 import javax.swing.JPanel;
 import mvc.AbstractFrame;
 import mvc.AbstractView;
@@ -14,24 +13,22 @@ import mvc.AbstractView;
  *
  * @author senac2012
  */
-public class LayerPanelView extends AbstractView<JPanel> implements Observer {
+public class LayerPanelView extends AbstractView<JPanel> {
 
-    public LayerPanelView(AbstractFrame mainFrame) {
+    private Layer model;
+    
+    public LayerPanelView(AbstractFrame mainFrame, Layer layerModel) {
         super(mainFrame);
+        this.model = layerModel;
     }
 
+    
+    
     @Override
     protected JPanel layout() {
-        JPanel panel = new JPanel();
         
-        return panel;
+        
+        
     }
-
-    @Override
-    public void update(Observable o, Object o1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    
     
 }
