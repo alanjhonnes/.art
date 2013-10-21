@@ -5,6 +5,7 @@ import com.algorist.art.ModelAcessor;
 import com.algorist.art.controller.BrushPanelController;
 import com.algorist.art.controller.DrawingAreaController;
 import com.algorist.art.controller.LayerPanelController;
+import com.algorist.art.model.Document;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -41,7 +42,7 @@ public class MainFrame extends AbstractFrame {
     @Override
     protected void registerAllViews() {
         views.put(BrushPanelView.class, new BrushPanelView(this, null));
-        views.put(LayersPanelView.class, new LayersPanelView(this));
+        views.put(LayersPanelView.class, new LayersPanelView(this, new Document()));
         views.put(DrawingAreaView.class, new DrawingAreaView(this));
         views.put(MenuView.class, new MenuView(this));
     }
