@@ -9,7 +9,8 @@ package com.algorist.art.model.brushes.parameters;
  * @author user
  */
 public abstract class Parameter {
-  protected Class type;
+
+    protected Class type;
 
     public Class getType() {
         return type;
@@ -18,9 +19,6 @@ public abstract class Parameter {
     public void setType(Class type) {
         this.type = type;
     }
-    
+
     public abstract Object getValue();
-  
-  
-  
 }

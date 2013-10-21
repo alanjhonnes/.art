@@ -4,9 +4,9 @@
  */
 package com.algorist.art.model.brushes;
 
-import com.algorist.art.model.brushes.parameters.FloatParameter;
-import com.algorist.art.model.brushes.parameters.ColorParameter;
 import com.algorist.art.model.brushes.parameters.IntParameter;
+import com.algorist.art.model.brushes.parameters.ColorParameter;
+import com.algorist.art.model.brushes.parameters.FloatParameter;
 import com.algorist.art.model.brushes.parameters.Parameter;
 import com.algorist.art.model.brushes.presets.Preset;
 import com.algorist.art.model.brushes.presets.SmallCircleBrushPreset;

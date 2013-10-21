@@ -4,15 +4,19 @@
  */
 package com.algorist.art.model.brushes.parameters;
 
-import com.algorist.art.model.brushes.parameters.Parameter;
 
 /**
  *
  * @author senac2012
  */
-class FloatParameter extends Parameter {
+public class FloatParameter extends Parameter {
 
-    public FloatParameter(int i, int i0) {
+    public FloatParameter(float min, float max) {
+    }
+
+    @Override
+    public Float getValue() {
+        return null;
     }
     
 }

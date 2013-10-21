@@ -4,15 +4,18 @@
  */
 package com.algorist.art.model.brushes.parameters;
 
-import com.algorist.art.model.brushes.parameters.Parameter;
-
 /**
  *
  * @author senac2012
  */
-class ColorParameter extends Parameter {
+public class ColorParameter extends Parameter {
 
     public ColorParameter() {
+    }
+
+    @Override
+    public ColorValue getValue() {
+        return null;
     }
     
 }
