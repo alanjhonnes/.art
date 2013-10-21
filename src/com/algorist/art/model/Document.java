@@ -5,6 +5,7 @@
 package com.algorist.art.model;
 
 import com.alanjhonnes.event.EventDispatcher;
+import java.util.List;
 import java.util.Observable;
 
 /**
@@ -12,27 +13,11 @@ import java.util.Observable;
  * @author alan.jbssa
  */
 public class Document extends EventDispatcher {
-    private Layers layers;
-    private History history;
+    private List<Layer> layers;
+    private List<State> states;
     private int width;
     private int height;
     private Layer selectedLayer;
-
-    public Layers getLayers() {
-        return layers;
-    }
-
-    public void setLayers(Layers layers) {
-        this.layers = layers;
-    }
-
-    public History getHistory() {
-        return history;
-    }
-
-    public void setHistory(History history) {
-        this.history = history;
-    }
 
     public int getWidth() {
         return width;
@@ -57,5 +42,23 @@ public class Document extends EventDispatcher {
     public void setSelectedLayer(Layer selectedLayer) {
         this.selectedLayer = selectedLayer;
     }
+
+    public List<Layer> getLayers() {
+        return layers;
+    }
+
+    public void setLayers(List<Layer> layers) {
+        this.layers = layers;
+    }
+
+    public List<State> getStates() {
+        return states;
+    }
+
+    public void setStates(List<State> states) {
+        this.states = states;
+    }
+    
+    
     
 }
