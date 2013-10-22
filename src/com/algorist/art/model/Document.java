@@ -5,6 +5,8 @@
 package com.algorist.art.model;
 
 import com.alanjhonnes.event.EventDispatcher;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Observable;
 
@@ -18,6 +20,20 @@ public class Document extends EventDispatcher {
     private int width;
     private int height;
     private Layer selectedLayer;
+
+    public Document(int width, int height) {
+        this.width = width;
+        this.height = height;
+        layers = new ArrayList<>();
+        states = new LinkedList<>();
+        
+        layers.add(new Layer(width, height));
+        layers.add(new Layer(width, height));
+        layers.add(new Layer(width, height));
+        layers.add(new Layer(width, height));
+    }
+    
+    
 
     public int getWidth() {
         return width;

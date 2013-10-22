@@ -42,7 +42,7 @@ public class MainFrame extends AbstractFrame {
     @Override
     protected void registerAllViews() {
         views.put(BrushPanelView.class, new BrushPanelView(this, null));
-        views.put(LayersPanelView.class, new LayersPanelView(this, new Document()));
+        views.put(LayersPanelView.class, new LayersPanelView(this, new Document(500,400)));
         views.put(DrawingAreaView.class, new DrawingAreaView(this));
         views.put(MenuView.class, new MenuView(this));
     }
