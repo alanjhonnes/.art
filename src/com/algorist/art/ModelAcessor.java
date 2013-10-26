@@ -25,6 +25,12 @@ public class ModelAcessor {
     //TODO
     public ModelAcessor() {
         
+        
+        
+    }
+    
+    public void initializeModel(){
+        
     }
     
     
