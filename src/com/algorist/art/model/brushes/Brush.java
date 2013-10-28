@@ -68,6 +68,10 @@ public abstract class Brush {
     public String toString() {
         return name;
     }
+
+    public void stop() {
+        
+    }
     
     
     
