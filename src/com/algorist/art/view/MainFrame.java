@@ -34,10 +34,14 @@ public class MainFrame extends AbstractFrame {
     public JPanel layerContainer;
     private ModelAcessor modelAcessor;
     
+    private DrawingAreaController drawingAreaController;
+    
 
     public MainFrame(ModelAcessor modelAcessor) {
-        System.out.println(modelAcessor);
         this.modelAcessor = modelAcessor;
+        
+        drawingAreaController = new DrawingAreaController(this, modelAcessor.getArt());
+        
         registerAllViews();
         registerAllControllers();
         this.frame = layout();
@@ -47,7 +51,8 @@ public class MainFrame extends AbstractFrame {
     protected void registerAllViews() {
         views.put(BrushPanelView.class, new BrushPanelView(this, null));
         views.put(LayersPanelView.class, new LayersPanelView(this, modelAcessor.getArt().getCurrentDocument()));
-        views.put(DrawingAreaView.class, new DrawingAreaView(this));
+        
+        views.put(DrawingAreaView.class, new DrawingAreaView(this, drawingAreaController));
         views.put(MenuView.class, new MenuView(this));
     }
 
@@ -56,7 +61,7 @@ public class MainFrame extends AbstractFrame {
         controllers.put(BrushPanelController.class, new BrushPanelController(this));
         controllers.put(BrushPanelController.class, new BrushPanelController(this));
         controllers.put(LayerPanelController.class, new LayerPanelController(this));
-        controllers.put(DrawingAreaController.class, new DrawingAreaController(this, modelAcessor.getArt()));
+        controllers.put(DrawingAreaController.class, drawingAreaController);
     }
 
     @Override

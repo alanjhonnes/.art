@@ -43,6 +43,7 @@ public class DrawingAreaController extends AbstractController {
     
     public void onMouseMoved(Point newMousePosition){
         mousePosition = newMousePosition;
+        System.out.println(mousePosition);
     }
     
     public void onMouseReleased(){

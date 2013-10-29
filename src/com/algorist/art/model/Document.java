@@ -26,11 +26,8 @@ public class Document extends EventDispatcher {
         this.height = height;
         layers = new ArrayList<>();
         states = new LinkedList<>();
-        
-        layers.add(new Layer(width, height));
-        layers.add(new Layer(width, height));
-        layers.add(new Layer(width, height));
-        layers.add(new Layer(width, height));
+        selectedLayer = new Layer(width, height);
+        layers.add(selectedLayer);
     }
     
     

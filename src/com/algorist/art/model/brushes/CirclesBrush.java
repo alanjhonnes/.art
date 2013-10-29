@@ -30,12 +30,7 @@ public class CirclesBrush extends Brush {
         super();
         this.name = "Circulos";
     }
-
-    @Override
-    public void draw() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
     @Override
     public void loadDefaultPresets() {
         presets.add(new SmallCircleBrushPreset());
@@ -59,6 +54,21 @@ public class CirclesBrush extends Brush {
         Map<Object, Object> map = preset.getParams();
         this.thickness = (Integer) map.get("thickness");
         
+    }
+    
+    @Override
+    public void draw() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void initialize() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void stop() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     
