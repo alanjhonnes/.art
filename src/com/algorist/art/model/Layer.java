@@ -43,7 +43,7 @@ public class Layer extends EventDispatcher {
         dispatchEvent(new LayerEvent(this, LayerEvent.SIZE_CHANGED));
     }
 
-    public void refreshThumbnail() {
+    private void refreshThumbnail() {
     }
 
     public Layer duplicate() {

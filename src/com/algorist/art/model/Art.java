@@ -18,13 +18,11 @@ import javax.swing.JTable;
 public class Art extends EventDispatcher {
     
     private Brush selectedBrush;
-    private Documents documents;
+    private List<Document> documents;
     private Document currentDocument;
-    
 
     public Art() {
-        documents = new Documents();
-        
+        documents = new ArrayList<>();
     }
 
     public Brush getSelectedBrush() {
@@ -34,6 +32,24 @@ public class Art extends EventDispatcher {
     public void setSelectedBrush(Brush selectedBrush) {
         this.selectedBrush = selectedBrush;
     }
+    
+    public Document getCurrentDocument() {
+        return currentDocument;
+    }
+
+    public void setCurrentDocument(Document currentDocument) {
+        this.currentDocument = currentDocument;
+    }
+
+    public List<Document> getDocuments() {
+        return documents;
+    }
+
+    public void setDocuments(List<Document> documents) {
+        this.documents = documents;
+    }
+    
+    
     
     
     

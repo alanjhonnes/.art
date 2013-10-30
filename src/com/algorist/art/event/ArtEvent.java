@@ -12,6 +12,8 @@ import com.alanjhonnes.event.IEventDispatcher;
  * @author user
  */
 public class ArtEvent extends Event {
+    
+    public static final String BRUSH_CHANGED = "brushChanged";
 
     public ArtEvent(IEventDispatcher source, String type) {
         super(source, type);

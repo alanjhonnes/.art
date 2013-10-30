@@ -28,7 +28,9 @@ public class Main {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                MainFrame mainFrame = new MainFrame(new ModelAcessor());
+                ModelAcessor modelAcessor = new ModelAcessor();
+                modelAcessor.initializeModel();
+                MainFrame mainFrame = new MainFrame(modelAcessor);
                 mainFrame.show();
             }
         });

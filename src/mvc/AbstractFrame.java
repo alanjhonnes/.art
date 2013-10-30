@@ -12,15 +12,15 @@ import javax.swing.JPanel;
 
 public abstract class AbstractFrame {
 
-    protected final JFrame frame;
+    protected JFrame frame;
     protected final Map<Class<? extends AbstractView<? extends JComponent>>, AbstractView<? extends JComponent>> views = new HashMap<Class<? extends AbstractView<? extends JComponent>>, AbstractView<? extends JComponent>>();
     protected final Map<Class<? extends AbstractController>, AbstractController> controllers = new HashMap<Class<? extends AbstractController>, AbstractController>();
     
-    public AbstractFrame() {
-        registerAllViews();
-        registerAllControllers();
-        this.frame = layout();
-    }
+//    public AbstractFrame() {
+//        registerAllViews();
+//        registerAllControllers();
+//        this.frame = layout();
+//    }
     
     protected abstract void registerAllViews();
     

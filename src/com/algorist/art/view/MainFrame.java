@@ -11,6 +11,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -22,7 +23,7 @@ public class MainFrame extends AbstractFrame {
     public JMenuBar menu;
     
     public JScrollPane drawingContainer;
-    public JPanel drawingArea;
+    public JLayeredPane drawingArea;
     
     public JScrollPane panelScroller;
     public JScrollPane brushScroller;
@@ -33,17 +34,25 @@ public class MainFrame extends AbstractFrame {
     public JPanel layerContainer;
     private ModelAcessor modelAcessor;
     
+    private DrawingAreaController drawingAreaController;
+    
 
     public MainFrame(ModelAcessor modelAcessor) {
-        super();
         this.modelAcessor = modelAcessor;
+        
+        drawingAreaController = new DrawingAreaController(this, modelAcessor.getArt());
+        
+        registerAllViews();
+        registerAllControllers();
+        this.frame = layout();
     }
 
     @Override
     protected void registerAllViews() {
         views.put(BrushPanelView.class, new BrushPanelView(this, null));
-        views.put(LayersPanelView.class, new LayersPanelView(this, new Document()));
-        views.put(DrawingAreaView.class, new DrawingAreaView(this));
+        views.put(LayersPanelView.class, new LayersPanelView(this, modelAcessor.getArt().getCurrentDocument()));
+        
+        views.put(DrawingAreaView.class, new DrawingAreaView(this, drawingAreaController));
         views.put(MenuView.class, new MenuView(this));
     }
 
@@ -52,7 +61,7 @@ public class MainFrame extends AbstractFrame {
         controllers.put(BrushPanelController.class, new BrushPanelController(this));
         controllers.put(BrushPanelController.class, new BrushPanelController(this));
         controllers.put(LayerPanelController.class, new LayerPanelController(this));
-        controllers.put(DrawingAreaController.class, new DrawingAreaController(this));
+        controllers.put(DrawingAreaController.class, drawingAreaController);
     }
 
     @Override

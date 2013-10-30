@@ -5,6 +5,7 @@
 package com.algorist.art;
 
 import com.algorist.art.model.Art;
+import com.algorist.art.model.Document;
 import com.algorist.art.model.History;
 import com.algorist.art.model.Layers;
 import com.algorist.art.model.Preferences;
@@ -25,7 +26,57 @@ public class ModelAcessor {
     //TODO
     public ModelAcessor() {
         
+        
     }
+    
+    public void initializeModel(){
+        art = new Art();
+        Document doc = new Document(600, 400);
+        art.getDocuments().add(doc);
+        art.setCurrentDocument(doc);
+    }
+
+    public Brushes getBrushes() {
+        return brushes;
+    }
+
+    public void setBrushes(Brushes brushes) {
+        this.brushes = brushes;
+    }
+
+    public Preferences getPreferences() {
+        return preferences;
+    }
+
+    public void setPreferences(Preferences preferences) {
+        this.preferences = preferences;
+    }
+
+    public History getHistory() {
+        return history;
+    }
+
+    public void setHistory(History history) {
+        this.history = history;
+    }
+
+    public Layers getLayers() {
+        return layers;
+    }
+
+    public void setLayers(Layers layers) {
+        this.layers = layers;
+    }
+
+    public Art getArt() {
+        return art;
+    }
+
+    public void setArt(Art art) {
+        this.art = art;
+    }
+    
+    
     
     
     
