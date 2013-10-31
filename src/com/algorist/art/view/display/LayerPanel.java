@@ -27,6 +27,7 @@ public class LayerPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Layer painted");
         this.setBackground(Color.yellow);
         g.setColor(Color.yellow);
         g.drawRect(50, 50, 50, 50);
