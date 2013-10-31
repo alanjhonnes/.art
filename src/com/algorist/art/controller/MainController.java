@@ -9,7 +9,7 @@ import mvc.AbstractFrame;
 
 /**
  *
- * @author senac2012
+ * @author alanjhonnes
  */
 public class MainController extends AbstractController {
 

@@ -21,7 +21,7 @@ import mvc.AbstractView;
 
 /**
  *
- * @author senac2012
+ * @author alanjhonnes
  */
 public class LayersPanelView extends AbstractView<JPanel> {
     private List<LayerPanelView> layerViews;

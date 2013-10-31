@@ -16,7 +16,7 @@ import javax.swing.JScrollPane;
  *
  * @author alan.jbssa
  */
-public class MainView extends JFrame implements Observer {
+public class MainView extends JFrame {
     
     public MenuView menu;
     
@@ -36,11 +36,6 @@ public class MainView extends JFrame implements Observer {
         this.add(drawingContainer);
         
         
-    }
-
-    @Override
-    public void update(Observable o, Object o1) {
-
     }
 
     

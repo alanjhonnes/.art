@@ -4,16 +4,16 @@
  */
 package com.algorist.art.model;
 
+import com.alanjhonnes.event.EventDispatcher;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Observable;
 
 
 /**
  *
- * @author senac2012
+ * @author alanjhonnes
  */
-public class Layers extends Observable {
+public class Layers extends EventDispatcher {
     private List<Layer> layers;
 
     public List<Layer> getLayers() {
@@ -26,14 +26,14 @@ public class Layers extends Observable {
     
     public void addLayer(){
         //layers.add(new Layer();
-        notifyObservers(this);
+        //notifyObservers(this);
     }
     
     public void deleteLayer(Layer layer){
         for (Iterator<Layer> it = layers.iterator(); it.hasNext();) {
             if(it.next() == layer){
                 it.remove();
-                notifyObservers(this);
+                //notifyObservers(this);
                 break;
             }
         }

@@ -2,12 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.algorist.art.model.brushes.parameters;
+package com.alanjhonnes.components.swing;
 
 /**
  *
- * @author alanjhonnes
+ * @author alan.jbssa
  */
-public class ColorValue {
+public class GradientSelector {
     
 }

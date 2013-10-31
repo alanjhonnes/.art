@@ -4,6 +4,8 @@
  */
 package com.algorist.art.model.brushes;
 
+import com.algorist.art.model.Layer;
+import com.algorist.art.model.Movement;
 import com.algorist.art.model.brushes.parameters.IntParameter;
 import com.algorist.art.model.brushes.parameters.ColorParameter;
 import com.algorist.art.model.brushes.parameters.FloatParameter;
@@ -58,17 +60,19 @@ public class CirclesBrush extends Brush {
     
     @Override
     public void draw() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void initialize() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void stop() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void startDrawing(Movement movement, Layer layer) {
+        
+    }
+
+    @Override
+    public void stopDrawing(Movement movement) {
     }
     
     

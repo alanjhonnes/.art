@@ -14,7 +14,7 @@ import mvc.AbstractView;
 
 /**
  *
- * @author senac2012
+ * @author alanjhonnes
  */
 public class LayerPanelView extends AbstractView<JPanel> {
 

@@ -9,11 +9,11 @@ import com.alanjhonnes.event.IEventDispatcher;
 
 /**
  *
- * @author Wellington
+ * @author alanjhonnes
  */
 public class MovementEvent extends Event {
 
-    public final String POSITION_CHANGED = "positionChanged";
+    public static final String POSITION_CHANGED = "positionChanged";
     
     public MovementEvent(IEventDispatcher source, String type) {
         super(source, type);

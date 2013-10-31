@@ -4,11 +4,13 @@
  */
 package com.algorist.art.model;
 
+import com.alanjhonnes.event.EventDispatcher;
+
 /**
  *
- * @author senac2012
+ * @author alanjhonnes
  */
-public class State {
+public class State extends EventDispatcher{
     
     private Layers layers;
     

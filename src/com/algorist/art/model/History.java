@@ -4,14 +4,14 @@
  */
 package com.algorist.art.model;
 
+import com.alanjhonnes.event.EventDispatcher;
 import java.util.List;
-import java.util.Observable;
 
 /**
  *
- * @author senac2012
+ * @author alanjhonnes
  */
-public class History extends Observable {
+public class History extends EventDispatcher {
     
     public List<State> states;
     

@@ -37,6 +37,7 @@ public class MainFrame extends AbstractFrame {
     
     private DrawingAreaController drawingAreaController;
     private DocumentsController documentsController;
+    private BrushPanelController brushPanelController;
     
 
     public MainFrame(ModelAcessor modelAcessor) {
@@ -44,6 +45,7 @@ public class MainFrame extends AbstractFrame {
         
         drawingAreaController = new DrawingAreaController(this, modelAcessor.getArt());
         documentsController = new DocumentsController(this, modelAcessor.getArt());
+        brushPanelController = new BrushPanelController(this, modelAcessor.getArt());
         registerAllViews();
         registerAllControllers();
         this.frame = layout();
@@ -51,17 +53,15 @@ public class MainFrame extends AbstractFrame {
 
     @Override
     protected void registerAllViews() {
-        views.put(BrushPanelView.class, new BrushPanelView(this, null));
+        views.put(BrushPanelView.class, new BrushPanelView(this, brushPanelController, modelAcessor.getArt()));
         views.put(LayersPanelView.class, new LayersPanelView(this, modelAcessor.getArt().getCurrentDocument()));
-        
-        views.put(DrawingAreaView.class, new DrawingAreaView(this, drawingAreaController));
+        views.put(DrawingAreaView.class, new DrawingAreaView(this, drawingAreaController, modelAcessor.getArt().getCurrentDocument()));
         views.put(MenuView.class, new MenuView(this));
     }
 
     @Override
     protected void registerAllControllers() {
-        controllers.put(BrushPanelController.class, new BrushPanelController(this));
-        controllers.put(BrushPanelController.class, new BrushPanelController(this));
+        controllers.put(BrushPanelController.class, brushPanelController);
         controllers.put(LayerPanelController.class, new LayerPanelController(this));
         controllers.put(DrawingAreaController.class, drawingAreaController);
         controllers.put(DrawingAreaController.class, documentsController);

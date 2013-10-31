@@ -7,7 +7,7 @@ package com.algorist.art.model.brushes.parameters;
 
 /**
  *
- * @author senac2012
+ * @author alanjhonnes
  */
 public class FloatParameter extends Parameter {
 

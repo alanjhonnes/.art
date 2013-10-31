@@ -7,12 +7,14 @@ package com.algorist.art.model;
 import com.alanjhonnes.event.EventDispatcher;
 import com.algorist.art.event.ArtEvent;
 import com.algorist.art.model.brushes.Brush;
+import com.algorist.art.model.brushes.CirclesBrush;
+import com.algorist.art.model.brushes.LinesBrush;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Main model class, contains the whole list of openned documents. 
- * @author senac2012
+ * @author alanjhonnes
  */
 public class Art extends EventDispatcher {
     
@@ -20,9 +22,14 @@ public class Art extends EventDispatcher {
     private List<Document> documents;
     private Document currentDocument;
     private List<Movement> movements;
+    private List<Brush> brushes;
 
     public Art() {
         documents = new ArrayList<>();
+        movements = new ArrayList<>();
+        brushes = new ArrayList<>();
+        brushes.add(new CirclesBrush());
+        brushes.add(new LinesBrush());
     }
     
     public void addDocument(Document document){
@@ -79,7 +86,10 @@ public class Art extends EventDispatcher {
     public void setMovements(List<Movement> movements) {
         this.movements = movements;
     }
-    
+
+    public List<Brush> getBrushes() {
+        return brushes;
+    }
     
     
 }

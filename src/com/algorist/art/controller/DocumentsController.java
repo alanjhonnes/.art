@@ -11,7 +11,7 @@ import mvc.AbstractFrame;
 
 /**
  *
- * @author Wellington
+ * @author alanjhonnes
  */
 public class DocumentsController extends AbstractController {
     

@@ -17,51 +17,51 @@ import mvc.AbstractFrame;
 
 /**
  *
- * @author senac2012
+ * @author alanjhonnes
  */
 public class DrawingAreaController extends AbstractController {
 
-    public Point mousePosition;
     private DrawingAreaView view;
     private Brush brush;
-    private Art model;
-    
-    private Movement mouseMovement;
-    
-    public DrawingAreaController(AbstractFrame mainFrame, Art artModel) {
+    private Art artModel;
+    private Movement movement;
+
+    public DrawingAreaController(AbstractFrame mainFrame, Art art) {
         super(mainFrame);
-        view = mainFrame.getView(DrawingAreaView.class);
-        model = artModel;
-        model.addEventListener(ArtEvent.BRUSH_CHANGED, new CallbackFunction() {
+        this.artModel = art;
+
+        artModel.addEventListener(ArtEvent.BRUSH_CHANGED, new CallbackFunction() {
             @Override
             public void execute(Event e) {
-                brush = model.getSelectedBrush();
+                brush = artModel.getSelectedBrush();
             }
         });
-        model.addEventListener(ArtEvent.MOVEMENT_STARTED, new CallbackFunction() {
+        artModel.addEventListener(ArtEvent.MOVEMENT_STARTED, new CallbackFunction() {
             @Override
             public void execute(Event e) {
                 ArtEvent ae = (ArtEvent) e;
-                brush.startDrawing(ae.getMovement(), model.getCurrentDocument().getSelectedLayer());
+                brush.startDrawing(ae.getMovement(), artModel.getCurrentDocument().getSelectedLayer());
             }
         });
     }
-    
-    public void onMousePressed(){
-        Movement movement = new Movement(mousePosition);
-        model.startMovement(movement);
+
+    public void movementStarted(Point startPosition) {
+        movement = new Movement(startPosition);
+        artModel.startMovement(movement);
+        System.out.println(movement);
     }
-    
-    public void onMouseMoved(Point newMousePosition){
-        mousePosition = newMousePosition;
-        System.out.println(mousePosition);
+
+    public void movementUpdated(Point newPosition) {
+        if (movement != null) {
+            movement.movePosition(newPosition);
+            System.out.println(movement);
+        }
+
     }
-    
-    public void onMouseReleased(){
-        brush.stopDrawing();
+
+    public void movementEnded() {
+        brush.stopDrawing(movement);
+        artModel.endMovement(movement);
+        movement = null;
     }
-    
-    
-    
-    
 }

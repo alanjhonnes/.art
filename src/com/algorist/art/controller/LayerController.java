@@ -4,9 +4,6 @@
  */
 package com.algorist.art.controller;
 
-import com.alanjhonnes.event.CallbackFunction;
-import com.alanjhonnes.event.Event;
-import com.algorist.art.event.LayerEvent;
 import com.algorist.art.model.Layer;
 import mvc.AbstractController;
 import mvc.AbstractFrame;

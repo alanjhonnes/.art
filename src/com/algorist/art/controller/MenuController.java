@@ -9,7 +9,7 @@ import mvc.AbstractFrame;
 
 /**
  *
- * @author senac2012
+ * @author alanjhonnes
  */
 public class MenuController extends AbstractController {
 

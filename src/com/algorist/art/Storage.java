@@ -4,11 +4,7 @@
  */
 package com.algorist.art;
 
-import com.algorist.art.model.Art;
-import com.algorist.art.model.History;
-import com.algorist.art.model.Layers;
 import com.algorist.art.model.Preferences;
-import com.algorist.art.model.brushes.Brushes;
 
 /**
  * Class to store persistent user variables (Preferences, presets).
@@ -16,7 +12,7 @@ import com.algorist.art.model.brushes.Brushes;
  */
 public class Storage {
 
-  private Brushes brushes;
+  
   private Preferences preferences;
 
   public Storage() {

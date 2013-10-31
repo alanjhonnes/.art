@@ -4,6 +4,8 @@
  */
 package com.algorist.art.model.brushes;
 
+import com.algorist.art.model.Layer;
+import com.algorist.art.model.Movement;
 import com.algorist.art.model.brushes.parameters.Parameter;
 import java.util.Map;
 
@@ -25,24 +27,26 @@ public class LinesBrush extends Brush {
 
     @Override
     public Map<String, Parameter> getParamTypes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
 
     @Override
     public void initialize() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void draw() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void stop() {
+    public void startDrawing(Movement movement, Layer layer) {
+    }
+
+    @Override
+    public void stopDrawing(Movement movement) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     
     
 }

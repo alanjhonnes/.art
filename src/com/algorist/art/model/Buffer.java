@@ -4,12 +4,12 @@
  */
 package com.algorist.art.model;
 
-import java.util.Observable;
+import com.alanjhonnes.event.EventDispatcher;
 
 /**
  *
  * @author alan.jbssa
  */
-public class Buffer extends Observable {
+public class Buffer extends EventDispatcher {
     
 }

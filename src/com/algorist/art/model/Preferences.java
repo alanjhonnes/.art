@@ -4,12 +4,13 @@
  */
 package com.algorist.art.model;
 
+import com.alanjhonnes.event.EventDispatcher;
 import java.util.Observable;
 
 /**
  *
  * @author alan.jbssa
  */
-public class Preferences extends Observable {
+public class Preferences extends EventDispatcher {
     
 }

@@ -9,7 +9,6 @@ import com.algorist.art.model.Document;
 import com.algorist.art.model.History;
 import com.algorist.art.model.Layers;
 import com.algorist.art.model.Preferences;
-import com.algorist.art.model.brushes.Brushes;
 
 /**
  * 
@@ -17,7 +16,6 @@ import com.algorist.art.model.brushes.Brushes;
  */
 public class ModelAcessor {
     
-    private Brushes brushes;
     private Preferences preferences;
     private History history;
     private Layers layers;
@@ -34,14 +32,6 @@ public class ModelAcessor {
         Document doc = new Document(600, 400);
         art.getDocuments().add(doc);
         art.setCurrentDocument(doc);
-    }
-
-    public Brushes getBrushes() {
-        return brushes;
-    }
-
-    public void setBrushes(Brushes brushes) {
-        this.brushes = brushes;
     }
 
     public Preferences getPreferences() {

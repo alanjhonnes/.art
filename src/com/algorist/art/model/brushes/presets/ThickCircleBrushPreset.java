@@ -6,7 +6,7 @@ package com.algorist.art.model.brushes.presets;
 
 /**
  *
- * @author senac2012
+ * @author alanjhonnes
  */
 public class ThickCircleBrushPreset extends Preset {
 

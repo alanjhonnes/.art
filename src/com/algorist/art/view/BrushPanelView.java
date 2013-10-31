@@ -5,23 +5,17 @@
 package com.algorist.art.view;
 
 import com.algorist.art.controller.BrushPanelController;
+import com.algorist.art.model.Art;
 import com.algorist.art.model.brushes.presets.Preset;
 import com.algorist.art.model.brushes.Brush;
-import com.algorist.art.model.brushes.Brushes;
-import com.algorist.art.model.brushes.CirclesBrush;
-import com.algorist.art.model.brushes.LinesBrush;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.GroupLayout;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -31,23 +25,22 @@ import mvc.AbstractView;
 
 /**
  *
- * @author senac2012
+ * @author alanjhonnes
  */
-public class BrushPanelView extends AbstractView<JPanel> implements Observer {
-    
-    private BrushPanelController controller;
+public class BrushPanelView extends AbstractView<JPanel> {
 
-    public Brushes brushesModel;
-    
+    private BrushPanelController controller;
+    public Art artModel;
     public JLabel labelBrush;
     public JLabel labelPreset;
     public JComboBox<Brush> comboBrushes;
     public JComboBox<Preset> comboPresets;
 
-    public BrushPanelView(AbstractFrame mainFrame, Brushes brushesModel) {
+    public BrushPanelView(AbstractFrame mainFrame, BrushPanelController controller, Art artModel) {
         super(mainFrame);
-        this.brushesModel = brushesModel;
-        this.controller = mainFrame.getController(BrushPanelController.class);
+        this.artModel = artModel;
+        this.controller = controller;
+        setup();
     }
 
     @Override
@@ -55,47 +48,7 @@ public class BrushPanelView extends AbstractView<JPanel> implements Observer {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
         panel.setBorder(new EmptyBorder(5, 0, 5, 5));
-        comboBrushes = new JComboBox<>();
-        comboBrushes.setMaximumSize(new Dimension(200, 20));
 
-        
-        
-        comboBrushes.addItem(new CirclesBrush());
-        comboBrushes.addItem(new LinesBrush());
-
-        comboPresets = new JComboBox<>();
-        comboPresets.setMaximumSize(new Dimension(200, 20));
-
-
-        comboBrushes.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                JComboBox<Brush> combo = (JComboBox<Brush>) ae.getSource();
-                List<Preset> presets = combo.getItemAt(combo.getSelectedIndex()).getPresets();
-                repopulatePresets(presets);
-            }
-        });
-
-        repopulatePresets(comboBrushes.getItemAt(comboBrushes.getSelectedIndex()).getPresets());
-
-
-        labelBrush = new JLabel("Pincel:");
-        labelPreset = new JLabel("Preset:");
-        
-        labelBrush.setAlignmentX(Component.LEFT_ALIGNMENT);
-        labelPreset.setAlignmentX(Component.LEFT_ALIGNMENT);
-        comboBrushes.setAlignmentX(Component.LEFT_ALIGNMENT);
-        comboPresets.setAlignmentX(Component.LEFT_ALIGNMENT);
-        
-        
-        panel.add(labelBrush);
-        panel.add(comboBrushes);
-        panel.add(labelPreset);
-        panel.add(comboPresets);
-        
-        
-        
-        
         return panel;
     }
 
@@ -107,7 +60,50 @@ public class BrushPanelView extends AbstractView<JPanel> implements Observer {
         }
     }
 
-    @Override
-    public void update(Observable o, Object o1) {
+    private void setup() {
+        JPanel panel = getContentPane();
+        comboBrushes = new JComboBox<>();
+        comboBrushes.setMaximumSize(new Dimension(200, 20));
+
+        List<Brush> brushes = controller.getBrushes();
+        
+        for (int i = 0; i < brushes.size(); i++) {
+            Brush brush = brushes.get(i);
+            comboBrushes.addItem(brush);
+        }
+
+        comboPresets = new JComboBox<>();
+        comboPresets.setMaximumSize(new Dimension(200, 20));
+
+
+        comboBrushes.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                JComboBox<Brush> combo = (JComboBox<Brush>) ae.getSource();
+                List<Preset> presets = combo.getItemAt(combo.getSelectedIndex()).getPresets();
+                repopulatePresets(presets);
+                controller.changeBrush(combo.getItemAt(combo.getSelectedIndex()));
+            }
+        });
+        
+        controller.changeBrush(comboBrushes.getItemAt(comboBrushes.getSelectedIndex()));
+
+        repopulatePresets(comboBrushes.getItemAt(comboBrushes.getSelectedIndex()).getPresets());
+
+
+        labelBrush = new JLabel("Pincel:");
+        labelPreset = new JLabel("Preset:");
+
+        labelBrush.setAlignmentX(Component.LEFT_ALIGNMENT);
+        labelPreset.setAlignmentX(Component.LEFT_ALIGNMENT);
+        comboBrushes.setAlignmentX(Component.LEFT_ALIGNMENT);
+        comboPresets.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+
+        panel.add(labelBrush);
+        panel.add(comboBrushes);
+        panel.add(labelPreset);
+        panel.add(comboPresets);
+
     }
 }

@@ -8,7 +8,7 @@ import com.algorist.art.model.brushes.CirclesBrush;
 
 /**
  *
- * @author senac2012
+ * @author alanjhonnes
  */
 public class SmallCircleBrushPreset extends Preset {
 

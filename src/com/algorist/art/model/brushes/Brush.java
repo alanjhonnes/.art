@@ -10,11 +10,8 @@ import com.algorist.art.model.brushes.parameters.Parameter;
 import com.algorist.art.model.brushes.presets.Preset;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
 
 /**
  *
