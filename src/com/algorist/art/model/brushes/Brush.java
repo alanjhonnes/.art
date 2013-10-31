@@ -4,6 +4,8 @@
  */
 package com.algorist.art.model.brushes;
 
+import com.algorist.art.model.Layer;
+import com.algorist.art.model.Movement;
 import com.algorist.art.model.brushes.parameters.Parameter;
 import com.algorist.art.model.brushes.presets.Preset;
 import java.awt.image.BufferedImage;
@@ -34,13 +36,13 @@ public abstract class Brush {
     }
     abstract public void initialize();
     
+    abstract public void startDrawing(Movement movement, Layer layer);
+    
+    abstract public void stopDrawing(Movement movement);
+    
     abstract public void draw();
     
-    abstract public void stop();
-    
     public abstract void loadDefaultPresets();
-    
-    
     
     public abstract Map<String, Parameter> getParamTypes();
     
