@@ -8,7 +8,6 @@ import com.alanjhonnes.event.EventDispatcher;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Observable;
 
 /**
  * Represents an opened file
@@ -29,8 +28,6 @@ public class Document extends EventDispatcher {
         selectedLayer = new Layer(width, height);
         layers.add(selectedLayer);
     }
-    
-    
 
     public int getWidth() {
         return width;

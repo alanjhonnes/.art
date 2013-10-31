@@ -3,6 +3,7 @@ package com.algorist.art.view;
 
 import com.algorist.art.ModelAcessor;
 import com.algorist.art.controller.BrushPanelController;
+import com.algorist.art.controller.DocumentsController;
 import com.algorist.art.controller.DrawingAreaController;
 import com.algorist.art.controller.LayerPanelController;
 import com.algorist.art.model.Document;
@@ -35,13 +36,14 @@ public class MainFrame extends AbstractFrame {
     private ModelAcessor modelAcessor;
     
     private DrawingAreaController drawingAreaController;
+    private DocumentsController documentsController;
     
 
     public MainFrame(ModelAcessor modelAcessor) {
         this.modelAcessor = modelAcessor;
         
         drawingAreaController = new DrawingAreaController(this, modelAcessor.getArt());
-        
+        documentsController = new DocumentsController(this, modelAcessor.getArt());
         registerAllViews();
         registerAllControllers();
         this.frame = layout();
@@ -62,6 +64,7 @@ public class MainFrame extends AbstractFrame {
         controllers.put(BrushPanelController.class, new BrushPanelController(this));
         controllers.put(LayerPanelController.class, new LayerPanelController(this));
         controllers.put(DrawingAreaController.class, drawingAreaController);
+        controllers.put(DrawingAreaController.class, documentsController);
     }
 
     @Override
