@@ -5,6 +5,7 @@
 package com.algorist.art.model;
 
 import com.alanjhonnes.event.EventDispatcher;
+import com.algorist.art.event.DocumentEvent;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -51,6 +52,7 @@ public class Document extends EventDispatcher {
 
     public void setSelectedLayer(Layer selectedLayer) {
         this.selectedLayer = selectedLayer;
+        dispatchEvent(new DocumentEvent(this, DocumentEvent.LAYER_SELECTED, selectedLayer));
     }
 
     public List<Layer> getLayers() {

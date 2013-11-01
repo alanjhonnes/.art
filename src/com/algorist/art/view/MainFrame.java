@@ -39,6 +39,8 @@ public class MainFrame extends AbstractFrame {
     private DocumentsController documentsController;
     private BrushPanelController brushPanelController;
     
+    private DrawingAreaView drawingAreaView;
+    
 
     public MainFrame(ModelAcessor modelAcessor) {
         this.modelAcessor = modelAcessor;
@@ -53,9 +55,10 @@ public class MainFrame extends AbstractFrame {
 
     @Override
     protected void registerAllViews() {
+        drawingAreaView = new DrawingAreaView(this, drawingAreaController, modelAcessor.getArt().getCurrentDocument());
         views.put(BrushPanelView.class, new BrushPanelView(this, brushPanelController, modelAcessor.getArt()));
         views.put(LayersPanelView.class, new LayersPanelView(this, modelAcessor.getArt().getCurrentDocument()));
-        views.put(DrawingAreaView.class, new DrawingAreaView(this, drawingAreaController, modelAcessor.getArt().getCurrentDocument()));
+        views.put(DrawingAreaView.class, drawingAreaView);
         views.put(MenuView.class, new MenuView(this));
     }
 
@@ -73,7 +76,7 @@ public class MainFrame extends AbstractFrame {
         JFrame jFrame = new JFrame();
         jFrame.setTitle(".art");
         jFrame.setLayout(new BorderLayout());
-        jFrame.setMinimumSize(new Dimension(800, 600));
+        jFrame.setMinimumSize(new Dimension(800, 500));
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         menu = getView(MenuView.class).getContentPane();

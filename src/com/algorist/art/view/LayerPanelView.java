@@ -9,6 +9,8 @@ import javax.swing.GroupLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import mvc.AbstractFrame;
 import mvc.AbstractView;
 
@@ -34,6 +36,14 @@ public class LayerPanelView extends AbstractView<JPanel> {
         labelName = new JLabel();
         labelOpacity = new JLabel();
         opacitySlider = new JSlider(0, 100);
+        
+        opacitySlider.addChangeListener(new ChangeListener() {
+
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                
+            }
+        });
 
         labelName.setText("Camada:");
         labelOpacity.setText("Opacidade:");

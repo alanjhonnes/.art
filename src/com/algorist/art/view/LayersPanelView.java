@@ -9,12 +9,9 @@ import com.alanjhonnes.event.Event;
 import com.algorist.art.event.DocumentEvent;
 import com.algorist.art.model.Document;
 import com.algorist.art.model.Layer;
-import com.algorist.art.model.Layers;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 import javax.swing.JPanel;
 import mvc.AbstractFrame;
 import mvc.AbstractView;
@@ -33,7 +30,29 @@ public class LayersPanelView extends AbstractView<JPanel> {
         layerViews = new ArrayList<>();
         this.model = documentModel;
         setupLayers();
-        model.addEventListener(DocumentEvent.LAYERS_CHANGED, new CallbackFunction() {
+        
+        model.addEventListener(DocumentEvent.LAYER_ADDED, new CallbackFunction() {
+            @Override
+            public void execute(Event e) {
+                
+            }
+        });
+        
+        model.addEventListener(DocumentEvent.LAYER_REMOVED, new CallbackFunction() {
+            @Override
+            public void execute(Event e) {
+                
+            }
+        });
+        
+        model.addEventListener(DocumentEvent.LAYER_SELECTED, new CallbackFunction() {
+            @Override
+            public void execute(Event e) {
+                
+            }
+        });
+        
+        model.addEventListener(DocumentEvent.LAYERS_ORDER_CHANGED, new CallbackFunction() {
             @Override
             public void execute(Event e) {
                 

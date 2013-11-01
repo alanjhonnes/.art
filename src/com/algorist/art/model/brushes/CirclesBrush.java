@@ -4,6 +4,9 @@
  */
 package com.algorist.art.model.brushes;
 
+import com.alanjhonnes.event.CallbackFunction;
+import com.alanjhonnes.event.Event;
+import com.algorist.art.event.MovementEvent;
 import com.algorist.art.model.Layer;
 import com.algorist.art.model.Movement;
 import com.algorist.art.model.brushes.parameters.IntParameter;
@@ -13,6 +16,9 @@ import com.algorist.art.model.brushes.parameters.Parameter;
 import com.algorist.art.model.brushes.presets.Preset;
 import com.algorist.art.model.brushes.presets.SmallCircleBrushPreset;
 import com.algorist.art.model.brushes.presets.ThickCircleBrushPreset;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,6 +37,18 @@ public class CirclesBrush extends Brush {
     public CirclesBrush() {
         super();
         this.name = "Circulos";
+        drawCallback = new CallbackFunction() {
+
+            @Override
+            public void execute(Event e) {
+                MovementEvent me = (MovementEvent) e;
+                Movement movement = (Movement) e.getSource();
+                Graphics2D g = (Graphics2D) layer.getImage().createGraphics();
+                g.setColor(Color.BLACK);
+                g.drawOval(movement.getNewPosition().x, movement.getNewPosition().y, 5, 5);
+                
+            }
+        };
     }
     
     @Override
@@ -64,15 +82,6 @@ public class CirclesBrush extends Brush {
 
     @Override
     public void initialize() {
-    }
-
-    @Override
-    public void startDrawing(Movement movement, Layer layer) {
-        
-    }
-
-    @Override
-    public void stopDrawing(Movement movement) {
     }
     
     

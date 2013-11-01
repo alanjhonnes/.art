@@ -11,7 +11,9 @@ import com.algorist.art.model.Art;
 import com.algorist.art.model.Movement;
 import com.algorist.art.model.brushes.Brush;
 import com.algorist.art.view.DrawingAreaView;
+import com.algorist.art.view.display.LayerPanel;
 import java.awt.Point;
+import java.util.List;
 import mvc.AbstractController;
 import mvc.AbstractFrame;
 
@@ -29,7 +31,7 @@ public class DrawingAreaController extends AbstractController {
     public DrawingAreaController(AbstractFrame mainFrame, Art art) {
         super(mainFrame);
         this.artModel = art;
-
+        this.view = view;
         artModel.addEventListener(ArtEvent.BRUSH_CHANGED, new CallbackFunction() {
             @Override
             public void execute(Event e) {
@@ -54,6 +56,11 @@ public class DrawingAreaController extends AbstractController {
     public void movementUpdated(Point newPosition) {
         if (movement != null) {
             movement.movePosition(newPosition);
+            List<LayerPanel> layerPanels = view.getLayerPanels();
+            for (int i = 0; i < layerPanels.size(); i++) {
+                LayerPanel layerPanel = layerPanels.get(i);
+                layerPanel.repaint();
+            }
             System.out.println(movement);
         }
 
@@ -64,4 +71,13 @@ public class DrawingAreaController extends AbstractController {
         artModel.endMovement(movement);
         movement = null;
     }
+
+    public DrawingAreaView getView() {
+        return view;
+    }
+
+    public void setView(DrawingAreaView view) {
+        this.view = view;
+    }
+    
 }

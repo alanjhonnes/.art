@@ -4,6 +4,8 @@
  */
 package com.algorist.art.model.brushes;
 
+import com.alanjhonnes.event.CallbackFunction;
+import com.algorist.art.event.MovementEvent;
 import com.algorist.art.model.Layer;
 import com.algorist.art.model.Movement;
 import com.algorist.art.model.brushes.parameters.Parameter;
@@ -22,6 +24,10 @@ public abstract class Brush {
     protected String name;
     protected BufferedImage image;
     protected List<Preset> presets;
+    
+    protected Layer layer;
+    
+    protected CallbackFunction drawCallback;
 
     public Brush() {
         presets = new ArrayList<>();
@@ -33,9 +39,15 @@ public abstract class Brush {
     }
     abstract public void initialize();
     
-    abstract public void startDrawing(Movement movement, Layer layer);
+    public void startDrawing(Movement movement, Layer layer){
+        this.layer = layer;
+        movement.addEventListener(MovementEvent.POSITION_CHANGED, drawCallback);
+    }
     
-    abstract public void stopDrawing(Movement movement);
+    public void stopDrawing(Movement movement){
+        layer = null;
+        movement.removeEventListener(MovementEvent.POSITION_CHANGED, drawCallback);
+    }
     
     abstract public void draw();
     
