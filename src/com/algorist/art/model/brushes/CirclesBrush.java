@@ -27,7 +27,7 @@ import java.util.Map;
  * @author alan.jbssa
  */
 public class CirclesBrush extends Brush {
-    
+
     private Integer thickness;
     private Integer color;
     private Integer stepDuration;
@@ -37,20 +37,8 @@ public class CirclesBrush extends Brush {
     public CirclesBrush() {
         super();
         this.name = "Circulos";
-        drawCallback = new CallbackFunction() {
-
-            @Override
-            public void execute(Event e) {
-                MovementEvent me = (MovementEvent) e;
-                Movement movement = (Movement) e.getSource();
-                Graphics2D g = (Graphics2D) layer.getImage().createGraphics();
-                g.setColor(Color.BLACK);
-                g.drawOval(movement.getNewPosition().x, movement.getNewPosition().y, 5, 5);
-                
-            }
-        };
     }
-    
+
     @Override
     public void loadDefaultPresets() {
         presets.add(new SmallCircleBrushPreset());
@@ -66,26 +54,24 @@ public class CirclesBrush extends Brush {
         map.put("opacity", new FloatParameter(0, 1));
         map.put("hardness", new FloatParameter(0, 1));
         return map;
-        
+
     }
 
     @Override
     public void loadPreset(Preset preset) {
         Map<Object, Object> map = preset.getParams();
         this.thickness = (Integer) map.get("thickness");
-        
+
     }
-    
+
     @Override
-    public void draw() {
+    public void draw(Movement movement) {
+        Graphics2D g = (Graphics2D) layer.getImage().createGraphics();
+        g.setColor(Color.BLACK);
+        g.drawOval(movement.getNewPosition().x, movement.getNewPosition().y, 5,5);
     }
 
     @Override
     public void initialize() {
     }
-    
-    
-    
-    
-    
 }

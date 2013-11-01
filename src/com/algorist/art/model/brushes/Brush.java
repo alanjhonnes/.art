@@ -5,6 +5,7 @@
 package com.algorist.art.model.brushes;
 
 import com.alanjhonnes.event.CallbackFunction;
+import com.alanjhonnes.event.Event;
 import com.algorist.art.event.MovementEvent;
 import com.algorist.art.model.Layer;
 import com.algorist.art.model.Movement;
@@ -31,7 +32,16 @@ public abstract class Brush {
 
     public Brush() {
         presets = new ArrayList<>();
+        drawCallback = new CallbackFunction() {
+            @Override
+            public void execute(Event e) {
+                MovementEvent me = (MovementEvent) e;
+                Movement movement = (Movement) e.getSource();
+                draw(movement);
+            }
+        };
         loadDefaultPresets();
+        
     }
 
     public Brush(List<Preset> presets) {
@@ -49,7 +59,7 @@ public abstract class Brush {
         movement.removeEventListener(MovementEvent.POSITION_CHANGED, drawCallback);
     }
     
-    abstract public void draw();
+    abstract public void draw(Movement movement);
     
     public abstract void loadDefaultPresets();
     

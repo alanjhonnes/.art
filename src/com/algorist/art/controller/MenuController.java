@@ -4,6 +4,7 @@
  */
 package com.algorist.art.controller;
 
+import com.algorist.art.model.Art;
 import mvc.AbstractController;
 import mvc.AbstractFrame;
 
@@ -13,8 +14,11 @@ import mvc.AbstractFrame;
  */
 public class MenuController extends AbstractController {
 
-    public MenuController(AbstractFrame mainFrame) {
+    private Art artModel;
+    
+    public MenuController(AbstractFrame mainFrame, Art artModel) {
         super(mainFrame);
+        this.artModel = artModel;
     }
     
 }

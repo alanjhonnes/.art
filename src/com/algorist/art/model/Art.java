@@ -8,6 +8,7 @@ import com.alanjhonnes.event.EventDispatcher;
 import com.algorist.art.event.ArtEvent;
 import com.algorist.art.model.brushes.Brush;
 import com.algorist.art.model.brushes.CirclesBrush;
+import com.algorist.art.model.brushes.ArcBrush;
 import com.algorist.art.model.brushes.LinesBrush;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +31,7 @@ public class Art extends EventDispatcher {
         brushes = new ArrayList<>();
         brushes.add(new CirclesBrush());
         brushes.add(new LinesBrush());
+        brushes.add(new ArcBrush());
     }
     
     public void addDocument(Document document){

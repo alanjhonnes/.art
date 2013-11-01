@@ -4,6 +4,7 @@
  */
 package com.algorist.art.model.brushes.presets;
 
+import com.alanjhonnes.event.EventDispatcher;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
@@ -12,7 +13,7 @@ import java.util.Observable;
  *
  * @author alan.jbssa
  */
-public class Preset extends Observable {
+public class Preset extends EventDispatcher {
     protected String name;
     protected Class brushClass;
     protected Map<Object, Object> params;

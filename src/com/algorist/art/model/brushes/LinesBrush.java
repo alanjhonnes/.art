@@ -23,18 +23,6 @@ public class LinesBrush extends Brush {
     public LinesBrush() {
         super();
         this.name = "Linhas";
-        drawCallback = new CallbackFunction() {
-
-            @Override
-            public void execute(Event e) {
-                MovementEvent me = (MovementEvent) e;
-                Movement movement = (Movement) e.getSource();
-                Graphics2D g = (Graphics2D) layer.getImage().createGraphics();
-                g.setColor(Color.BLACK);
-                g.drawLine(movement.getOldPosition().x, movement.getOldPosition().y, movement.getNewPosition().x, movement.getNewPosition().y);
-                
-            }
-        };
     }
 
     @Override
@@ -52,7 +40,10 @@ public class LinesBrush extends Brush {
     }
 
     @Override
-    public void draw() {
+    public void draw(Movement movement) {
+        Graphics2D g = (Graphics2D) layer.getImage().createGraphics();
+                g.setColor(Color.BLACK);
+                g.drawLine(movement.getOldPosition().x, movement.getOldPosition().y, movement.getNewPosition().x, movement.getNewPosition().y);
     }
 
     
