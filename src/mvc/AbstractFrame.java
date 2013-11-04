@@ -57,4 +57,10 @@ public abstract class AbstractFrame {
     public <C extends AbstractController> C getController(Class<C> controllerClass) {
         return (C) controllers.get(controllerClass);
     }
+
+    public JFrame getFrame() {
+        return frame;
+    }
+    
+    
 }

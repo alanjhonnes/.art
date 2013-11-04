@@ -35,14 +35,15 @@ public class DocumentsView extends AbstractView<JTabbedPane> {
         this.controller = controller;
         drawingAreaViews = new ArrayList<>();
         controller.setView(this);
-        
-        contentPane.addChangeListener(new ChangeListener() {
 
+        contentPane.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                
-                Document doc = drawingAreaViews.get(contentPane.getSelectedIndex()).getDocumentModel();
-                getController().currentDocumentChanged(doc);
+                if (drawingAreaViews.size() > 0) {
+                    Document doc = drawingAreaViews.get(contentPane.getSelectedIndex()).getDocumentModel();
+                    getController().currentDocumentChanged(doc);
+                }
+
             }
         });
 
@@ -50,12 +51,12 @@ public class DocumentsView extends AbstractView<JTabbedPane> {
             @Override
             public void execute(Event e) {
                 ArtEvent ae = (ArtEvent) e;
-                
+
                 Document doc = ae.getDocument();
                 DrawingAreaView dwa = new DrawingAreaView(getMainFrame(), new DrawingAreaController(getMainFrame(), getArtModel()), doc);
                 drawingAreaViews.add(dwa);
                 contentPane.add(doc.getName(), dwa.getContentPane());
-                contentPane.setSelectedIndex(drawingAreaViews.size()-1);
+                contentPane.setSelectedIndex(drawingAreaViews.size() - 1);
             }
         });
 

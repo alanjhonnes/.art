@@ -24,6 +24,7 @@ public class Main {
             public void run() {
                 ModelAcessor modelAcessor = new ModelAcessor();
                 modelAcessor.initializeModel();
+                FileManager.initialize();
                 MainFrame mainFrame = new MainFrame(modelAcessor);
                 mainFrame.show();
             }

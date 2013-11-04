@@ -4,15 +4,18 @@
  */
 package com.algorist.art.view;
 
+import com.algorist.art.FileManager;
 import com.algorist.art.controller.MenuController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import javax.swing.ActionMap;
+import javax.swing.JFileChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import mvc.AbstractFrame;
 import mvc.AbstractView;
 
@@ -82,7 +85,7 @@ public class MenuView extends AbstractView<JMenuBar> implements ActionListener {
         closeDocumentItem.setMnemonic(KeyEvent.VK_W);
         closeDocumentItem.setActionCommand(CLOSE_DOCUMENT);
         closeDocumentItem.addActionListener(this);
-        
+
         openDocumentItem = new JMenuItem("Abrir...");
         openDocumentItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
         openDocumentItem.setMnemonic(KeyEvent.VK_O);
@@ -99,7 +102,7 @@ public class MenuView extends AbstractView<JMenuBar> implements ActionListener {
         saveAsItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK | ActionEvent.SHIFT_MASK));
         saveAsItem.setMnemonic(KeyEvent.VK_S);
         saveAsItem.setActionCommand(SAVE_AS);
-        saveFileItem.addActionListener(this);
+        saveAsItem.addActionListener(this);
 
         exportItem = new JMenuItem("Exportar...");
         exportItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, ActionEvent.CTRL_MASK));
@@ -185,15 +188,34 @@ public class MenuView extends AbstractView<JMenuBar> implements ActionListener {
                 controller.closeDocument();
                 break;
             case SAVE: {
-                controller.saveDocument();
+                JFileChooser chooser = new JFileChooser();
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("Arquivos .art", "art");
+                chooser.setFileFilter(filter);
+                int returnVal = chooser.showSaveDialog(getMainFrame().getFrame());
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    controller.saveDocument(chooser.getSelectedFile().getAbsolutePath());
+                }
                 break;
             }
             case SAVE_AS: {
-                controller.saveDocument();
+                JFileChooser chooser = new JFileChooser();
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("Arquivos .art", "art");
+                chooser.setFileFilter(filter);
+                int returnVal = chooser.showSaveDialog(getMainFrame().getFrame());
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    controller.saveDocument(chooser.getSelectedFile().getAbsolutePath());
+                }
+                
                 break;
             }
-                case OPEN_DOCUMENT: {
-                controller.loadDocument();
+            case OPEN_DOCUMENT: {
+                JFileChooser chooser = new JFileChooser();
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("Arquivos .art", "art");
+                chooser.setFileFilter(filter);
+                int returnVal = chooser.showOpenDialog(getMainFrame().getFrame());
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    controller.loadDocument(chooser.getSelectedFile());
+                }
                 break;
             }
         }
