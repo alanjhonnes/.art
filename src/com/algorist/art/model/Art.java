@@ -10,6 +10,9 @@ import com.algorist.art.model.brushes.Brush;
 import com.algorist.art.model.brushes.CirclesBrush;
 import com.algorist.art.model.brushes.ArcBrush;
 import com.algorist.art.model.brushes.LinesBrush;
+import com.algorist.art.model.brushes.RB2_Brush;
+import com.algorist.art.model.brushes.RB3_Brush;
+import com.algorist.art.model.brushes.RB4_Brush;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +35,11 @@ public class Art extends EventDispatcher {
         brushes.add(new CirclesBrush());
         brushes.add(new LinesBrush());
         brushes.add(new ArcBrush());
+        
+        brushes.add(new RB2_Brush());
+        brushes.add(new RB3_Brush());
+        brushes.add(new RB4_Brush());
+        
         setSelectedBrush(brushes.get(0));
     }
     
