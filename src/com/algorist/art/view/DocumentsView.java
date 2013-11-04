@@ -43,7 +43,6 @@ public class DocumentsView extends AbstractView<JTabbedPane> {
                     Document doc = drawingAreaViews.get(contentPane.getSelectedIndex()).getDocumentModel();
                     getController().currentDocumentChanged(doc);
                 }
-
             }
         });
 
