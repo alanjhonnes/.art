@@ -6,6 +6,7 @@ import com.algorist.art.controller.BrushPanelController;
 import com.algorist.art.controller.DocumentsController;
 import com.algorist.art.controller.DrawingAreaController;
 import com.algorist.art.controller.LayerPanelController;
+import com.algorist.art.controller.MenuController;
 import com.algorist.art.model.Document;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -35,19 +36,18 @@ public class MainFrame extends AbstractFrame {
     public JPanel layerContainer;
     private ModelAcessor modelAcessor;
     
-    private DrawingAreaController drawingAreaController;
     private DocumentsController documentsController;
     private BrushPanelController brushPanelController;
+    private MenuController menuController;
     
-    private DrawingAreaView drawingAreaView;
     
 
     public MainFrame(ModelAcessor modelAcessor) {
         this.modelAcessor = modelAcessor;
         
-        drawingAreaController = new DrawingAreaController(this, modelAcessor.getArt());
         documentsController = new DocumentsController(this, modelAcessor.getArt());
         brushPanelController = new BrushPanelController(this, modelAcessor.getArt());
+        menuController = new MenuController(this, modelAcessor.getArt());
         registerAllViews();
         registerAllControllers();
         this.frame = layout();
@@ -55,18 +55,16 @@ public class MainFrame extends AbstractFrame {
 
     @Override
     protected void registerAllViews() {
-        drawingAreaView = new DrawingAreaView(this, drawingAreaController, modelAcessor.getArt().getCurrentDocument());
         views.put(BrushPanelView.class, new BrushPanelView(this, brushPanelController, modelAcessor.getArt()));
         views.put(LayersPanelView.class, new LayersPanelView(this, modelAcessor.getArt().getCurrentDocument()));
-        views.put(DrawingAreaView.class, drawingAreaView);
-        views.put(MenuView.class, new MenuView(this));
+        views.put(DocumentsView.class, new DocumentsView(this, modelAcessor.getArt(), documentsController));
+        views.put(MenuView.class, new MenuView(this, menuController));
     }
 
     @Override
     protected void registerAllControllers() {
         controllers.put(BrushPanelController.class, brushPanelController);
         controllers.put(LayerPanelController.class, new LayerPanelController(this));
-        controllers.put(DrawingAreaController.class, drawingAreaController);
         controllers.put(DrawingAreaController.class, documentsController);
     }
 
@@ -83,7 +81,6 @@ public class MainFrame extends AbstractFrame {
         
         jFrame.setJMenuBar(menu);
         
-        drawingArea = getView(DrawingAreaView.class).getContentPane();
         drawingContainer = new JScrollPane(drawingArea);
         
         panelContainer = new JPanel();
@@ -93,7 +90,7 @@ public class MainFrame extends AbstractFrame {
         brushContainer = getView(BrushPanelView.class).getContentPane();
         layerContainer = getView(LayersPanelView.class).getContentPane();
         
-        jFrame.add(drawingContainer, BorderLayout.CENTER);
+        jFrame.add(getView(DocumentsView.class).getContentPane(), BorderLayout.CENTER);
         
         panelContainer.setPreferredSize(new Dimension(200, 500));
         

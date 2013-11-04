@@ -32,6 +32,7 @@ public class Art extends EventDispatcher {
         brushes.add(new CirclesBrush());
         brushes.add(new LinesBrush());
         brushes.add(new ArcBrush());
+        setSelectedBrush(brushes.get(0));
     }
     
     public void addDocument(Document document){
@@ -51,6 +52,7 @@ public class Art extends EventDispatcher {
     
     public void endMovement(Movement movement){
         movements.remove(movement);
+        movement.stop();
         dispatchEvent(new ArtEvent(this, ArtEvent.MOVEMENT_ENDED, movement));
     }
     

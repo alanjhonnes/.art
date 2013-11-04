@@ -29,7 +29,7 @@ public class ModelAcessor {
     
     public void initializeModel(){
         art = new Art();
-        Document doc = new Document(600, 500);
+        Document doc = new Document("Novo documento", 600, 500);
         art.getDocuments().add(doc);
         art.setCurrentDocument(doc);
     }

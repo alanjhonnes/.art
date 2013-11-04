@@ -121,6 +121,10 @@ public class DrawingAreaView extends AbstractView<JLayeredPane> {
     public List<LayerPanel> getLayerPanels() {
         return layerPanels;
     }
+
+    public Document getDocumentModel() {
+        return documentModel;
+    }
     
     
     

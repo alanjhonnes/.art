@@ -25,7 +25,8 @@ public class EventDispatcher implements IEventDispatcher {
     
     @Override
     public void dispatchEvent(Event event) {
-        for (EventData eventData : listeners) {
+        for (int i = 0; i < listeners.size(); i++) {
+            EventData eventData = listeners.get(i);
             if(event.getType().equals(eventData.getType())){
                 eventData.getCallback().execute(event);
             }

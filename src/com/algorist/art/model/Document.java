@@ -6,6 +6,7 @@ package com.algorist.art.model;
 
 import com.alanjhonnes.event.EventDispatcher;
 import com.algorist.art.event.DocumentEvent;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,20 +15,30 @@ import java.util.List;
  * Represents an opened file
  * @author alan.jbssa
  */
-public class Document extends EventDispatcher {
+public class Document extends EventDispatcher implements Serializable {
     private List<Layer> layers;
     private List<State> states;
     private int width;
     private int height;
     private Layer selectedLayer;
+    private String name;
 
-    public Document(int width, int height) {
+    public Document(String name, int width, int height) {
+        this.name = name;
         this.width = width;
         this.height = height;
         layers = new ArrayList<>();
         states = new LinkedList<>();
         selectedLayer = new Layer(width, height);
         layers.add(selectedLayer);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getWidth() {
@@ -69,6 +80,20 @@ public class Document extends EventDispatcher {
 
     public void setStates(List<State> states) {
         this.states = states;
+    }
+    
+    public Document getSerializableVersion(){
+        Document doc = new Document(this.name,this.width,this.height);
+        List<Layer> docLayers = new ArrayList<>();
+        Layer layer = null;
+        for (int i = 0; i < layers.size(); i++) {
+            layer = layers.get(i);
+            layer = layer.duplicate();
+            docLayers.add(layer);
+        }
+        doc.setLayers(docLayers);
+        doc.setSelectedLayer(layer);
+        return doc;
     }
     
     

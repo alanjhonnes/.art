@@ -31,7 +31,7 @@ public class DrawingAreaController extends AbstractController {
     public DrawingAreaController(AbstractFrame mainFrame, Art art) {
         super(mainFrame);
         this.artModel = art;
-        this.view = view;
+        brush = art.getSelectedBrush();
         artModel.addEventListener(ArtEvent.BRUSH_CHANGED, new CallbackFunction() {
             @Override
             public void execute(Event e) {

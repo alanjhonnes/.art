@@ -51,12 +51,14 @@ public abstract class Brush {
     
     public void startDrawing(Movement movement, Layer layer){
         this.layer = layer;
-        movement.addEventListener(MovementEvent.POSITION_CHANGED, drawCallback);
+        movement.addEventListener(MovementEvent.TIMER_TICK, drawCallback);
+        //movement.addEventListener(MovementEvent.POSITION_CHANGED, drawCallback);
     }
     
     public void stopDrawing(Movement movement){
         layer = null;
-        movement.removeEventListener(MovementEvent.POSITION_CHANGED, drawCallback);
+        movement.removeEventListener(MovementEvent.TIMER_TICK, drawCallback);
+        //movement.removeEventListener(MovementEvent.POSITION_CHANGED, drawCallback);
     }
     
     abstract public void draw(Movement movement);

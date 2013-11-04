@@ -16,9 +16,13 @@ import com.algorist.art.model.brushes.parameters.Parameter;
 import com.algorist.art.model.brushes.presets.Preset;
 import com.algorist.art.model.brushes.presets.SmallCircleBrushPreset;
 import com.algorist.art.model.brushes.presets.ThickCircleBrushPreset;
+import java.awt.AlphaComposite;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Shape;
+import java.awt.Stroke;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -67,8 +71,9 @@ public class CirclesBrush extends Brush {
     @Override
     public void draw(Movement movement) {
         Graphics2D g = (Graphics2D) layer.getImage().createGraphics();
-        g.setColor(Color.BLACK);
-        g.drawOval(movement.getNewPosition().x, movement.getNewPosition().y, 5,5);
+        g.setColor(new Color(0f, 0f, 0f, 0.2f));
+        g.setComposite(AlphaComposite.DstOver);
+        g.fillOval(movement.getNewPosition().x, movement.getNewPosition().y, 18,18);
     }
 
     @Override

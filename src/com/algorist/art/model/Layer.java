@@ -11,17 +11,20 @@ import java.awt.image.ColorModel;
 import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import javax.imageio.ImageIO;
 
 /**
  *
  * @author alan.jbssa
  */
-public class Layer extends EventDispatcher {
+public class Layer extends EventDispatcher implements Serializable {
 
     private float opacity = 1;
-    private BufferedImage image;
-    private BufferedImage thumbnail;
+    transient private BufferedImage image;
+    //private BufferedImage thumbnail;
     private int width;
     private int height;
 
@@ -29,22 +32,19 @@ public class Layer extends EventDispatcher {
         this.width = width;
         this.height = height;
         image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB_PRE);
-        refreshThumbnail();
+        //refreshThumbnail();
     }
 
     public Layer(BufferedImage image) {
         this.image = image;
         this.width = image.getWidth();
         this.height = image.getHeight();
-        refreshThumbnail();
+        //refreshThumbnail();
     }
 
     public void setSize(int width, int height) {
         ///
         dispatchEvent(new LayerEvent(this, LayerEvent.SIZE_CHANGED));
-    }
-
-    private void refreshThumbnail() {
     }
 
     public Layer duplicate() {
@@ -70,19 +70,21 @@ public class Layer extends EventDispatcher {
         this.image = image;
     }
 
-    public BufferedImage getThumbnail() {
-        return thumbnail;
-    }
-
-    public void setThumbnail(BufferedImage thumbnail) {
-        this.thumbnail = thumbnail;
-    }
-
     public int getWidth() {
         return width;
     }
 
     public int getHeight() {
         return height;
+    }
+
+    private void writeObject(ObjectOutputStream out) throws IOException {
+        out.defaultWriteObject();
+        ImageIO.write(image, "png", out); // png is lossless
+    }
+
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        image = ImageIO.read(in);
     }
 }
