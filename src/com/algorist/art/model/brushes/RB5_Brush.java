@@ -32,14 +32,14 @@ public class RB5_Brush extends Brush {
 		
 		for (int i=0; i<35; i++){
 			// use static final ints now
-			tempx = (x + (int) Math.round(2*SMALL_OFFSET*(Math.random() -0.5)));
+			tempx = (x + (int) Math.round(2 * SMALL_OFFSET * (Math.random() -0.5)));
 			tempy = (y + (int) ( ((Math.random()-0.5)*2) * Math.sqrt(
 				(SMALL_OFFSET * SMALL_OFFSET) - ((x - tempx) * (x - tempx)))));
 			g.drawLine(tempx, tempy, tempx, tempy);
 		}
 		
-		for (int i=0; i<12; i++){
-			tempx = (x + (int) Math.round(2*BIG_OFFSET*(Math.random() -0.5)));
+		for (int i = 0; i < 12; i++){
+			tempx = (x + (int) Math.round( 2* BIG_OFFSET*(Math.random() -0.5)));
 			tempy = (y + (int) ( ((Math.random()-0.5)*2) * Math.sqrt(
 				(BIG_OFFSET * BIG_OFFSET) - ((x - tempx) * (x - tempx)))));
 			g.drawLine(tempx, tempy, tempx, tempy);
