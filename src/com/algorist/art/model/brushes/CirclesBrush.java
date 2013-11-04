@@ -77,6 +77,6 @@ public class CirclesBrush extends Brush {
     }
 
     @Override
-    public void initialize() {
+    public void initialize(Layer layer) {
     }
 }

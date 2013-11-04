@@ -74,4 +74,8 @@ public class MenuController extends AbstractController {
             Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public void addLayer() {
+        artModel.getCurrentDocument().addLayer();
+    }
 }

@@ -10,6 +10,7 @@ import com.algorist.art.model.brushes.Brush;
 import com.algorist.art.model.brushes.CirclesBrush;
 import com.algorist.art.model.brushes.ArcBrush;
 import com.algorist.art.model.brushes.LinesBrush;
+import com.algorist.art.model.brushes.NeonParticles;
 import com.algorist.art.model.brushes.RB2_Brush;
 import com.algorist.art.model.brushes.RB3_Brush;
 import com.algorist.art.model.brushes.RB4_Brush;
@@ -39,6 +40,10 @@ public class Art extends EventDispatcher {
         brushes.add(new RB2_Brush());
         brushes.add(new RB3_Brush());
         brushes.add(new RB4_Brush());
+        
+        brushes.add(new RB4_Brush());
+        
+        brushes.add(new NeonParticles());
         
         setSelectedBrush(brushes.get(0));
     }

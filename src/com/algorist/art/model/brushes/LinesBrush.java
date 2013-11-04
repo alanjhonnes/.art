@@ -36,7 +36,7 @@ public class LinesBrush extends Brush {
     }
 
     @Override
-    public void initialize() {
+    public void initialize(Layer layer) {
     }
 
     @Override

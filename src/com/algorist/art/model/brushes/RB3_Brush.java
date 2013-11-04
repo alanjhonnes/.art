@@ -24,7 +24,7 @@ import javax.swing.Timer;
 public class RB3_Brush extends Brush {
 
     @Override
-    public void initialize() {
+    public void initialize(Layer layer) {
     }
 
     

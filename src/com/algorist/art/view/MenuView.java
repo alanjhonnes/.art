@@ -218,6 +218,10 @@ public class MenuView extends AbstractView<JMenuBar> implements ActionListener {
                 }
                 break;
             }
+                case NEW_LAYER: {
+                controller.addLayer();
+                break;
+            }
         }
 
     }
