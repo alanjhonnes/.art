@@ -26,11 +26,11 @@ public class RB5_Brush extends Brush {
 
     @Override
     public void draw(Movement movement) {
-        int x, y, tempx,tempy;
+        double x, y, tempx,tempy;
         Graphics2D g = layer.getImage().createGraphics();
         g.setColor(Color.ORANGE);
 		
-		for (int i=0; i<35; i++){
+		for (int i = 0; i < 35; i++){
 			// use static final ints now
 			tempx = (x + (int) Math.round(2 * SMALL_OFFSET * (Math.random() -0.5)));
 			tempy = (y + (int) ( ((Math.random()-0.5)*2) * Math.sqrt(
