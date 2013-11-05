@@ -21,7 +21,7 @@ import javax.swing.Timer;
 public class ArcBrush extends Brush {
 
     @Override
-    public void initialize() {
+    public void initialize(Layer layer) {
         
     }
 

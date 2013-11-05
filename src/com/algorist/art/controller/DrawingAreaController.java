@@ -36,12 +36,14 @@ public class DrawingAreaController extends AbstractController {
             @Override
             public void execute(Event e) {
                 brush = artModel.getSelectedBrush();
+                
             }
         });
         artModel.addEventListener(ArtEvent.MOVEMENT_STARTED, new CallbackFunction() {
             @Override
             public void execute(Event e) {
                 ArtEvent ae = (ArtEvent) e;
+                brush.initialize(artModel.getCurrentDocument().getSelectedLayer());
                 brush.startDrawing(ae.getMovement(), artModel.getCurrentDocument().getSelectedLayer());
             }
         });

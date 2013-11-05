@@ -47,7 +47,7 @@ public abstract class Brush {
     public Brush(List<Preset> presets) {
         this.presets = presets;
     }
-    abstract public void initialize();
+    abstract public void initialize(Layer layer);
     
     public void startDrawing(Movement movement, Layer layer){
         this.layer = layer;

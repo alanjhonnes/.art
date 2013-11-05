@@ -34,7 +34,11 @@ public class LayersPanelView extends AbstractView<JPanel> {
         model.addEventListener(DocumentEvent.LAYER_ADDED, new CallbackFunction() {
             @Override
             public void execute(Event e) {
-                
+                DocumentEvent de = (DocumentEvent) e;
+                LayerPanelView layerPanelView = new LayerPanelView(getMainFrame(), de.getLayer());
+                layerViews.add(layerPanelView);
+                contentPane.add(layerPanelView.getContentPane());
+                contentPane.revalidate();
             }
         });
         

@@ -4,6 +4,7 @@
  */
 package com.algorist.art.model.brushes;
 
+import com.algorist.art.model.Layer;
 import com.algorist.art.model.Movement;
 import com.algorist.art.model.brushes.parameters.Parameter;
 import java.awt.Color;
@@ -17,7 +18,7 @@ import java.util.Map;
 public class SoftBrush extends Brush {
 
     @Override
-    public void initialize() {
+    public void initialize(Layer layer) {
         
     }
 

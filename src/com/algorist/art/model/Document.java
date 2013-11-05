@@ -95,6 +95,12 @@ public class Document extends EventDispatcher implements Serializable {
         doc.setSelectedLayer(layer);
         return doc;
     }
+
+    public void addLayer() {
+        Layer layer = new Layer(width, height);
+        layers.add(layer);
+        dispatchEvent(new DocumentEvent(this, DocumentEvent.LAYER_ADDED, layer));
+    }
     
     
     
