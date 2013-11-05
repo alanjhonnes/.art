@@ -219,12 +219,15 @@ public class MenuView extends AbstractView<JMenuBar> implements ActionListener {
                 }
                 break;
             }
+
             case EXPORT: {
                 JFrame frame = new JFrame("Exportar");
                 ExportView exportView = new ExportView(getMainFrame());
                 frame.add(exportView.getContentPane());
                 frame.setVisible(true);
-
+            }
+            case NEW_LAYER: {
+                controller.addLayer();
                 break;
             }
         }
