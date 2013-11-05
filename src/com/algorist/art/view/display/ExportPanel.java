@@ -4,6 +4,8 @@
  */
 package com.algorist.art.view.display;
 
+import javax.swing.JFileChooser;
+
 /**
  *
  * @author Asus
@@ -34,17 +36,18 @@ public class ExportPanel extends javax.swing.JPanel {
         jPanelSalvar = new javax.swing.JPanel();
         jButtonSalvar = new javax.swing.JButton();
 
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout jPanelGIFLayout = new javax.swing.GroupLayout(jPanelGIF);
         jPanelGIF.setLayout(jPanelGIFLayout);
         jPanelGIFLayout.setHorizontalGroup(
             jPanelGIFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 410, Short.MAX_VALUE)
+            .addGap(0, 408, Short.MAX_VALUE)
         );
         jPanelGIFLayout.setVerticalGroup(
             jPanelGIFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 192, Short.MAX_VALUE)
+            .addGap(0, 190, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("GIF", jPanelGIF);
@@ -53,11 +56,11 @@ public class ExportPanel extends javax.swing.JPanel {
         jPanelJPEG.setLayout(jPanelJPEGLayout);
         jPanelJPEGLayout.setHorizontalGroup(
             jPanelJPEGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 410, Short.MAX_VALUE)
+            .addGap(0, 408, Short.MAX_VALUE)
         );
         jPanelJPEGLayout.setVerticalGroup(
             jPanelJPEGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 192, Short.MAX_VALUE)
+            .addGap(0, 190, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("JPEG", jPanelJPEG);
@@ -66,11 +69,11 @@ public class ExportPanel extends javax.swing.JPanel {
         jPanelPNG.setLayout(jPanelPNGLayout);
         jPanelPNGLayout.setHorizontalGroup(
             jPanelPNGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 410, Short.MAX_VALUE)
+            .addGap(0, 408, Short.MAX_VALUE)
         );
         jPanelPNGLayout.setVerticalGroup(
             jPanelPNGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 192, Short.MAX_VALUE)
+            .addGap(0, 190, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("PNG", jPanelPNG);
@@ -99,7 +102,7 @@ public class ExportPanel extends javax.swing.JPanel {
         jPanelSalvarLayout.setHorizontalGroup(
             jPanelSalvarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSalvarLayout.createSequentialGroup()
-                .addContainerGap(226, Short.MAX_VALUE)
+                .addContainerGap(224, Short.MAX_VALUE)
                 .addComponent(jButtonSalvar)
                 .addGap(126, 126, 126))
         );
@@ -112,6 +115,8 @@ public class ExportPanel extends javax.swing.JPanel {
         );
 
         add(jPanelSalvar, java.awt.BorderLayout.PAGE_END);
+
+        getAccessibleContext().setAccessibleDescription("");
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -134,8 +139,12 @@ public class ExportPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-        // TODO add your handling code here:
-        
+//        JFileChooser chooser = new JFileChooser();
+//        int returnVal = chooser.showSaveDialog(getMainFrame().getFrame());
+//                if (returnVal == JFileChooser.APPROVE_OPTION) {
+////                    controller.saveDocument(chooser.getSelectedFile().getAbsolutePath());
+//                }
+//        
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

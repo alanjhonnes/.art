@@ -6,6 +6,7 @@ package com.algorist.art.view;
 
 import com.algorist.art.FileManager;
 import com.algorist.art.controller.MenuController;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -224,12 +225,18 @@ public class MenuView extends AbstractView<JMenuBar> implements ActionListener {
                 JFrame frame = new JFrame("Exportar");
                 ExportView exportView = new ExportView(getMainFrame());
                 frame.add(exportView.getContentPane());
+                frame.pack();
                 frame.setVisible(true);
             }
+                
             case NEW_LAYER: {
                 controller.addLayer();
                 break;
             }
         }
+    }
+
+    private void Dimension(int i, int i0) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
