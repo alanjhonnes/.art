@@ -35,11 +35,10 @@ public class Movement extends EventDispatcher {
         this.oldPosition = new Point(startPosition);
         this.newPosition = new Point(startPosition);
         startTime = System.currentTimeMillis();
-        timer = new Timer(1, new ActionListener() {
+        timer = new Timer(16, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispatchTimerEvent();
-
             }
         });
         timer.start();

@@ -45,25 +45,20 @@ public class DrawingAreaView extends AbstractView<JLayeredPane> {
         layerPanels = new ArrayList<>();
         setupLayers();
         this.documentModel.addEventListener(DocumentEvent.LAYER_ADDED, new CallbackFunction() {
-
             @Override
             public void execute(Event e) {
-                
             }
         });
-        
+
         this.documentModel.addEventListener(DocumentEvent.LAYER_REMOVED, new CallbackFunction() {
-
             @Override
             public void execute(Event e) {
-                
             }
         });
-        
+
         this.documentModel.addEventListener(DocumentEvent.LAYERS_ORDER_CHANGED, new CallbackFunction() {
             @Override
             public void execute(Event e) {
-                
             }
         });
     }
@@ -72,7 +67,7 @@ public class DrawingAreaView extends AbstractView<JLayeredPane> {
     protected JLayeredPane layout() {
         JLayeredPane panel = new JLayeredPane();
         panel.setPreferredSize(new Dimension(600, 500));
-        
+
 
         mouseListener = new MouseAdapter() {
             @Override
@@ -98,7 +93,6 @@ public class DrawingAreaView extends AbstractView<JLayeredPane> {
 
             @Override
             public void mouseMoved(MouseEvent e) {
-                
             }
         };
 
@@ -125,8 +119,14 @@ public class DrawingAreaView extends AbstractView<JLayeredPane> {
     public Document getDocumentModel() {
         return documentModel;
     }
-    
-    
-    
-    
+
+    public void updateLayer(Layer selectedLayer) {
+        for (int i = 0; i < layerPanels.size(); i++) {
+            LayerPanel layerPanel = layerPanels.get(i);
+            if(layerPanel.getLayer() == selectedLayer){
+                layerPanel.repaint();
+                break;
+            }
+        }
+    }
 }

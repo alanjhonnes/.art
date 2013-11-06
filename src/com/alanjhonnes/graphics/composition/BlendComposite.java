@@ -17,7 +17,8 @@ public class BlendComposite implements Composite {
 
     @Override
     public CompositeContext createContext(ColorModel cm, ColorModel cm1, RenderingHints rh) {
-        return null;
+        return new AddContext();
+        
     }
     
 }

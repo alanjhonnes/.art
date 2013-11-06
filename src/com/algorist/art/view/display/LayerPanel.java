@@ -30,4 +30,13 @@ public class LayerPanel extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
 	g2d.drawImage( layer.getImage(), null, 0,0);
     }
+
+    public Layer getLayer() {
+        return layer;
+    }
+
+    public void setLayer(Layer layer) {
+        this.layer = layer;
+    }
+    
 }

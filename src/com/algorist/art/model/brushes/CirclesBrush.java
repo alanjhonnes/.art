@@ -21,6 +21,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.Stroke;
 import java.util.HashMap;
@@ -71,8 +72,10 @@ public class CirclesBrush extends Brush {
     @Override
     public void draw(Movement movement) {
         Graphics2D g = (Graphics2D) layer.getImage().createGraphics();
+        g.setRenderingHint(
+        RenderingHints.KEY_ANTIALIASING,
+        RenderingHints.VALUE_ANTIALIAS_ON);
         g.setColor(new Color(0f, 0f, 0f, 0.2f));
-        g.setComposite(AlphaComposite.DstOver);
         g.fillOval(movement.getNewPosition().x, movement.getNewPosition().y, 18,18);
     }
 

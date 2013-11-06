@@ -10,11 +10,11 @@ package com.alanjhonnes.particles;
  */
 public class SimpleParticle extends Particle {
     
-    private int vx;
-    private int vy;
+    private double vx;
+    private double vy;
     private int age;
 
-    public SimpleParticle(int vx, int vy, int x, int y) {
+    public SimpleParticle(double vx, double vy, int x, int y) {
         this.vx = vx;
         this.vy = vy;
         this.x = x;
@@ -22,19 +22,19 @@ public class SimpleParticle extends Particle {
         this.age = 0;
     }
 
-    public int getVx() {
+    public double getVx() {
         return vx;
     }
 
-    public void setVx(int vx) {
+    public void setVx(double vx) {
         this.vx = vx;
     }
 
-    public int getVy() {
+    public double getVy() {
         return vy;
     }
 
-    public void setVy(int vy) {
+    public void setVy(double vy) {
         this.vy = vy;
     }
 

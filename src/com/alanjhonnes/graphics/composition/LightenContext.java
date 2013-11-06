@@ -12,7 +12,7 @@ import java.awt.image.WritableRaster;
  *
  * @author alan.jbssa
  */
-public class AddContext implements CompositeContext {
+public class LightenContext implements CompositeContext {
 
     @Override
     public void dispose() {
@@ -36,15 +36,15 @@ public class AddContext implements CompositeContext {
             for (int y = 0; y < h; y++) {
                 src.getPixel(x, y, srcRgba);
                 dstIn.getPixel(x, y, dstRgba);
-                for (int i = 0; i < 3; i++) {
-                    //value = srcRgba[i] + dstRgba[i];
-                    value = (int) (dstRgba[i] + (1-Math.pow(2, -srcRgba[i]*0.005))*255);
-                    
-//                    if(value > 255){
-//                        value = 255;
-//                    }
+                for (int i = 0; i < 2; i++) {
+                    value = srcRgba[i] + dstRgba[i];
+                    value = 255 - (255 - srcRgba[i]) * (255 - dstRgba[i]);
+                    if(value > 255){
+                        value = 255;
+                    }
                     resultRgba[i] = value;
                 }
+                resultRgba[3] = 255;
                 dstOut.setPixel(x, y, resultRgba);
             }
         }

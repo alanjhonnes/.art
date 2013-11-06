@@ -7,6 +7,7 @@ package com.algorist.art.controller;
 import com.alanjhonnes.event.CallbackFunction;
 import com.alanjhonnes.event.Event;
 import com.algorist.art.event.ArtEvent;
+import com.algorist.art.event.MovementEvent;
 import com.algorist.art.model.Art;
 import com.algorist.art.model.Movement;
 import com.algorist.art.model.brushes.Brush;
@@ -27,11 +28,23 @@ public class DrawingAreaController extends AbstractController {
     private Brush brush;
     private Art artModel;
     private Movement movement;
+    
+    private CallbackFunction movementTickCallback;
 
     public DrawingAreaController(AbstractFrame mainFrame, Art art) {
         super(mainFrame);
         this.artModel = art;
         brush = art.getSelectedBrush();
+        
+        movementTickCallback = new CallbackFunction() {
+            @Override
+            public void execute(Event e) {
+                MovementEvent me = (MovementEvent) e;
+                Movement mov = (Movement) me.getSource();
+                movementTick(mov);
+            }
+        };
+        
         artModel.addEventListener(ArtEvent.BRUSH_CHANGED, new CallbackFunction() {
             @Override
             public void execute(Event e) {
@@ -45,6 +58,7 @@ public class DrawingAreaController extends AbstractController {
                 ArtEvent ae = (ArtEvent) e;
                 brush.initialize(artModel.getCurrentDocument().getSelectedLayer());
                 brush.startDrawing(ae.getMovement(), artModel.getCurrentDocument().getSelectedLayer());
+                ae.getMovement().addEventListener(MovementEvent.TIMER_TICK, movementTickCallback);
             }
         });
     }
@@ -58,14 +72,13 @@ public class DrawingAreaController extends AbstractController {
     public void movementUpdated(Point newPosition) {
         if (movement != null) {
             movement.movePosition(newPosition);
-            List<LayerPanel> layerPanels = view.getLayerPanels();
-            for (int i = 0; i < layerPanels.size(); i++) {
-                LayerPanel layerPanel = layerPanels.get(i);
-                layerPanel.repaint();
-            }
+            view.updateLayer(artModel.getCurrentDocument().getSelectedLayer());
             System.out.println(movement);
         }
-
+    }
+    
+    public void movementTick(Movement mov){
+        view.updateLayer(artModel.getCurrentDocument().getSelectedLayer());
     }
 
     public void movementEnded() {

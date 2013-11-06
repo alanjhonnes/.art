@@ -4,12 +4,14 @@
  */
 package com.algorist.art.model.brushes;
 
+import com.alanjhonnes.graphics.composition.BlendComposite;
 import com.alanjhonnes.particles.SimpleParticle;
 import com.algorist.art.model.Layer;
 import com.algorist.art.model.Movement;
 import com.algorist.art.model.brushes.parameters.Parameter;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.awt.image.Raster;
 import java.awt.image.WritableRaster;
@@ -41,20 +43,18 @@ public class NeonParticles extends Brush {
 
     public NeonParticles() {
         super();
-        intensity = 0.75;
-        noise = 1;
+        intensity = 1;
         spawn = 10;
         maxAge = 70;
         exposure = 1;
-        noise = 2;
-        fuzz = 2;
-        damping = 0.3;
-        initialXVelocity = 15;
-        initialYVelocity = 15;
+        noise = 1;
+        fuzz = 1;
+        damping = 0.8;
+        initialXVelocity = 3;
+        initialYVelocity = 3;
         red = 1f;
         green = 0.1f;
         blue = 0.1f;
-        particles = new ArrayList<>();
         name = "Neon Particles";
     }
 
@@ -62,6 +62,8 @@ public class NeonParticles extends Brush {
     public void initialize(Layer layer) {
         noiseCanvas = makeOctaveNoise(layer.getWidth(), layer.getHeight(), 8);
         noiseData = noiseCanvas.getRaster();
+        System.out.println(noiseData);
+        particles = new ArrayList<>();
         //hdrdata = new WritableRaster();
     }
 
@@ -72,45 +74,59 @@ public class NeonParticles extends Brush {
         int h = layer.getHeight();
 
         List<SimpleParticle> alive = new ArrayList<>();
-        
+
         WritableRaster canvas = layer.getImage().getRaster();
-        
+
         Graphics2D g = layer.getImage().createGraphics();
+        g.setRenderingHint(
+                RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
+
+        g.setComposite(new BlendComposite());
 
 
         for (int i = 0; i < spawn; i++) {
             particles.add(new SimpleParticle(fuzzy(initialXVelocity), fuzzy(initialYVelocity), movement.getNewPosition().x, movement.getNewPosition().y));
-
-            for (i = 0; i < particles.size(); i++) {
-                SimpleParticle p = particles.get(i);
-                int newVx = (int) (p.getVx() * damping + getNoise(p.getX(), p.getY(), 0) * 4 * noise + fuzzy(0.1) * fuzz);
-                int newVY = (int) (p.getVy() * damping + getNoise(p.getX(), p.getY(), 0) * 4 * noise + fuzzy(0.1) * fuzz);
-                p.setVx(newVx);
-                p.setVy(newVY);
-                p.setAge(p.getAge() + 1);
-
-                for (int j = 0; j < 10; j++) {
-                    p.setX((int) (p.getX() + p.getVx() * 0.1));
-                    p.setY((int) (p.getY() + p.getVy() * 0.1));
-                    if (p.getX() < 0 || p.getX() >= w || p.getY() < 0 || p.getY() >= h) {
-                        continue;
-                    }
-                    //float pixel[] = {red, green, blue, 1f};
-                    ////canvas.setPixel(p.getX(), p.getY(), pixel);
-                    g.setColor(new Color(red, green, blue, 1f));
-                    g.drawOval(p.getX(), p.getY(), 1, 1);
-                }
-                if (p.getAge() < maxAge) {
-                    alive.add(p);
-                }
-            }
-            particles = alive;
         }
+
+        for (int i = 0; i < particles.size(); i++) {
+            SimpleParticle p = particles.get(i);
+
+            g.setColor(new Color(red, green, blue, 1f));
+            g.drawOval(p.getX(), p.getY(), 0, 1);
+            //System.out.println(getNoise(p.getX(), p.getY(), 0));
+            //int newVx = (int) (p.getVx() * damping + getNoise(p.getX(), p.getY(), 0) * 4 * noise + fuzzy(0.1) * fuzz);
+            //int newVy = (int) (p.getVy() * damping + getNoise(p.getX(), p.getY(), 0) * 4 * noise + fuzzy(0.1) * fuzz);
+            //int newVx = (int) (p.getVx() * damping * 4 * noise + fuzzy(0.1) * fuzz);
+            //int newVy = (int) (p.getVy() * damping * 4 * noise + fuzzy(0.1) * fuzz);
+//            double newVx = p.getVx() * damping + getNoise(p.getX(), p.getY(), 0) * 4 * noise + fuzzy(0.1) * fuzz;
+//            double newVy = p.getVy() * damping + getNoise(p.getX(), p.getY(), 0) * 4 * noise + fuzzy(0.1) * fuzz;
+//            double newVx = p.getVx() * damping;
+//            double newVy = p.getVy() * damping;
+
+            double newVx = p.getVx() * damping + fuzzy(1) * 4 * noise + fuzzy(0.1) * fuzz;
+            double newVy = p.getVy() * damping + fuzzy(1) * 4 * noise + fuzzy(0.1) * fuzz;
+
+            p.setVx(newVx);
+            p.setVy(newVy);
+            p.setAge(p.getAge() + 1);
+
+            p.setX((int) (p.getX() + p.getVx()));
+            p.setY((int) (p.getY() + p.getVy()));
+
+            if (p.getAge() < maxAge) {
+                alive.add(p);
+            }
+
+            if (p.getX() < 0 || p.getX() >= w || p.getY() < 0 || p.getY() >= h) {
+                continue;
+            }
+        }
+        particles = alive;
     }
 
     @Override
     public void loadDefaultPresets() {
-        
     }
 
     @Override
@@ -119,19 +135,17 @@ public class NeonParticles extends Brush {
     }
 
     private int getNoise(int x, int y, int channel) {
-        if(x > noiseData.getWidth()){
-            System.out.println(x);
-        }
-        if(x >= 0 && x <= noiseData.getWidth() && y >= 0 && y <= noiseData.getHeight()){
+        System.out.println("x: " + x + " y: " + y);
+        if (x >= 0 && x <= noiseData.getWidth() && y >= 0 && y <= noiseData.getHeight()) {
             int pixel[] = noiseData.getPixel(x, y, new int[4]);
             return pixel[channel];
         }
         return 0;
-        
+
     }
 
-    private int fuzzy(double range) {
-        return (int) Math.round((Math.random() - 0.5) * range * 6);
+    private double fuzzy(double range) {
+        return (Math.random() - 0.5) * range;
     }
 
     private double tonemap(double n) {
@@ -142,6 +156,7 @@ public class NeonParticles extends Brush {
         BufferedImage canvas = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB_PRE);
 
         Graphics2D g = canvas.createGraphics();
+
         g.setColor(Color.black);
         g.fillRect(0, 0, width, height);
 
@@ -150,10 +165,10 @@ public class NeonParticles extends Brush {
 //        ctx.globalAlpha = 1 / octaves;
 //        ctx.globalCompositeOperation = 'lighter';
 
-    for (int i = 0; i < octaves; i++) {
+        for (int i = 0; i < octaves; i++) {
             BufferedImage octave = makeNoise(width >> i, height >> i);
             //var octave = makeNoise(width, height);
-            
+
             g.drawImage(octave, null, 0, 0);
         }
 
