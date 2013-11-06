@@ -71,9 +71,11 @@ public class NeonParticles extends Brush {
         int w = layer.getWidth();
         int h = layer.getHeight();
 
-        List<SimpleParticle> alive = new ArrayList<>(spawn);
+        List<SimpleParticle> alive = new ArrayList<>();
         
         WritableRaster canvas = layer.getImage().getRaster();
+        
+        Graphics2D g = layer.getImage().createGraphics();
 
 
         for (int i = 0; i < spawn; i++) {
@@ -93,26 +95,22 @@ public class NeonParticles extends Brush {
                     if (p.getX() < 0 || p.getX() >= w || p.getY() < 0 || p.getY() >= h) {
                         continue;
                     }
-                    float pixel[] = {red, green, blue};
-                    canvas.setPixel(p.getX(), p.getY(), pixel);
-                    
-
+                    //float pixel[] = {red, green, blue, 1f};
+                    ////canvas.setPixel(p.getX(), p.getY(), pixel);
+                    g.setColor(new Color(red, green, blue, 1f));
+                    g.drawOval(p.getX(), p.getY(), 1, 1);
                 }
-
                 if (p.getAge() < maxAge) {
                     alive.add(p);
                 }
             }
-
-            
-            
-
             particles = alive;
         }
     }
 
     @Override
     public void loadDefaultPresets() {
+        
     }
 
     @Override
@@ -121,12 +119,19 @@ public class NeonParticles extends Brush {
     }
 
     private int getNoise(int x, int y, int channel) {
-        int pixel[] = noiseData.getPixel(x, y, new int[4]);
-        return pixel[channel];
+        if(x > noiseData.getWidth()){
+            System.out.println(x);
+        }
+        if(x >= 0 && x <= noiseData.getWidth() && y >= 0 && y <= noiseData.getHeight()){
+            int pixel[] = noiseData.getPixel(x, y, new int[4]);
+            return pixel[channel];
+        }
+        return 0;
+        
     }
 
     private int fuzzy(double range) {
-        return (int) Math.round((Math.random() - 0.5) * range * 2);
+        return (int) Math.round((Math.random() - 0.5) * range * 6);
     }
 
     private double tonemap(double n) {
