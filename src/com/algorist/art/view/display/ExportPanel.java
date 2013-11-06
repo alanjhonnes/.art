@@ -4,13 +4,26 @@
  */
 package com.algorist.art.view.display;
 
+import com.algorist.art.controller.ExportController;
+import java.awt.image.RenderedImage;
+import java.io.File;
+import java.io.Writer;
 import javax.swing.JFileChooser;
+import javax.swing.plaf.FileChooserUI;
 
 /**
  *
  * @author Asus
  */
 public class ExportPanel extends javax.swing.JPanel {
+    
+    private ExportController controller;
+
+    public ExportPanel(ExportController controller) {
+        this.controller = controller;
+    }
+    
+    
 
     /**
      * Creates new form ExportPanel
@@ -31,6 +44,8 @@ public class ExportPanel extends javax.swing.JPanel {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanelGIF = new javax.swing.JPanel();
         jPanelJPEG = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jSlider1 = new javax.swing.JSlider();
         jPanelPNG = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox();
         jPanelSalvar = new javax.swing.JPanel();
@@ -52,18 +67,33 @@ public class ExportPanel extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("GIF", jPanelGIF);
 
+        jLabel1.setText("Qualidade");
+
         javax.swing.GroupLayout jPanelJPEGLayout = new javax.swing.GroupLayout(jPanelJPEG);
         jPanelJPEG.setLayout(jPanelJPEGLayout);
         jPanelJPEGLayout.setHorizontalGroup(
             jPanelJPEGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 408, Short.MAX_VALUE)
+            .addGroup(jPanelJPEGLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(jLabel1)
+                .addGap(36, 36, 36)
+                .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(87, Short.MAX_VALUE))
         );
         jPanelJPEGLayout.setVerticalGroup(
             jPanelJPEGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 190, Short.MAX_VALUE)
+            .addGroup(jPanelJPEGLayout.createSequentialGroup()
+                .addGroup(jPanelJPEGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelJPEGLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanelJPEGLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(153, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("JPEG", jPanelJPEG);
+        jTabbedPane1.addTab("JPG", jPanelJPEG);
 
         javax.swing.GroupLayout jPanelPNGLayout = new javax.swing.GroupLayout(jPanelPNG);
         jPanelPNG.setLayout(jPanelPNGLayout);
@@ -121,39 +151,68 @@ public class ExportPanel extends javax.swing.JPanel {
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
-        
-        switch( jComboBox1.getItemAt(jComboBox1.getSelectedIndex()).toString() ) {
-            
-    case "GIF":
-            jTabbedPane1.setSelectedIndex(0);
-            break;
-    
-    case "JPEG":
-            jTabbedPane1.setSelectedIndex(1);
-            break;
- 
-    case "PNG":
-            jTabbedPane1.setSelectedIndex(2);
-            break;
-}
+
+        switch (jComboBox1.getItemAt(jComboBox1.getSelectedIndex()).toString()) {
+
+            case "GIF":
+                jTabbedPane1.setSelectedIndex(0);
+                break;
+
+            case "JPG":
+                jTabbedPane1.setSelectedIndex(1);
+                break;
+
+            case "PNG":
+                jTabbedPane1.setSelectedIndex(2);
+                break;
+        }
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-//        JFileChooser chooser = new JFileChooser();
-//        int returnVal = chooser.showSaveDialog(getMainFrame().getFrame());
-//                if (returnVal == JFileChooser.APPROVE_OPTION) {
+        JFileChooser jfc = new JFileChooser();
+        int returnVal = jfc.showSaveDialog(this.getRootPane());
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = jfc.getSelectedFile();
+            System.out.println("Opening: " + file.getAbsolutePath());
+            //Salvar arquivo em disco
+            switch jComboBox1.getSelectedItem(){
+                case "GIF":{
+                    controller.saveGIF(file.getAbsolutePath());
+                    break;
+                }
+                case "JPG":{
+                    int quality;
+                    controller.saveJPG(file.getAbsolutePath(), quality);
+                    break;
+                }
+                case "PNG":{
+                    controller.savePNG(file.getAbsolutePath());
+                    break;
+                }
+            }
+            
+            
+        }else{
+            System.out.println("Open command cancelled by user. ");
+            
+        }
+//        }
 ////                    controller.saveDocument(chooser.getSelectedFile().getAbsolutePath());
-//                }
-//        
-    }//GEN-LAST:event_jButtonSalvarActionPerformed
+//        }
+//        static boolean ImageIO.write(RenderedImage im,String formatName, file output)throws IOExceotion;
 
+        
+
+    }//GEN-LAST:event_jButtonSalvarActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonSalvar;
     private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanelGIF;
     private javax.swing.JPanel jPanelJPEG;
     private javax.swing.JPanel jPanelPNG;
     private javax.swing.JPanel jPanelSalvar;
+    private javax.swing.JSlider jSlider1;
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 }
