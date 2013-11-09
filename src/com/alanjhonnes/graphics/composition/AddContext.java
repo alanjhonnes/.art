@@ -37,13 +37,17 @@ public class AddContext implements CompositeContext {
                 src.getPixel(x, y, srcRgba);
                 dstIn.getPixel(x, y, dstRgba);
                 for (int i = 0; i < 3; i++) {
-                    //value = srcRgba[i] + dstRgba[i];
-                    value = (int) (dstRgba[i] + (1-Math.pow(2, -srcRgba[i]*0.005))*255);
-                    
+//                    value = srcRgba[i] + dstRgba[i];
+//                    value = srcRgba[i];
+//                    value = (int) (srcRgba[i] + (1-Math.pow(2, -dstRgba[i]*0.005))*255);
+                    //value = (int) (srcRgba[i] + dstRgba[i]) / 2;
+                    value = (int) (255 - (255 - srcRgba[i]) * (255 - dstRgba[i]));
+//                    value = (int) (Math.random() * 255);
 //                    if(value > 255){
 //                        value = 255;
 //                    }
                     resultRgba[i] = value;
+                    System.out.println(value);
                 }
                 dstOut.setPixel(x, y, resultRgba);
             }

@@ -92,7 +92,7 @@ public class NeonParticles extends Brush {
         for (int i = 0; i < particles.size(); i++) {
             SimpleParticle p = particles.get(i);
 
-            g.setColor(new Color(red, green, blue, 1f));
+            g.setColor(new Color(tonemap(red), tonemap(green), tonemap(blue), 1f));
             g.drawOval(p.getX(), p.getY(), 0, 1);
             //System.out.println(getNoise(p.getX(), p.getY(), 0));
             //int newVx = (int) (p.getVx() * damping + getNoise(p.getX(), p.getY(), 0) * 4 * noise + fuzzy(0.1) * fuzz);
@@ -148,8 +148,8 @@ public class NeonParticles extends Brush {
         return (Math.random() - 0.5) * range;
     }
 
-    private double tonemap(double n) {
-        return (1 - Math.pow(2, -n * 0.005 * exposure)) * 255;
+    private float tonemap(double n) {
+        return (float) ((1 - Math.pow(2, -n * 0.005 * exposure)) * 255);
     }
 
     private BufferedImage makeOctaveNoise(int width, int height, int octaves) {

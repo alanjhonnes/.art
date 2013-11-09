@@ -6,6 +6,8 @@ package com.algorist.art.model;
 
 import com.alanjhonnes.event.EventDispatcher;
 import com.algorist.art.event.LayerEvent;
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.WritableRaster;
@@ -32,6 +34,9 @@ public class Layer extends EventDispatcher implements Serializable {
         this.width = width;
         this.height = height;
         image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB_PRE);
+        Graphics2D g = image.createGraphics();
+        g.setColor(Color.BLACK);
+        g.fillRect(0, 0, width, height);
         //refreshThumbnail();
     }
 
