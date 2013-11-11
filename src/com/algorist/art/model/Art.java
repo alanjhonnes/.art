@@ -33,6 +33,8 @@ public class Art extends EventDispatcher {
         documents = new ArrayList<>();
         movements = new ArrayList<>();
         brushes = new ArrayList<>();
+        
+        brushes.add(new NeonParticles());
         brushes.add(new CirclesBrush());
         brushes.add(new LinesBrush());
         brushes.add(new ArcBrush());
@@ -43,7 +45,7 @@ public class Art extends EventDispatcher {
         
         brushes.add(new RB4_Brush());
         
-        brushes.add(new NeonParticles());
+        
         
         setSelectedBrush(brushes.get(0));
     }

@@ -50,8 +50,8 @@ public class NeonParticles extends Brush {
         noise = 1;
         fuzz = 1;
         damping = 0.8;
-        initialXVelocity = 3;
-        initialYVelocity = 3;
+        initialXVelocity = 10;
+        initialYVelocity = 10;
         red = 1f;
         green = 0.1f;
         blue = 0.1f;
@@ -66,6 +66,16 @@ public class NeonParticles extends Brush {
         particles = new ArrayList<>();
         //hdrdata = new WritableRaster();
     }
+
+    @Override
+    public void startDrawing(Movement movement, Layer layer) {
+        super.startDrawing(movement, layer); //To change body of generated methods, choose Tools | Templates.
+        red = (float) Math.random();
+        green = (float) Math.random();
+        blue = (float) Math.random();
+    }
+    
+    
 
     @Override
     public void draw(Movement movement) {
@@ -92,7 +102,8 @@ public class NeonParticles extends Brush {
         for (int i = 0; i < particles.size(); i++) {
             SimpleParticle p = particles.get(i);
 
-            g.setColor(new Color(tonemap(red), tonemap(green), tonemap(blue), 1f));
+            //g.setColor(new Color(tonemap(red), tonemap(green), tonemap(blue), 1f));
+            g.setColor(new Color((red), (green), (blue),  0.5f));
             g.drawOval(p.getX(), p.getY(), 0, 1);
             //System.out.println(getNoise(p.getX(), p.getY(), 0));
             //int newVx = (int) (p.getVx() * damping + getNoise(p.getX(), p.getY(), 0) * 4 * noise + fuzzy(0.1) * fuzz);
@@ -148,7 +159,7 @@ public class NeonParticles extends Brush {
         return (Math.random() - 0.5) * range;
     }
 
-    private float tonemap(double n) {
+    private float tonemap(float n) {
         return (float) ((1 - Math.pow(2, -n * 0.005 * exposure)) * 255);
     }
 

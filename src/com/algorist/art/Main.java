@@ -6,6 +6,8 @@ package com.algorist.art;
 
 import com.algorist.art.view.MainFrame;
 import com.algorist.art.view.MainView;
+import java.util.TimerTask;
+import java.util.Timer;
 
 /**
  *
@@ -27,11 +29,6 @@ public class Main {
                 FileManager.initialize();
                 MainFrame mainFrame = new MainFrame(modelAcessor);
                 mainFrame.show();
-            }
-        });
 
     }
-    
-    
-    
 }

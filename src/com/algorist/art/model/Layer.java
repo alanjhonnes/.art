@@ -33,10 +33,19 @@ public class Layer extends EventDispatcher implements Serializable {
     public Layer(int width, int height) {
         this.width = width;
         this.height = height;
-        image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB_PRE);
+        image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
-        g.setColor(Color.BLACK);
-        g.fillRect(0, 0, width, height);
+        g.setColor(Color.WHITE);
+        g.fillRect(0, 0, width / 2, height/2);
+        
+        g.setColor(Color.black);
+        g.fillRect(width / 2, 0, width / 2, height/2);
+        
+        g.setColor(Color.blue);
+        g.fillRect(0, height/2, width / 2, height/2);
+        
+        g.setColor(Color.red);
+        g.fillRect(width / 2, height/2, width / 2, height/2);
         //refreshThumbnail();
     }
 
