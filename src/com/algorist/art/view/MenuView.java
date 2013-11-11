@@ -5,7 +5,9 @@
 package com.algorist.art.view;
 
 import com.algorist.art.FileManager;
+import com.algorist.art.controller.ExportController;
 import com.algorist.art.controller.MenuController;
+import com.algorist.art.model.Art;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -59,10 +61,12 @@ public class MenuView extends AbstractView<JMenuBar> implements ActionListener {
     public JMenuItem deletePresetItem;
     public JMenuItem undoItem;
     private MenuController controller;
+    private Art model;
 
-    public MenuView(AbstractFrame mainFrame, MenuController controller) {
+    public MenuView(AbstractFrame mainFrame, MenuController controller, Art artModel) {
         super(mainFrame);
         this.controller = controller;
+        this.model = artModel;
     }
 
     @Override
@@ -223,10 +227,11 @@ public class MenuView extends AbstractView<JMenuBar> implements ActionListener {
 
             case EXPORT: {
                 JFrame frame = new JFrame("Exportar");
-                ExportView exportView = new ExportView(getMainFrame());
+                ExportView exportView = new ExportView(getMainFrame(), new ExportController(getMainFrame(), model.getCurrentDocument()));
                 frame.add(exportView.getContentPane());
                 frame.pack();
                 frame.setVisible(true);
+                break;
             }
                 
             case NEW_LAYER: {

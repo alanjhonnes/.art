@@ -58,7 +58,7 @@ public class MainFrame extends AbstractFrame {
         views.put(BrushPanelView.class, new BrushPanelView(this, brushPanelController, modelAcessor.getArt()));
         views.put(LayersPanelView.class, new LayersPanelView(this, modelAcessor.getArt().getCurrentDocument()));
         views.put(DocumentsView.class, new DocumentsView(this, modelAcessor.getArt(), documentsController));
-        views.put(MenuView.class, new MenuView(this, menuController));
+        views.put(MenuView.class, new MenuView(this, menuController, modelAcessor.getArt()));
     }
 
     @Override
