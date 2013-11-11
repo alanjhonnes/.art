@@ -29,6 +29,8 @@ public class Main {
                 FileManager.initialize();
                 MainFrame mainFrame = new MainFrame(modelAcessor);
                 mainFrame.show();
+            }
+        });
 
     }
 }
