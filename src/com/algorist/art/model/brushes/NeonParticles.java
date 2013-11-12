@@ -102,9 +102,9 @@ public class NeonParticles extends Brush {
         for (int i = 0; i < particles.size(); i++) {
             SimpleParticle p = particles.get(i);
 
-            //g.setColor(new Color(tonemap(red), tonemap(green), tonemap(blue), 1f));
-            g.setColor(new Color((red), (green), (blue),  0.5f));
-            g.drawOval(p.getX(), p.getY(), 0, 1);
+            g.setColor(new Color(tonemap(red), tonemap(green), tonemap(blue), 1f));
+            //g.setColor(new Color((red), (green), (blue),  0.5f));
+            g.fillOval(p.getX(), p.getY(), 1, 1);
             //System.out.println(getNoise(p.getX(), p.getY(), 0));
             //int newVx = (int) (p.getVx() * damping + getNoise(p.getX(), p.getY(), 0) * 4 * noise + fuzzy(0.1) * fuzz);
             //int newVy = (int) (p.getVy() * damping + getNoise(p.getX(), p.getY(), 0) * 4 * noise + fuzzy(0.1) * fuzz);
