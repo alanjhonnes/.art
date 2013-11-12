@@ -90,7 +90,7 @@ public class NeonParticles extends Brush {
                 RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
 
-        //g.setComposite(new BlendComposite());
+        g.setComposite(new BlendComposite());
 
         for (int i = 0; i < spawn; i++) {
             particles.add(new SimpleParticle(fuzzy(initialXVelocity), fuzzy(initialYVelocity), movement.getNewPosition().x, movement.getNewPosition().y));
