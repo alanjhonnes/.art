@@ -23,6 +23,10 @@ import javax.swing.Timer;
  * @author alan.jbssa
  */
 public class RB4_Brush extends Brush {
+    
+       public RB4_Brush() {
+        name = "Vintage";
+    }
 
     @Override
     public void initialize(Layer layer) {

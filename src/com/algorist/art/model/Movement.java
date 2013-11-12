@@ -61,6 +61,8 @@ public class Movement extends EventDispatcher {
         deltaY = newPosition.y - oldPosition.y;
 
         this.angle = Math.atan2(deltaY, deltaX) * 180 / Math.PI;
+        
+        this.speed = Math.sqrt((deltaX*deltaX) + (deltaY*deltaY));
 
         dispatchEvent(new MovementEvent(this, MovementEvent.POSITION_CHANGED));
     }

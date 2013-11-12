@@ -20,9 +20,13 @@ import javax.swing.Timer;
  */
 public class ArcBrush extends Brush {
 
+    public ArcBrush() {
+        name = "ArcBrush";
+    }
+
     @Override
     public void initialize(Layer layer) {
-        
+
     }
 
     @Override
@@ -34,7 +38,7 @@ public class ArcBrush extends Brush {
 
     @Override
     public void startDrawing(final Movement movement, Layer layer) {
-        super.startDrawing(movement, layer); 
+        super.startDrawing(movement, layer);
         final Graphics2D g = layer.getImage().createGraphics();
         g.setColor(Color.CYAN);
         g.drawArc(movement.getNewPosition().x, movement.getNewPosition().y, 10, 20, 0, (int) 50);
@@ -46,20 +50,17 @@ public class ArcBrush extends Brush {
             }
         });
         timer.start();
-        
+
     }
-    
-    
 
     @Override
     public void loadDefaultPresets() {
-        
+
     }
 
     @Override
     public Map<String, Parameter> getParamTypes() {
         return null;
     }
-    
-    
+
 }

@@ -6,6 +6,8 @@ package com.algorist.art.model;
 
 import com.alanjhonnes.event.EventDispatcher;
 import com.algorist.art.event.DocumentEvent;
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -100,6 +102,10 @@ public class Document extends EventDispatcher implements Serializable {
         Layer layer = new Layer(width, height);
         layers.add(layer);
         dispatchEvent(new DocumentEvent(this, DocumentEvent.LAYER_ADDED, layer));
+    }
+
+    public BufferedImage getResultingImage() {
+        return selectedLayer.getImage();
     }
     
     

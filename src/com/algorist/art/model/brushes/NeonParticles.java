@@ -74,8 +74,6 @@ public class NeonParticles extends Brush {
         green = (float) Math.random();
         blue = (float) Math.random();
     }
-    
-    
 
     @Override
     public void draw(Movement movement) {
@@ -92,8 +90,7 @@ public class NeonParticles extends Brush {
                 RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
 
-        g.setComposite(new BlendComposite());
-
+        //g.setComposite(new BlendComposite());
 
         for (int i = 0; i < spawn; i++) {
             particles.add(new SimpleParticle(fuzzy(initialXVelocity), fuzzy(initialYVelocity), movement.getNewPosition().x, movement.getNewPosition().y));
@@ -102,9 +99,9 @@ public class NeonParticles extends Brush {
         for (int i = 0; i < particles.size(); i++) {
             SimpleParticle p = particles.get(i);
 
-            g.setColor(new Color(tonemap(red), tonemap(green), tonemap(blue), 1f));
-            //g.setColor(new Color((red), (green), (blue),  0.5f));
-            g.fillOval(p.getX(), p.getY(), 1, 1);
+            //g.setColor(new Color(tonemap(red), tonemap(green), tonemap(blue), 1f));
+            g.setColor(new Color((red), (green), (blue), 0.5f));
+            g.drawOval(p.getX(), p.getY(), 0, 1);
             //System.out.println(getNoise(p.getX(), p.getY(), 0));
             //int newVx = (int) (p.getVx() * damping + getNoise(p.getX(), p.getY(), 0) * 4 * noise + fuzzy(0.1) * fuzz);
             //int newVy = (int) (p.getVy() * damping + getNoise(p.getX(), p.getY(), 0) * 4 * noise + fuzzy(0.1) * fuzz);
@@ -171,11 +168,8 @@ public class NeonParticles extends Brush {
         g.setColor(Color.black);
         g.fillRect(0, 0, width, height);
 
-
-
 //        ctx.globalAlpha = 1 / octaves;
 //        ctx.globalCompositeOperation = 'lighter';
-
         for (int i = 0; i < octaves; i++) {
             BufferedImage octave = makeNoise(width >> i, height >> i);
             //var octave = makeNoise(width, height);

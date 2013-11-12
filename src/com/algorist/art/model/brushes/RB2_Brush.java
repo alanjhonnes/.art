@@ -19,6 +19,10 @@ import javax.swing.Timer;
  * @author alan.jbssa
  */
 public class RB2_Brush extends Brush {
+    
+     public RB2_Brush() {
+        name = "Phynna";
+    }    
 
     @Override
     public void initialize(Layer layer) {

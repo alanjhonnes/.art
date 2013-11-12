@@ -23,17 +23,20 @@ import javax.swing.Timer;
  */
 public class RB3_Brush extends Brush {
 
+    public RB3_Brush() {
+        name = "Alchemy";
+    }
+
     @Override
     public void initialize(Layer layer) {
     }
 
-    
     @Override
     public void draw(Movement movement) {
-    
-        Point p = movement.getNewPosition(); 
+
+        Point p = movement.getNewPosition();
         int size = 10;
-        
+
         Graphics2D g = layer.getImage().createGraphics();
         g.setColor(Color.darkGray);
         Rectangle r = new Rectangle();

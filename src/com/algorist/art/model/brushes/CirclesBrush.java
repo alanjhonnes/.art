@@ -72,9 +72,9 @@ public class CirclesBrush extends Brush {
     @Override
     public void draw(Movement movement) {
         Graphics2D g = (Graphics2D) layer.getImage().createGraphics();
-        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setColor(new Color(0f, 0f, 0f, 0.2f));
-        g.fillOval(movement.getNewPosition().x, movement.getNewPosition().y, 18,18);
+        g.fillOval(movement.getNewPosition().x, movement.getNewPosition().y, 18, 18);
     }
 
     @Override
