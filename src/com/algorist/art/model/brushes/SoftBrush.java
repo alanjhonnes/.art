@@ -19,7 +19,7 @@ public class SoftBrush extends Brush {
 
     @Override
     public void initialize(Layer layer) {
-        
+
     }
 
     @Override
@@ -33,12 +33,12 @@ public class SoftBrush extends Brush {
 
     @Override
     public void loadDefaultPresets() {
-        
+
     }
 
     @Override
     public Map<String, Parameter> getParamTypes() {
         return null;
     }
-    
+
 }

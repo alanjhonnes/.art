@@ -21,13 +21,13 @@ import java.util.Map;
  * @author alan.jbssa
  */
 public abstract class Brush {
-    
+
     protected String name;
     protected BufferedImage image;
     protected List<Preset> presets;
-    
+
     protected Layer layer;
-    
+
     protected CallbackFunction drawCallback;
 
     public Brush() {
@@ -41,37 +41,37 @@ public abstract class Brush {
             }
         };
         loadDefaultPresets();
-        
+
     }
 
     public Brush(List<Preset> presets) {
         this.presets = presets;
     }
+
     abstract public void initialize(Layer layer);
-    
-    public void startDrawing(Movement movement, Layer layer){
+
+    public void startDrawing(Movement movement, Layer layer) {
         this.layer = layer;
         movement.addEventListener(MovementEvent.TIMER_TICK, drawCallback);
         //movement.addEventListener(MovementEvent.POSITION_CHANGED, drawCallback);
     }
-    
-    public void stopDrawing(Movement movement){
+
+    public void stopDrawing(Movement movement) {
         layer = null;
         movement.removeEventListener(MovementEvent.TIMER_TICK, drawCallback);
         //movement.removeEventListener(MovementEvent.POSITION_CHANGED, drawCallback);
     }
-    
+
     abstract public void draw(Movement movement);
-    
+
     public abstract void loadDefaultPresets();
-    
+
     public abstract Map<String, Parameter> getParamTypes();
-    
-    public void loadPreset(Preset preset){
-        if(preset.getBrushClass() == this.getClass()){
-            
-        }
-        else {
+
+    public void loadPreset(Preset preset) {
+        if (preset.getBrushClass() == this.getClass()) {
+
+        } else {
             System.err.println("Error loading preset. Preset brushClass is diferent from brush class.");
         }
     }
@@ -105,8 +105,4 @@ public abstract class Brush {
         return name;
     }
 
-    
-    
-    
-    
 }

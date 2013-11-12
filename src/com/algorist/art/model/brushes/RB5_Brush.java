@@ -20,31 +20,41 @@ import javax.swing.Timer;
  */
 public class RB5_Brush extends Brush {
 
+    private int SMALL_OFFSET = 2;
+    private int BIG_OFFSET = 8;
+
+    public RB5_Brush() {
+        name = "SprayHardcore";
+    }
+    
+    
+
     @Override
     public void initialize(Layer layer) {
     }
 
     @Override
     public void draw(Movement movement) {
-        double x, y, tempx,tempy;
+        int x = 0, y = 0, tempx, tempy;
+        x=movement.getNewPosition().x;
+        y=movement.getNewPosition().y;
         Graphics2D g = layer.getImage().createGraphics();
         g.setColor(Color.ORANGE);
-		
-		for (int i = 0; i < 35; i++){
-			// use static final ints now
-			tempx = (x + (int) Math.round(2 * SMALL_OFFSET * (Math.random() -0.5)));
-			tempy = (y + (int) ( ((Math.random()-0.5)*2) * Math.sqrt(
-				(SMALL_OFFSET * SMALL_OFFSET) - ((x - tempx) * (x - tempx)))));
-			g.drawLine(tempx, tempy, tempx, tempy);
-		}
-		
-		for (int i = 0; i < 12; i++){
-			tempx = (x + (int) Math.round( 2* BIG_OFFSET*(Math.random() -0.5)));
-			tempy = (y + (int) ( ((Math.random()-0.5)*2) * Math.sqrt(
-				(BIG_OFFSET * BIG_OFFSET) - ((x - tempx) * (x - tempx)))));
-			g.drawLine(tempx, tempy, tempx, tempy);
-		}
-		re paint();
+
+        for (int i = 0; i < 35; i++) {
+            // use static final ints now
+            tempx = (x + (int) Math.round(2 * SMALL_OFFSET * (Math.random() - 0.5)));
+            tempy = (y + (int) (((Math.random() - 0.5) * 2) * Math.sqrt(
+                    (SMALL_OFFSET * SMALL_OFFSET) - ((x - tempx) * (x - tempx)))));
+            g.drawLine((int) tempx, (int) tempy, (int) tempx, (int) tempy);
+        }
+
+        for (int i = 0; i < 12; i++) {
+            tempx = (x + (int) Math.round(2 * BIG_OFFSET * (Math.random() - 0.5)));
+            tempy = (y + (int) (((Math.random() - 0.5) * 2) * Math.sqrt(
+                    (BIG_OFFSET * BIG_OFFSET) - ((x - tempx) * (x - tempx)))));
+            g.drawLine((int) tempx, (int) tempy, (int) tempx, (int) tempy);
+        }
     }
 
     @Override

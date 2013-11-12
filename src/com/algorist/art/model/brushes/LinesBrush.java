@@ -42,10 +42,8 @@ public class LinesBrush extends Brush {
     @Override
     public void draw(Movement movement) {
         Graphics2D g = (Graphics2D) layer.getImage().createGraphics();
-                g.setColor(Color.BLACK);
-                g.drawLine(movement.getOldPosition().x, movement.getOldPosition().y, movement.getNewPosition().x, movement.getNewPosition().y);
+        g.setColor(Color.BLACK);
+        g.drawLine(movement.getOldPosition().x, movement.getOldPosition().y, movement.getNewPosition().x, movement.getNewPosition().y);
     }
 
-    
-    
 }
