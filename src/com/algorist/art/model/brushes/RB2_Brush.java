@@ -9,6 +9,7 @@ import com.algorist.art.model.Movement;
 import com.algorist.art.model.brushes.parameters.Parameter;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
@@ -32,6 +33,7 @@ public class RB2_Brush extends Brush {
     public void draw(Movement movement) {
         Graphics2D g = layer.getImage().createGraphics();
         g.setColor(Color.DARK_GRAY);
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         int[] xs = {-50, 0, 50, 10, 50, 0, -50, -10, -50};
         int[] ys = {-50, -10, -50, 0, 50, 10, 50, 0,-50};
         for (int i = 0; i < xs.length; i++) {

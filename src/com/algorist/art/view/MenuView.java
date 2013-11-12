@@ -9,9 +9,12 @@ import com.algorist.art.controller.ExportController;
 import com.algorist.art.controller.MenuController;
 import com.algorist.art.model.Art;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import javax.swing.ActionMap;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -22,6 +25,7 @@ import javax.swing.KeyStroke;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import mvc.AbstractFrame;
 import mvc.AbstractView;
+import sun.font.GraphicComponent;
 
 /**
  *
@@ -42,6 +46,7 @@ public class MenuView extends AbstractView<JMenuBar> implements ActionListener {
     public final String SAVE_PRESET = "SavePreset";
     public final String NEW_PRESET = "NewPreset";
     public final String DELETE_PRESET = "DeletePreset";
+    public final String CLEAN_LAYER = "Limpar";
     public ActionMap actionMap;
     public JMenu fileMenu;
     public JMenu layerMenu;
@@ -60,8 +65,10 @@ public class MenuView extends AbstractView<JMenuBar> implements ActionListener {
     public JMenuItem newPresetItem;
     public JMenuItem deletePresetItem;
     public JMenuItem undoItem;
+    public JMenuItem ccleanerLayerItem;
     private MenuController controller;
     private Art model;
+    private BufferedImage image;
 
     public MenuView(AbstractFrame mainFrame, MenuController controller, Art artModel) {
         super(mainFrame);
@@ -128,6 +135,12 @@ public class MenuView extends AbstractView<JMenuBar> implements ActionListener {
         duplicateLayerItem.setActionCommand(DUPLICATE_LAYER);
         duplicateLayerItem.addActionListener(this);
 
+        ccleanerLayerItem = new JMenuItem("Limpar camada");
+        ccleanerLayerItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, ActionEvent.CTRL_MASK | ActionEvent.SHIFT_MASK));
+        ccleanerLayerItem.setMnemonic(KeyEvent.VK_DELETE);
+        ccleanerLayerItem.setActionCommand(CLEAN_LAYER);
+        ccleanerLayerItem.addActionListener(this);
+
         deleteLayerItem = new JMenuItem("Deletar camada");
         deleteLayerItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK | ActionEvent.SHIFT_MASK));
         deleteLayerItem.setMnemonic(KeyEvent.VK_N);
@@ -168,6 +181,7 @@ public class MenuView extends AbstractView<JMenuBar> implements ActionListener {
         layerMenu.add(newLayerItem);
         layerMenu.add(duplicateLayerItem);
         layerMenu.add(deleteLayerItem);
+        layerMenu.add(ccleanerLayerItem);
 
         presetMenu.add(savePresetItem);
         presetMenu.add(newPresetItem);
@@ -233,9 +247,14 @@ public class MenuView extends AbstractView<JMenuBar> implements ActionListener {
                 frame.setVisible(true);
                 break;
             }
-                
+
             case NEW_LAYER: {
                 controller.addLayer();
+                break;
+            }
+
+            case CLEAN_LAYER: {
+                controller.cleanLayer();
                 break;
             }
         }

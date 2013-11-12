@@ -8,6 +8,8 @@ import com.algorist.art.FileManager;
 import com.algorist.art.model.Art;
 import com.algorist.art.model.Document;
 import com.sun.jnlp.FileOpenServiceImpl;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -77,5 +79,9 @@ public class MenuController extends AbstractController {
 
     public void addLayer() {
         artModel.getCurrentDocument().addLayer();
+    }
+
+    public void cleanLayer() {
+        artModel.getCurrentDocument().getSelectedLayer().clear();
     }
 }
