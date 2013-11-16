@@ -60,7 +60,9 @@ public class Movement extends EventDispatcher {
         deltaX = newPosition.x - oldPosition.x;
         deltaY = newPosition.y - oldPosition.y;
 
-        this.angle = Math.atan2(deltaY, deltaX) * 180 / Math.PI;
+        //this.angle = Math.atan2(deltaY, deltaX) * 180 / Math.PI;
+        this.angle = Math.atan2(deltaY, deltaX);
+        //this.angle = Math.atan2(deltaX, deltaY)* 180 / Math.PI;
         
         this.speed = Math.sqrt((deltaX*deltaX) + (deltaY*deltaY));
 

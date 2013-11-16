@@ -15,6 +15,7 @@ import com.algorist.art.model.brushes.RB2_Brush;
 import com.algorist.art.model.brushes.RB3_Brush;
 import com.algorist.art.model.brushes.RB4_Brush;
 import com.algorist.art.model.brushes.RB5_Brush;
+import com.algorist.art.model.brushes.SilkBrush;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class Art extends EventDispatcher {
         documents = new ArrayList<>();
         movements = new ArrayList<>();
         brushes = new ArrayList<>();
-        
+        brushes.add(new SilkBrush());
         brushes.add(new NeonParticles());
         brushes.add(new CirclesBrush());
         brushes.add(new LinesBrush());

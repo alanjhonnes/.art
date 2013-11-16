@@ -10,9 +10,9 @@ package com.alanjhonnes.particles;
  */
 public class SimpleParticle extends Particle {
     
-    private double vx;
-    private double vy;
-    private int age;
+    public double vx;
+    public double vy;
+    public int age;
 
     public SimpleParticle(double vx, double vy, int x, int y) {
         this.vx = vx;

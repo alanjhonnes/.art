@@ -12,6 +12,8 @@ import com.algorist.art.model.Document;
 import com.algorist.art.model.Layer;
 import com.algorist.art.view.display.LayerPanel;
 import java.awt.Dimension;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -29,7 +31,7 @@ import org.netbeans.lib.awtextra.AbsoluteLayout;
  *
  * @author alanjhonnes
  */
-public class DrawingAreaView extends AbstractView<JLayeredPane> {
+public class DrawingAreaView extends AbstractView<JLayeredPane> implements ComponentListener {
 
     private DrawingAreaController controller;
     private MouseListener mouseListener;
@@ -67,7 +69,7 @@ public class DrawingAreaView extends AbstractView<JLayeredPane> {
     protected JLayeredPane layout() {
         JLayeredPane panel = new JLayeredPane();
         panel.setPreferredSize(new Dimension(600, 500));
-
+        
 
         mouseListener = new MouseAdapter() {
             @Override
@@ -98,6 +100,7 @@ public class DrawingAreaView extends AbstractView<JLayeredPane> {
 
         panel.addMouseListener(mouseListener);
         panel.addMouseMotionListener(mouseMotionListener);
+        panel.addComponentListener(this);
         return panel;
     }
 
@@ -128,5 +131,25 @@ public class DrawingAreaView extends AbstractView<JLayeredPane> {
                 break;
             }
         }
+    }
+    
+    
+    
+    
+     public void componentHidden(ComponentEvent e) {
+        System.out.println(e.getComponent().getClass().getName() + " --- Hidden");
+    }
+
+    public void componentMoved(ComponentEvent e) {
+        System.out.println(e.getComponent().getClass().getName() + " --- Moved");
+    }
+
+    public void componentResized(ComponentEvent e) {
+        documentModel.setSize(contentPane.getWidth(), contentPane.getHeight());    
+    }
+
+    public void componentShown(ComponentEvent e) {
+        System.out.println(e.getComponent().getClass().getName() + " --- Shown");
+
     }
 }

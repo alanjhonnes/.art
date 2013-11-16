@@ -10,8 +10,8 @@ package com.alanjhonnes.particles;
  */
 public abstract class Particle {
     
-    protected int x;
-    protected int y;
+    public int x;
+    public int y;
 
     public int getX() {
         return x;

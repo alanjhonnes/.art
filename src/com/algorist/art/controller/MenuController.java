@@ -7,6 +7,9 @@ package com.algorist.art.controller;
 import com.algorist.art.FileManager;
 import com.algorist.art.model.Art;
 import com.algorist.art.model.Document;
+import com.algorist.art.view.DocumentView;
+import com.algorist.art.view.DocumentsView;
+import com.algorist.art.view.DrawingAreaView;
 import com.sun.jnlp.FileOpenServiceImpl;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -26,6 +29,9 @@ import javax.jnlp.FileOpenService;
 import javax.jnlp.ServiceManager;
 import javax.jnlp.UnavailableServiceException;
 import javax.swing.JFileChooser;
+import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import mvc.AbstractController;
 import mvc.AbstractFrame;
@@ -45,7 +51,8 @@ public class MenuController extends AbstractController {
 
     public void newDocument() {
         int i = artModel.getDocuments().size() + 1;
-        Document doc = new Document("Novo documento " + i, 600, 500);
+        JTabbedPane documentPanel = getMainFrame().getView(DocumentsView.class).getContentPane();
+        Document doc = new Document("Novo documento " + i, documentPanel.getWidth(), documentPanel.getHeight());
         artModel.addDocument(doc);
     }
 

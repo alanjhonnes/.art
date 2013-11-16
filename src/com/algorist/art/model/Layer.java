@@ -35,17 +35,20 @@ public class Layer extends EventDispatcher implements Serializable {
         this.height = height;
         image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
-        g.setColor(Color.WHITE);
-        g.fillRect(0, 0, width / 2, height / 2);
-
+//        g.setColor(Color.WHITE);
+//        g.fillRect(0, 0, width / 2, height / 2);
+//
+//        g.setColor(Color.black);
+//        g.fillRect(width / 2, 0, width / 2, height / 2);
+//
+//        g.setColor(Color.blue);
+//        g.fillRect(0, height / 2, width / 2, height / 2);
+//
+//        g.setColor(Color.red);
+//        g.fillRect(width / 2, height / 2, width / 2, height / 2);
+        
         g.setColor(Color.black);
-        g.fillRect(width / 2, 0, width / 2, height / 2);
-
-        g.setColor(Color.blue);
-        g.fillRect(0, height / 2, width / 2, height / 2);
-
-        g.setColor(Color.red);
-        g.fillRect(width / 2, height / 2, width / 2, height / 2);
+        g.fillRect(0, 0, width, height);
         //refreshThumbnail();
     }
 
@@ -57,7 +60,16 @@ public class Layer extends EventDispatcher implements Serializable {
     }
 
     public void setSize(int width, int height) {
-        ///
+        BufferedImage newImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+
+        Graphics2D g = newImage.createGraphics();
+        g.drawImage(image, 0, 0, image.getWidth(), image.getHeight(), null);
+        g.dispose();
+        image.flush();
+        image = newImage;
+        this.width = width;
+        this.height = height;
+        System.out.println("Layer resized");
         dispatchEvent(new LayerEvent(this, LayerEvent.SIZE_CHANGED));
     }
 

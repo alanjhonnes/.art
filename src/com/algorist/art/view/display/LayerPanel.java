@@ -4,6 +4,9 @@
  */
 package com.algorist.art.view.display;
 
+import com.alanjhonnes.event.CallbackFunction;
+import com.alanjhonnes.event.Event;
+import com.algorist.art.event.LayerEvent;
 import com.algorist.art.model.Layer;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -18,10 +21,18 @@ public class LayerPanel extends JPanel {
 
     private Layer layer;
 
-    public LayerPanel(Layer layer) {
+    public LayerPanel(final Layer layer) {
         super();
         this.layer = layer;
         this.setPreferredSize(new Dimension(layer.getWidth(), layer.getHeight()));
+        layer.addEventListener(LayerEvent.SIZE_CHANGED, new CallbackFunction() {
+
+            @Override
+            public void execute(Event e) {
+                System.out.println("test");
+                setPreferredSize(new Dimension(layer.getWidth(), layer.getHeight()));
+            }
+        });
     }
 
     @Override
