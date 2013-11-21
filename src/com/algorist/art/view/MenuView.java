@@ -16,6 +16,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import javax.swing.ActionMap;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -249,6 +250,7 @@ public class MenuView extends AbstractView<JMenuBar> implements ActionListener {
             }
 
             case NEW_LAYER: {
+                
                 controller.addLayer();
                 break;
             }
@@ -258,9 +260,5 @@ public class MenuView extends AbstractView<JMenuBar> implements ActionListener {
                 break;
             }
         }
-    }
-
-    private void Dimension(int i, int i0) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

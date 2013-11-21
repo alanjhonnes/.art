@@ -4,21 +4,15 @@
  */
 package com.algorist.art.model.brushes;
 
-import com.alanjhonnes.particles.Particle;
 import com.alanjhonnes.particles.SilkParticle;
-import com.alanjhonnes.particles.SimpleParticle;
 import com.algorist.art.model.Layer;
 import com.algorist.art.model.Movement;
 import com.algorist.art.model.brushes.parameters.Parameter;
-import com.algorist.art.model.brushes.presets.Preset;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
 
@@ -32,7 +26,7 @@ public class SilkBrush extends Brush {
     private List<SilkParticle> shadowParticles;
     private BufferedImage bumpmap;
     private int maxDist = 60;
-    private double opacity = 0.3;
+    private float opacity = 0.3f;
     private double density = 1;
     private int spread = 90;
     private int bumpmapScale = 100;
@@ -41,9 +35,9 @@ public class SilkBrush extends Brush {
     private int lifespan = 10;
     //shadow
     private int shadowMaxDist = 120;
-    private double shadowOpacity = 0.075;
+    private float shadowOpacity = 0.075f;
     private double shadowDensity = 0.8;
-    private int shadowSpread = 433;
+    private int shadowSpread = 300;
     private int shadowScatter = 0;
     private int shadowLifespan = 4;
     private boolean useShadows = false;
@@ -149,11 +143,26 @@ public class SilkBrush extends Brush {
 //                particle.setColor(new Color(0f, 0f, 0f, (float) shadowOpacity));
 //            }
 
-
+//            particle.angle += 0.15;
         }
         particle.x += Math.cos(particle.angle) * particle.speed;
         particle.y += Math.sin(particle.angle) * particle.speed;
         particle.age++;
+        
+//        if(particles == this.particles){
+//            Color c = particle.getColor();
+//        float lifeRatio = particle.age / lifespan;
+////        int red = (int) (c.getRed()* lifeRatio);
+////        int green = (int) (c.getGreen() * lifeRatio);
+////        int blue = (int) (c.getBlue() * lifeRatio);
+//        
+////        float red = (float) (c.getRed() / 256);
+////        float green = (float) (c.getGreen() / 256);
+////        float blue =  (float) (c.getBlue() / 256);
+//        particle.setColor(new Color(red, green, blue, opacity));
+//        }
+        
+        
 
     }
 
@@ -178,46 +187,20 @@ public class SilkBrush extends Brush {
         group.add(p);
         p.angle = angle;
         p.speed = speed;
-        //p.ox = mouseData.px1;
-        //p.oy = mouseData.py1;
         p.x = x;
         p.y = y;
         p.px = x;
         p.py = y;
-        //p.setColor(new Color(1, 1, 1, 0.3f));
         if(group == particles){
-            //p.setColor(new Color((float) Math.random(), (float) Math.random(), (float) Math.random(), 0.3f));
-            p.setColor(new Color(1,1,1, 0.3f));
+            p.setColor(new Color(1,1,1, opacity));
         }
         else {
-            p.setColor(new Color(0,0,0, 0.3f));
+            p.setColor(new Color(0,0,0, shadowOpacity));
         }
         
     }
 
-    public void setInitialPosition(SilkParticle particle, int f_method) {
 
-        switch (f_method) {
-//			// circle
-//			case 0:
-//				ringAngle = getRandomFromRange(0, Math.PI * 2);
-//				particle.setX(Math.cos(ringAngle) * ringRadius + centerX);
-//				particle.setY(Math.sin(ringAngle) * ringRadius + centerY;);
-//				break;
-
-            //Horizontal Line
-            case 1:
-                particle.setX((int) (Math.random() * layer.getWidth()));
-                particle.setY((int) (Math.random() * layer.getHeight()));
-                break;
-
-            //Random
-            case 2:
-                particle.setX((int) (Math.random() * layer.getWidth()));
-                particle.setY((int) (Math.random() * layer.getHeight()));
-                break;
-        }
-    }
 
     public void drawLines(SilkParticle particle, int id, List<SilkParticle> particles, Graphics2D g) {
         int i = -1;
@@ -225,8 +208,6 @@ public class SilkBrush extends Brush {
         int offsetY;
         Polygon polygon = new Polygon();
 
-        //i = f_id - 2;
-        //if (f_id > 1){
         List<Integer> distances = particle.getDistances();
         while (++i < distances.size()) {
             SilkParticle p2 = particles.get(i);

@@ -73,7 +73,7 @@ public class DrawingAreaController extends AbstractController {
         if (movement != null) {
             movement.movePosition(newPosition);
             view.updateLayer(artModel.getCurrentDocument().getSelectedLayer());
-            System.out.println(movement);
+            //System.out.println(movement);
         }
     }
     
