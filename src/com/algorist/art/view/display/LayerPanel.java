@@ -31,6 +31,7 @@ public class LayerPanel extends JPanel {
             public void execute(Event e) {
                 System.out.println("test");
                 setPreferredSize(new Dimension(layer.getWidth(), layer.getHeight()));
+                revalidate();
             }
         });
     }

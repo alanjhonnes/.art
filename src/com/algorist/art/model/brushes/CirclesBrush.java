@@ -64,8 +64,8 @@ public class CirclesBrush extends Brush {
 
     @Override
     public void loadPreset(Preset preset) {
-        Map<Object, Object> map = preset.getParams();
-        this.thickness = (Integer) map.get("thickness");
+        Map<String, Object> params = preset.getParams();
+        this.thickness = (int) params.get("thickness");
 
     }
 

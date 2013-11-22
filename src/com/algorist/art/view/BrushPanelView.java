@@ -86,6 +86,15 @@ public class BrushPanelView extends AbstractView<JPanel> {
             }
         });
         
+        comboPresets.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                JComboBox<Preset> combo = (JComboBox<Preset>) ae.getSource();
+                Preset preset = combo.getItemAt(combo.getSelectedIndex());
+                controller.changePreset(preset);
+            }
+        });
+        
         controller.changeBrush(comboBrushes.getItemAt(comboBrushes.getSelectedIndex()));
 
         repopulatePresets(comboBrushes.getItemAt(comboBrushes.getSelectedIndex()).getPresets());

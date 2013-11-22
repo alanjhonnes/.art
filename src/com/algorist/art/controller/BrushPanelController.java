@@ -6,6 +6,7 @@ package com.algorist.art.controller;
 
 import com.algorist.art.model.Art;
 import com.algorist.art.model.brushes.Brush;
+import com.algorist.art.model.brushes.presets.Preset;
 import java.util.List;
 import mvc.AbstractController;
 import mvc.AbstractFrame;
@@ -29,6 +30,10 @@ public class BrushPanelController extends AbstractController {
 
     public void changeBrush(Brush brush) {
         artModel.setSelectedBrush(brush);
+    }
+
+    public void changePreset(Preset preset) {
+        artModel.getSelectedBrush().loadPreset(preset);
     }
     
 }

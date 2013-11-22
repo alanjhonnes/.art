@@ -8,9 +8,14 @@ import com.alanjhonnes.particles.SilkParticle;
 import com.algorist.art.model.Layer;
 import com.algorist.art.model.Movement;
 import com.algorist.art.model.brushes.parameters.Parameter;
+import com.algorist.art.model.brushes.presets.Preset;
+import com.algorist.art.model.brushes.presets.silkbrush.DefaultSilkBrushPreset;
+import com.algorist.art.model.brushes.presets.silkbrush.HighSpreadSilkBrushPreset;
+import com.algorist.art.model.brushes.presets.silkbrush.RandomColorSilkBrushPreset;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +45,7 @@ public class SilkBrush extends Brush {
     private int shadowSpread = 300;
     private int shadowScatter = 0;
     private int shadowLifespan = 4;
+    private boolean useRandomColor = false;
     private boolean useShadows = false;
     private float red = 1f;
     private float green = 1f;
@@ -47,6 +53,7 @@ public class SilkBrush extends Brush {
 
     public SilkBrush() {
         this.name = "Silkbrush";
+
     }
 
     @Override
@@ -54,14 +61,6 @@ public class SilkBrush extends Brush {
         particles = new ArrayList<>();
         shadowParticles = new ArrayList<>();
     }
-
-    @Override
-    public void startDrawing(Movement movement, Layer layer) {
-        super.startDrawing(movement, layer); //To change body of generated methods, choose Tools | Templates.
-        
-    }
-    
-    
 
     @Override
     public void draw(Movement movement) {
@@ -74,43 +73,48 @@ public class SilkBrush extends Brush {
                     movement.getAngle() + (Math.PI * 0.5), 1 / movement.getSpeed() * spread,
                     particles);
             makeParticle(
-                    (int) movement.getNewPosition().getX(), 
-                    (int) movement.getNewPosition().getY(), 
-                    movement.getAngle() - (Math.PI * 0.5), 1 / movement.getSpeed() * spread, 
-                    particles);
-            //2 shadow particles
-            makeParticle(
                     (int) movement.getNewPosition().getX(),
                     (int) movement.getNewPosition().getY(),
-                    movement.getAngle() + (Math.PI * 0.5), 1 / movement.getSpeed() * shadowSpread,
-                    shadowParticles);
-            makeParticle(
-                    (int) movement.getNewPosition().getX(), 
-                    (int) movement.getNewPosition().getY(), 
-                    movement.getAngle() - (Math.PI * 0.5), 1 / movement.getSpeed() * shadowSpread, 
-                    shadowParticles);
+                    movement.getAngle() - (Math.PI * 0.5), 1 / movement.getSpeed() * spread,
+                    particles);
+
+            if (useShadows) {
+                //2 shadow particles
+                makeParticle(
+                        (int) movement.getNewPosition().getX(),
+                        (int) movement.getNewPosition().getY(),
+                        movement.getAngle() + (Math.PI * 0.5), 1 / movement.getSpeed() * shadowSpread,
+                        shadowParticles);
+                makeParticle(
+                        (int) movement.getNewPosition().getX(),
+                        (int) movement.getNewPosition().getY(),
+                        movement.getAngle() - (Math.PI * 0.5), 1 / movement.getSpeed() * shadowSpread,
+                        shadowParticles);
+            }
+
         }
-        
+
         Graphics2D g = layer.getImage().createGraphics();
-        
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
         for (int i = 0; i < particles.size(); i++) {
             SilkParticle particle = particles.get(i);
             particle.getDistances().clear();
             getDistances(particle, i, particles);
             drawLines(particle, i, particles, g);
             moveParticle(particle, i, particles);
-            if(particle.age > lifespan){
+            if (particle.age > lifespan) {
                 particles.remove(i);
             }
         }
-        
+
         for (int i = 0; i < shadowParticles.size(); i++) {
             SilkParticle particle = shadowParticles.get(i);
             particle.getDistances().clear();
             getDistances(particle, i, shadowParticles);
             drawLines(particle, i, shadowParticles, g);
             moveParticle(particle, i, shadowParticles);
-            if(particle.age > shadowLifespan){
+            if (particle.age > shadowLifespan) {
                 shadowParticles.remove(i);
             }
         }
@@ -127,10 +131,10 @@ public class SilkBrush extends Brush {
             //var colorVal = 0x80; //bumpmap.bitmapData.getPixel(propX * 100, propY * 100);
             //colorVal = (colorVal & 0xff) - 0x80;
             //var angleOffset = bumpmapEffect * (colorVal / 0x80);
-            
-            
-            
-            
+
+
+
+
 //            colorVal = bumpmap.noise((bumpmap.offsetX + particle.x) / bumpmap.scale, (bumpmap.offsetY + particle.y) / bumpmap.scale);
 //            var angleOffset = bumpmapEffect * colorVal;
 //            particle.angle += angleOffset;
@@ -143,12 +147,12 @@ public class SilkBrush extends Brush {
 //                particle.setColor(new Color(0f, 0f, 0f, (float) shadowOpacity));
 //            }
 
-//            particle.angle += 0.15;
+            //particle.angle += 0.2;
         }
         particle.x += Math.cos(particle.angle) * particle.speed;
         particle.y += Math.sin(particle.angle) * particle.speed;
         particle.age++;
-        
+
 //        if(particles == this.particles){
 //            Color c = particle.getColor();
 //        float lifeRatio = particle.age / lifespan;
@@ -161,8 +165,8 @@ public class SilkBrush extends Brush {
 ////        float blue =  (float) (c.getBlue() / 256);
 //        particle.setColor(new Color(red, green, blue, opacity));
 //        }
-        
-        
+
+
 
     }
 
@@ -177,8 +181,8 @@ public class SilkBrush extends Brush {
         for (int i = 0; i < particles.size(); i++) {
             SilkParticle p = particles.get(i);
             dx = p.x - particle.x;
-                dy = p.y - particle.y;
-                distances.add(new Integer((int) (Math.sqrt((dx * dx) + (dy * dy)))));
+            dy = p.y - particle.y;
+            distances.add(new Integer((int) (Math.sqrt((dx * dx) + (dy * dy)))));
         }
     }
 
@@ -191,16 +195,18 @@ public class SilkBrush extends Brush {
         p.y = y;
         p.px = x;
         p.py = y;
-        if(group == particles){
-            p.setColor(new Color(1,1,1, opacity));
+        if (group == particles) {
+            if (useRandomColor) {
+                p.setColor(new Color((float) Math.random(), (float) Math.random(), (float) Math.random(), opacity));
+
+            } else {
+                p.setColor(new Color(red, green, blue, opacity));
+            }
+        } else {
+            p.setColor(new Color(0, 0, 0, shadowOpacity));
         }
-        else {
-            p.setColor(new Color(0,0,0, shadowOpacity));
-        }
-        
+
     }
-
-
 
     public void drawLines(SilkParticle particle, int id, List<SilkParticle> particles, Graphics2D g) {
         int i = -1;
@@ -265,12 +271,30 @@ public class SilkBrush extends Brush {
         }
     }
 
-    public double getRandomFromRange(double f_min, double f_max) {
-        return (Math.random() * (f_max - f_min)) + f_min;
+    @Override
+    public void loadDefaultPresets() {
+        presets.add(new DefaultSilkBrushPreset());
+        presets.add(new RandomColorSilkBrushPreset());
+        presets.add(new HighSpreadSilkBrushPreset());
     }
 
     @Override
-    public void loadDefaultPresets() {
+    public void loadPreset(Preset preset) {
+        Map<String, Object> params = preset.getParams();
+        this.maxDist = (int) params.get("maxDist");
+        this.density = (double) params.get("density");
+        this.lifespan = (int) params.get("lifespan");
+        this.opacity = (float) params.get("opacity");
+        this.scatter = (int) params.get("scatter");
+        this.spread = (int) params.get("spread");
+        this.shadowDensity = (double) params.get("shadowDensity");
+        this.shadowLifespan = (int) params.get("shadowLifespan");
+        this.shadowMaxDist = (int) params.get("shadowMaxDist");
+        this.shadowOpacity = (float) params.get("shadowOpacity");
+        this.shadowScatter = (int) params.get("shadowScatter");
+        this.shadowSpread = (int) params.get("shadowSpread");
+        this.useShadows = (boolean) params.get("useShadows");
+        this.useRandomColor = (boolean) params.get("useRandomColor");
     }
 
     @Override

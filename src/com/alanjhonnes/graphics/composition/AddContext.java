@@ -75,7 +75,7 @@ public class AddContext implements CompositeContext {
                     
                     value = (srcP * srcA + dstP * dstA * (255 - srcA)) / (outA);
                     
-                    value = Math.min(255, value);
+                    //value = Math.min(255, value);
                     //value = srcP;
                      resultRgba[i] = value;
                     //resultRgba[i] = average;

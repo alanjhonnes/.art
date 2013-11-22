@@ -113,6 +113,7 @@ public class Document extends EventDispatcher implements Serializable {
             Layer layer = layers.get(i);
             layer.setSize(width, height);
         }
+        dispatchEvent(new DocumentEvent(this, DocumentEvent.SIZE_CHANGED));
     }
     
     

@@ -16,7 +16,7 @@ import java.util.Observable;
 public class Preset extends EventDispatcher {
     protected String name;
     protected Class brushClass;
-    protected Map<Object, Object> params;
+    protected Map<String, Object> params;
 
     public Preset() {
         params = new HashMap<>();
@@ -30,11 +30,11 @@ public class Preset extends EventDispatcher {
         this.name = name;
     }
 
-    public Map<Object, Object> getParams() {
+    public Map<String, Object> getParams() {
         return params;
     }
 
-    public void setParams(Map<Object, Object> params) {
+    public void setParams(Map<String, Object> params) {
         this.params = params;
     }
 

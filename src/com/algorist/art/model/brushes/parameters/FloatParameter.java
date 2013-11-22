@@ -14,9 +14,6 @@ public class FloatParameter extends Parameter {
     public FloatParameter(float min, float max) {
     }
 
-    @Override
-    public Float getValue() {
-        return null;
-    }
+    
     
 }

@@ -47,8 +47,8 @@ public class Layer extends EventDispatcher implements Serializable {
 //        g.setColor(Color.red);
 //        g.fillRect(width / 2, height / 2, width / 2, height / 2);
         
-        g.setColor(Color.black);
-        g.fillRect(0, 0, width, height);
+//        g.setColor(Color.black);
+//        g.fillRect(0, 0, width, height);
         //refreshThumbnail();
     }
 

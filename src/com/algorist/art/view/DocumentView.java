@@ -8,6 +8,7 @@ import com.alanjhonnes.event.CallbackFunction;
 import com.alanjhonnes.event.Event;
 import com.algorist.art.event.DocumentEvent;
 import com.algorist.art.model.Document;
+import java.awt.Dimension;
 import javax.swing.JPanel;
 import mvc.AbstractFrame;
 import mvc.AbstractView;
@@ -20,21 +21,14 @@ public class DocumentView extends AbstractView<JPanel>{
     
     private Document documentModel;
 
-    public DocumentView(AbstractFrame mainFrame, Document documentModel) {
+    public DocumentView(AbstractFrame mainFrame, final Document documentModel) {
         super(mainFrame);
         this.documentModel = documentModel;
         this.documentModel.addEventListener(DocumentEvent.SIZE_CHANGED, new CallbackFunction() {
 
             @Override
             public void execute(Event e) {
-                //TODO
-            }
-        });
-        this.documentModel.addEventListener(DocumentEvent.SIZE_CHANGED, new CallbackFunction() {
-
-            @Override
-            public void execute(Event e) {
-                //TODO
+                contentPane.setPreferredSize(new Dimension(documentModel.getWidth(), documentModel.getHeight()));
             }
         });
     }

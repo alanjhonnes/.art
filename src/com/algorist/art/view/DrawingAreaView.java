@@ -20,12 +20,9 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
 import mvc.AbstractFrame;
 import mvc.AbstractView;
-import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 /**
  *
@@ -39,7 +36,7 @@ public class DrawingAreaView extends AbstractView<JLayeredPane> implements Compo
     private Document documentModel;
     private List<LayerPanel> layerPanels;
 
-    public DrawingAreaView(AbstractFrame mainFrame, DrawingAreaController controller, Document documentModel) {
+    public DrawingAreaView(AbstractFrame mainFrame, DrawingAreaController controller, final Document documentModel) {
         super(mainFrame);
         this.controller = controller;
         controller.setView(this);
@@ -63,12 +60,20 @@ public class DrawingAreaView extends AbstractView<JLayeredPane> implements Compo
             public void execute(Event e) {
             }
         });
+        
+        this.documentModel.addEventListener(DocumentEvent.SIZE_CHANGED, new CallbackFunction() {
+
+            @Override
+            public void execute(Event e) {
+                contentPane.setPreferredSize(new Dimension(documentModel.getWidth(), documentModel.getHeight()));
+            }
+        });
     }
 
     @Override
     protected JLayeredPane layout() {
         JLayeredPane panel = new JLayeredPane();
-        panel.setPreferredSize(new Dimension(600, 500));
+        //panel.setPreferredSize(new Dimension(600, 500));
         
 
         mouseListener = new MouseAdapter() {

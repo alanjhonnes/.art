@@ -20,5 +20,4 @@ public abstract class Parameter {
         this.type = type;
     }
 
-    public abstract Object getValue();
 }

@@ -12,10 +12,5 @@ public class ColorParameter extends Parameter {
 
     public ColorParameter() {
     }
-
-    @Override
-    public ColorValue getValue() {
-        return null;
-    }
     
 }

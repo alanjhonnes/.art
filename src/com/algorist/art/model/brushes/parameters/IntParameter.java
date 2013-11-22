@@ -23,10 +23,4 @@ public class IntParameter extends Parameter {
         this.type = Integer.class;
     }
   
-
-    @Override
-    public Integer getValue() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-  
 }

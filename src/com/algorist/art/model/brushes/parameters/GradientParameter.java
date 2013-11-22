@@ -9,10 +9,6 @@ package com.algorist.art.model.brushes.parameters;
  * @author alanjhonnes
  */
 public class GradientParameter extends Parameter {
-
-    @Override
-    public Object getValue() {
-        return null;
-    }
+    
     
 }
