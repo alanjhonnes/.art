@@ -21,8 +21,6 @@ public class SilkParticle extends SimpleParticle {
     
     public int px;
     public int py;
-    public int ox;
-    public int oy;
     public double speed;
 
     public SilkParticle(double vx, double vy, int x, int y) {
