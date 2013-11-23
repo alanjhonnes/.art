@@ -4,22 +4,18 @@
  */
 package com.algorist.art.model.brushes.parameters;
 
-
 /**
  *
- * @author alanjhonnes
+ * @author alan.jbssa
  */
-public class FloatParameter extends Parameter {
+public class DoubleParameter extends Parameter {
+    public double min;
+    public double max;
 
-    public float min;
-    public float max;
-
-    public FloatParameter(String key, float min, float max) {
+    public DoubleParameter(String key, double min, double max) {
         super(key);
         this.min = min;
         this.max = max;
-        this.type = float.class;
+        this.type = double.class;
     }
-    
-    
 }

@@ -25,13 +25,13 @@ public abstract class Brush {
     protected String name;
     protected BufferedImage image;
     protected List<Preset> presets;
-
     protected Layer layer;
-
     protected CallbackFunction drawCallback;
+    protected List<Parameter> params;
 
     public Brush() {
         presets = new ArrayList<>();
+        params = new ArrayList<>();
         drawCallback = new CallbackFunction() {
             @Override
             public void execute(Event e) {
@@ -40,8 +40,8 @@ public abstract class Brush {
                 draw(movement);
             }
         };
+        defineParameters();
         loadDefaultPresets();
-
     }
 
     public Brush(List<Preset> presets) {
@@ -65,8 +65,8 @@ public abstract class Brush {
     abstract public void draw(Movement movement);
 
     public abstract void loadDefaultPresets();
-
-    public abstract Map<String, Parameter> getParamTypes();
+    
+    public abstract void defineParameters();
 
     public void loadPreset(Preset preset) {
         if (preset.getBrushClass() == this.getClass()) {
@@ -74,6 +74,10 @@ public abstract class Brush {
         } else {
             System.err.println("Error loading preset. Preset brushClass is diferent from brush class.");
         }
+    }
+
+    public List<Parameter> getParamTypes() {
+        return params;
     }
 
     public String getName() {

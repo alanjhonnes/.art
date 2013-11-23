@@ -7,7 +7,6 @@ import com.algorist.art.controller.DocumentsController;
 import com.algorist.art.controller.DrawingAreaController;
 import com.algorist.art.controller.LayerPanelController;
 import com.algorist.art.controller.MenuController;
-import com.algorist.art.model.Document;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;

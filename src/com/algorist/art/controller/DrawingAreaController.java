@@ -11,7 +11,7 @@ import com.algorist.art.event.MovementEvent;
 import com.algorist.art.model.Art;
 import com.algorist.art.model.Movement;
 import com.algorist.art.model.brushes.Brush;
-import com.algorist.art.view.DrawingAreaView;
+import com.algorist.art.view.DocumentView;
 import com.algorist.art.view.display.LayerPanel;
 import java.awt.Point;
 import java.util.List;
@@ -24,7 +24,7 @@ import mvc.AbstractFrame;
  */
 public class DrawingAreaController extends AbstractController {
 
-    private DrawingAreaView view;
+    private DocumentView view;
     private Brush brush;
     private Art artModel;
     private Movement movement;
@@ -87,11 +87,11 @@ public class DrawingAreaController extends AbstractController {
         movement = null;
     }
 
-    public DrawingAreaView getView() {
+    public DocumentView getView() {
         return view;
     }
 
-    public void setView(DrawingAreaView view) {
+    public void setView(DocumentView view) {
         this.view = view;
     }
     

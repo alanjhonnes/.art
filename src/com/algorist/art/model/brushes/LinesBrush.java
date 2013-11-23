@@ -4,15 +4,10 @@
  */
 package com.algorist.art.model.brushes;
 
-import com.alanjhonnes.event.CallbackFunction;
-import com.alanjhonnes.event.Event;
-import com.algorist.art.event.MovementEvent;
 import com.algorist.art.model.Layer;
 import com.algorist.art.model.Movement;
-import com.algorist.art.model.brushes.parameters.Parameter;
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.util.Map;
 
 /**
  *
@@ -30,10 +25,7 @@ public class LinesBrush extends Brush {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public Map<String, Parameter> getParamTypes() {
-        return null;
-    }
+    
 
     @Override
     public void initialize(Layer layer) {
@@ -44,6 +36,11 @@ public class LinesBrush extends Brush {
         Graphics2D g = (Graphics2D) layer.getImage().createGraphics();
         g.setColor(Color.BLACK);
         g.drawLine(movement.getOldPosition().x, movement.getOldPosition().y, movement.getNewPosition().x, movement.getNewPosition().y);
+    }
+
+    @Override
+    public void defineParameters() {
+        
     }
 
 }

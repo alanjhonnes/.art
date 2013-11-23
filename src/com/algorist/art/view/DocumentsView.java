@@ -27,20 +27,20 @@ public class DocumentsView extends AbstractView<JTabbedPane> {
 
     private Art artModel;
     private DocumentsController controller;
-    private List<DrawingAreaView> drawingAreaViews;
+    private List<DocumentView> documentViews;
 
     public DocumentsView(AbstractFrame mainFrame, Art artModel, DocumentsController controller) {
         super(mainFrame);
         this.artModel = artModel;
         this.controller = controller;
-        drawingAreaViews = new ArrayList<>();
+        documentViews = new ArrayList<>();
         controller.setView(this);
 
         contentPane.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                if (drawingAreaViews.size() > 0) {
-                    Document doc = drawingAreaViews.get(contentPane.getSelectedIndex()).getDocumentModel();
+                if (documentViews.size() > 0) {
+                    Document doc = documentViews.get(contentPane.getSelectedIndex()).getDocumentModel();
                     getController().currentDocumentChanged(doc);
                 }
             }
@@ -52,10 +52,10 @@ public class DocumentsView extends AbstractView<JTabbedPane> {
                 ArtEvent ae = (ArtEvent) e;
 
                 Document doc = ae.getDocument();
-                DrawingAreaView dwa = new DrawingAreaView(getMainFrame(), new DrawingAreaController(getMainFrame(), getArtModel()), doc);
-                drawingAreaViews.add(dwa);
+                DocumentView dwa = new DocumentView(getMainFrame(), new DrawingAreaController(getMainFrame(), getArtModel()), doc);
+                documentViews.add(dwa);
                 contentPane.add(doc.getName(), dwa.getContentPane());
-                contentPane.setSelectedIndex(drawingAreaViews.size() - 1);
+                contentPane.setSelectedIndex(documentViews.size() - 1);
             }
         });
 
@@ -64,13 +64,13 @@ public class DocumentsView extends AbstractView<JTabbedPane> {
             public void execute(Event e) {
                 ArtEvent ae = (ArtEvent) e;
                 Document doc = ae.getDocument();
-                DrawingAreaView dwa;
-                for (int i = 0; i < drawingAreaViews.size(); i++) {
-                    DrawingAreaView drawingAreaView = drawingAreaViews.get(i);
-                    if (drawingAreaView.getDocumentModel() == doc) {
-                        dwa = drawingAreaView;
-                        drawingAreaViews.remove(dwa);
-                        contentPane.remove(dwa.getContentPane());
+                DocumentView dv;
+                for (int i = 0; i < documentViews.size(); i++) {
+                    DocumentView documentView = documentViews.get(i);
+                    if (documentView.getDocumentModel() == doc) {
+                        dv = documentView;
+                        documentViews.remove(dv);
+                        contentPane.remove(dv.getContentPane());
                         contentPane.invalidate();
                         contentPane.revalidate();
                         contentPane.repaint();
@@ -98,8 +98,8 @@ public class DocumentsView extends AbstractView<JTabbedPane> {
         List<Document> docs = artModel.getDocuments();
         for (int i = 0; i < docs.size(); i++) {
             Document document = docs.get(i);
-            DrawingAreaView dwa = new DrawingAreaView(getMainFrame(), new DrawingAreaController(getMainFrame(), getArtModel()), document);
-            drawingAreaViews.add(dwa);
+            DocumentView dwa = new DocumentView(getMainFrame(), new DrawingAreaController(getMainFrame(), getArtModel()), document);
+            documentViews.add(dwa);
             contentPane.add(document.getName(), dwa.getContentPane());
         }
     }
@@ -108,7 +108,7 @@ public class DocumentsView extends AbstractView<JTabbedPane> {
         return controller;
     }
 
-    public List<DrawingAreaView> getDrawingAreaViews() {
-        return drawingAreaViews;
+    public List<DocumentView> getDrawingAreaViews() {
+        return documentViews;
     }
 }

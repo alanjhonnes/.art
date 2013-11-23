@@ -7,6 +7,10 @@ package com.algorist.art.model.brushes;
 import com.alanjhonnes.particles.SilkParticle;
 import com.algorist.art.model.Layer;
 import com.algorist.art.model.Movement;
+import com.algorist.art.model.brushes.parameters.BooleanParameter;
+import com.algorist.art.model.brushes.parameters.DoubleParameter;
+import com.algorist.art.model.brushes.parameters.FloatParameter;
+import com.algorist.art.model.brushes.parameters.IntParameter;
 import com.algorist.art.model.brushes.parameters.Parameter;
 import com.algorist.art.model.brushes.presets.Preset;
 import com.algorist.art.model.brushes.presets.silkbrush.DefaultSilkBrushPreset;
@@ -18,6 +22,7 @@ import java.awt.Polygon;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -53,7 +58,6 @@ public class SilkBrush extends Brush {
 
     public SilkBrush() {
         this.name = "Silkbrush";
-
     }
 
     @Override
@@ -280,25 +284,41 @@ public class SilkBrush extends Brush {
 
     @Override
     public void loadPreset(Preset preset) {
-        Map<String, Object> params = preset.getParams();
-        this.maxDist = (int) params.get("maxDist");
-        this.density = (double) params.get("density");
-        this.lifespan = (int) params.get("lifespan");
-        this.opacity = (float) params.get("opacity");
-        this.scatter = (int) params.get("scatter");
-        this.spread = (int) params.get("spread");
-        this.shadowDensity = (double) params.get("shadowDensity");
-        this.shadowLifespan = (int) params.get("shadowLifespan");
-        this.shadowMaxDist = (int) params.get("shadowMaxDist");
-        this.shadowOpacity = (float) params.get("shadowOpacity");
-        this.shadowScatter = (int) params.get("shadowScatter");
-        this.shadowSpread = (int) params.get("shadowSpread");
-        this.useShadows = (boolean) params.get("useShadows");
-        this.useRandomColor = (boolean) params.get("useRandomColor");
+        if (preset.getBrushClass() == SilkBrush.class) {
+            Map<String, Object> params = preset.getParams();
+            this.maxDist = (int) params.get("maxDist");
+            this.density = (double) params.get("density");
+            this.lifespan = (int) params.get("lifespan");
+            this.opacity = (float) params.get("opacity");
+            this.scatter = (int) params.get("scatter");
+            this.spread = (int) params.get("spread");
+            this.shadowMaxDist = (int) params.get("shadowMaxDist");
+            this.shadowDensity = (double) params.get("shadowDensity");
+            this.shadowLifespan = (int) params.get("shadowLifespan");
+            this.shadowOpacity = (float) params.get("shadowOpacity");
+            this.shadowScatter = (int) params.get("shadowScatter");
+            this.shadowSpread = (int) params.get("shadowSpread");
+            this.useShadows = (boolean) params.get("useShadows");
+            this.useRandomColor = (boolean) params.get("useRandomColor");
+        }
+
     }
 
     @Override
-    public Map<String, Parameter> getParamTypes() {
-        return null;
+    public void defineParameters() {
+        params.add(new IntParameter("maxDist",0, 500));
+        params.add(new DoubleParameter("density", 0, 1));
+        params.add(new IntParameter("lifespan",1, 50));
+        params.add(new FloatParameter("opacity",0, 1));
+        params.add(new IntParameter("scatter",0, 600));
+        params.add(new IntParameter("spread",0, 600));
+        params.add(new IntParameter("shadowMaxDist",0, 500));
+        params.add(new DoubleParameter("shadowDensity", 0, 1));
+        params.add(new IntParameter("shadowLifespan",1, 50));
+        params.add(new FloatParameter("shadowOpacity",0, 1));
+        params.add(new IntParameter("shadowScatter",0, 600));
+        params.add(new IntParameter("shadowSpread",0, 600));
+        params.add(new BooleanParameter("useShadows"));
+        params.add(new BooleanParameter("useRandomColor"));
     }
 }

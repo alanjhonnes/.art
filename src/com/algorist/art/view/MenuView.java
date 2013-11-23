@@ -4,19 +4,14 @@
  */
 package com.algorist.art.view;
 
-import com.algorist.art.FileManager;
 import com.algorist.art.controller.ExportController;
 import com.algorist.art.controller.MenuController;
 import com.algorist.art.model.Art;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import javax.swing.ActionMap;
-import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -26,7 +21,6 @@ import javax.swing.KeyStroke;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import mvc.AbstractFrame;
 import mvc.AbstractView;
-import sun.font.GraphicComponent;
 
 /**
  *

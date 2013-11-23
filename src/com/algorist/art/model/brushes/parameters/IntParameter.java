@@ -12,15 +12,11 @@ public class IntParameter extends Parameter {
 
     public int min;
     public int max;
-    
-  public IntParameter() {
-      this.type = Integer.class;
-  }
 
-    public IntParameter(int min, int max) {
+    public IntParameter(String key, int min, int max) {
+        super(key);
         this.min = min;
         this.max = max;
-        this.type = Integer.class;
+        this.type = int.class;
     }
-  
 }

@@ -8,16 +8,9 @@ import com.algorist.art.model.Layer;
 import com.algorist.art.model.Movement;
 import com.algorist.art.model.brushes.parameters.Parameter;
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Polygon;
-import java.awt.Rectangle;
 import java.awt.RenderingHints;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Map;
-import javax.swing.Timer;
 
 /**
  *
@@ -73,7 +66,9 @@ public class RB4_Brush extends Brush {
     }
 
     @Override
-    public Map<String, Parameter> getParamTypes() {
-        return null;
+    public void defineParameters() {
+        
     }
+
+    
 }

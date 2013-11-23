@@ -6,14 +6,12 @@ package com.algorist.art.model.brushes.parameters;
 
 /**
  *
- * @author alanjhonnes
+ * @author alan.jbssa
  */
-public class ColorParameter extends Parameter {
+public class BooleanParameter extends Parameter {
 
-    public ColorParameter(String key) {
+    public BooleanParameter(String key) {
         super(key);
     }
-
-    
     
 }

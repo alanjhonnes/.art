@@ -137,11 +137,6 @@ public class NeonParticles extends Brush {
     public void loadDefaultPresets() {
     }
 
-    @Override
-    public Map<String, Parameter> getParamTypes() {
-        return null;
-    }
-
     private int getNoise(int x, int y, int channel) {
         System.out.println("x: " + x + " y: " + y);
         if (x >= 0 && x <= noiseData.getWidth() && y >= 0 && y <= noiseData.getHeight()) {
@@ -194,4 +189,11 @@ public class NeonParticles extends Brush {
 
         return canvas;
     }
+
+    @Override
+    public void defineParameters() {
+        
+    }
+    
+    
 }

@@ -14,7 +14,7 @@ import com.algorist.art.model.brushes.NeonParticles;
 import com.algorist.art.model.brushes.RB2_Brush;
 import com.algorist.art.model.brushes.RB3_Brush;
 import com.algorist.art.model.brushes.RB4_Brush;
-import com.algorist.art.model.brushes.RB5_Brush;
+import com.algorist.art.model.brushes.SprayHardcoreBrush;
 import com.algorist.art.model.brushes.SilkBrush;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +43,7 @@ public class Art extends EventDispatcher {
         brushes.add(new RB2_Brush());
         brushes.add(new RB3_Brush());
         brushes.add(new RB4_Brush());
-        brushes.add(new RB5_Brush());
+        brushes.add(new SprayHardcoreBrush());
            
         
         setSelectedBrush(brushes.get(0));

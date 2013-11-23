@@ -13,10 +13,7 @@ import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Map;
-import javax.swing.Timer;
 
 /**
  *
@@ -56,7 +53,7 @@ public class RB3_Brush extends Brush {
     }
 
     @Override
-    public Map<String, Parameter> getParamTypes() {
-        return null;
+    public void defineParameters() {
+        
     }
 }
