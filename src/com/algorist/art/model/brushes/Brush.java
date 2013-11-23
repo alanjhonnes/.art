@@ -27,7 +27,6 @@ import java.util.logging.Logger;
 public abstract class Brush {
 
     protected String name;
-    protected BufferedImage image;
     protected List<Preset> presets;
     protected Layer layer;
     protected CallbackFunction drawCallback;
@@ -95,14 +94,6 @@ public abstract class Brush {
 
     public void setPresets(List<Preset> presets) {
         this.presets = presets;
-    }
-
-    public BufferedImage getImage() {
-        return image;
-    }
-
-    public void setImage(BufferedImage image) {
-        this.image = image;
     }
 
     @Override

@@ -64,9 +64,9 @@ public class NeonParticles extends Brush {
 
     @Override
     public void initialize(Layer layer) {
-        noiseCanvas = makeOctaveNoise(layer.getWidth(), layer.getHeight(), 8);
-        noiseData = noiseCanvas.getRaster();
-        System.out.println(noiseData);
+//        noiseCanvas = makeOctaveNoise(layer.getWidth(), layer.getHeight(), 8);
+//        noiseData = noiseCanvas.getRaster();
+//        System.out.println(noiseData);
         particles = new ArrayList<>();
         //hdrdata = new WritableRaster();
     }
