@@ -38,9 +38,4 @@ public class LinesBrush extends Brush {
         g.drawLine(movement.getOldPosition().x, movement.getOldPosition().y, movement.getNewPosition().x, movement.getNewPosition().y);
     }
 
-    @Override
-    public void defineParameters() {
-        
-    }
-
 }

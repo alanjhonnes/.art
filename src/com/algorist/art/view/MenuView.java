@@ -173,9 +173,9 @@ public class MenuView extends AbstractView<JMenuBar> implements ActionListener {
         fileMenu.add(saveAsItem);
         fileMenu.add(exportItem);
 
-        layerMenu.add(newLayerItem);
-        layerMenu.add(duplicateLayerItem);
-        layerMenu.add(deleteLayerItem);
+//        layerMenu.add(newLayerItem);
+//        layerMenu.add(duplicateLayerItem);
+//        layerMenu.add(deleteLayerItem);
         layerMenu.add(ccleanerLayerItem);
 
         presetMenu.add(savePresetItem);
@@ -186,8 +186,8 @@ public class MenuView extends AbstractView<JMenuBar> implements ActionListener {
 
         menuBar.add(fileMenu);
         menuBar.add(layerMenu);
-        menuBar.add(presetMenu);
-        menuBar.add(actionsMenu);
+        //menuBar.add(presetMenu);
+        //menuBar.add(actionsMenu);
 
         return menuBar;
     }

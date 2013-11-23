@@ -342,29 +342,6 @@ public class SilkBrush extends Brush {
     }
 
     @Override
-    public void defineParameters() {
-        params.add(new IntParameter("maxDist",0, 500, maxDist));
-        params.add(new DoubleParameter("density", 0, 1, density));
-        params.add(new IntParameter("lifespan",0, 50, lifespan));
-        params.add(new IntParameter("scatter",0, 600, scatter));
-        params.add(new IntParameter("spread",0, 600, spread));
-        params.add(new FloatParameter("red",0, 1, red));
-        params.add(new FloatParameter("green",0, 1, green));
-        params.add(new FloatParameter("blue",0, 1, blue));
-        params.add(new FloatParameter("opacity",0, 1, opacity));
-        params.add(new IntParameter("shadowMaxDist",0, 500, shadowMaxDist));
-        params.add(new DoubleParameter("shadowDensity", 0, 1, shadowDensity));
-        params.add(new IntParameter("shadowLifespan",0, 50, shadowLifespan));
-        params.add(new IntParameter("shadowScatter",0, 600, shadowScatter));
-        params.add(new IntParameter("shadowSpread",0, 600, shadowSpread));
-        params.add(new FloatParameter("shadowOpacity",0, 1, shadowOpacity));
-        
-        
-        params.add(new BooleanParameter("useShadows", true));
-        params.add(new BooleanParameter("useRandomColor", false));
-    }
-
-    @Override
     public List<Parameter> getParamTypes() {
         params.clear();
         

@@ -70,8 +70,6 @@ public abstract class Brush {
 
     public abstract void loadDefaultPresets();
 
-    public abstract void defineParameters();
-
     public void loadPreset(Preset preset) {
         if (preset.getBrushClass() == this.getClass()) {
         } else {

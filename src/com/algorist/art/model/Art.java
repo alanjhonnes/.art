@@ -8,7 +8,6 @@ import com.alanjhonnes.event.EventDispatcher;
 import com.algorist.art.event.ArtEvent;
 import com.algorist.art.model.brushes.Brush;
 import com.algorist.art.model.brushes.CirclesBrush;
-import com.algorist.art.model.brushes.ArcBrush;
 import com.algorist.art.model.brushes.LinesBrush;
 import com.algorist.art.model.brushes.NeonParticles;
 import com.algorist.art.model.brushes.RB2_Brush;
@@ -39,7 +38,6 @@ public class Art extends EventDispatcher {
         brushes.add(new NeonParticles());
         brushes.add(new CirclesBrush());
         brushes.add(new LinesBrush());
-        brushes.add(new ArcBrush());
         brushes.add(new RB2_Brush());
         brushes.add(new RB3_Brush());
         brushes.add(new RB4_Brush());

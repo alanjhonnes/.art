@@ -7,8 +7,6 @@ package com.algorist.art;
 import com.algorist.art.model.Art;
 import com.algorist.art.model.Document;
 import com.algorist.art.model.History;
-import com.algorist.art.model.Layers;
-import com.algorist.art.model.Preferences;
 
 /**
  * 
@@ -16,9 +14,7 @@ import com.algorist.art.model.Preferences;
  */
 public class ModelAcessor {
     
-    private Preferences preferences;
     private History history;
-    private Layers layers;
     private Art art;
 
     //TODO
@@ -34,28 +30,12 @@ public class ModelAcessor {
         art.setCurrentDocument(doc);
     }
 
-    public Preferences getPreferences() {
-        return preferences;
-    }
-
-    public void setPreferences(Preferences preferences) {
-        this.preferences = preferences;
-    }
-
     public History getHistory() {
         return history;
     }
 
     public void setHistory(History history) {
         this.history = history;
-    }
-
-    public Layers getLayers() {
-        return layers;
-    }
-
-    public void setLayers(Layers layers) {
-        this.layers = layers;
     }
 
     public Art getArt() {

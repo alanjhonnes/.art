@@ -15,6 +15,7 @@ import com.algorist.art.model.brushes.presets.sprayhardcore.SmallSprayHardcorePr
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,9 +24,11 @@ import java.util.Map;
  */
 public class SprayHardcoreBrush extends Brush {
 
-    private int smallOffset = 2;
-    private int bigOffset = 8;
-    private Color color;
+    public int radius = 8;
+    public float red = 0;
+    public float green = 0;
+    public float blue = 1f;
+    public float opacity = 1f;
 
     public SprayHardcoreBrush() {
         name = "SprayHardcore";
@@ -42,20 +45,13 @@ public class SprayHardcoreBrush extends Brush {
         y = movement.getNewPosition().y;
         Graphics2D g = layer.getImage().createGraphics();
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g.setColor(color);
+        g.setColor(new Color(red, green, blue, opacity));
+
 
         for (int i = 0; i < 35; i++) {
-            // use static final ints now
-            tempx = (x + (int) Math.round(2 * smallOffset * (Math.random() - 0.5)));
+            tempx = (x + (int) Math.round(2 * radius * (Math.random() - 0.5)));
             tempy = (y + (int) (((Math.random() - 0.5) * 2) * Math.sqrt(
-                    (smallOffset * smallOffset) - ((x - tempx) * (x - tempx)))));
-            g.drawLine((int) tempx, (int) tempy, (int) tempx, (int) tempy);
-        }
-
-        for (int i = 0; i < 12; i++) {
-            tempx = (x + (int) Math.round(2 * bigOffset * (Math.random() - 0.5)));
-            tempy = (y + (int) (((Math.random() - 0.5) * 2) * Math.sqrt(
-                    (bigOffset * bigOffset) - ((x - tempx) * (x - tempx)))));
+                    (radius * radius) - ((x - tempx) * (x - tempx)))));
             g.drawLine((int) tempx, (int) tempy, (int) tempx, (int) tempy);
         }
     }
@@ -70,19 +66,20 @@ public class SprayHardcoreBrush extends Brush {
     public void loadPreset(Preset preset) {
         if (preset.getBrushClass() == this.getClass()) {
             Map<String, Object> params = preset.getParams();
-            this.bigOffset = (int) params.get("bigOffset");
-            this.smallOffset = (int) params.get("smallOffset");
-
-            float red = (float) params.get("red");
-            float green = (float) params.get("green");
-            float blue = (float) params.get("blue");
-            float alpha = (float) params.get("alpha");
-            this.color = new Color(red, green, blue, alpha);
+            this.radius = (int) params.get("radius");
         }
     }
 
     @Override
-    public void defineParameters() {
-        
+    public List<Parameter> getParamTypes() {
+        params.clear();
+        params.add(new IntParameter("radius", 1, 100, radius));
+        params.add(new FloatParameter("red", 0, 1, red));
+        params.add(new FloatParameter("green", 0, 1, green));
+        params.add(new FloatParameter("blue", 0, 1, blue));
+        params.add(new FloatParameter("opacity", 0, 1, opacity));
+        return params;
     }
+    
+    
 }

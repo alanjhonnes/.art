@@ -52,8 +52,4 @@ public class RB3_Brush extends Brush {
     public void loadDefaultPresets() {
     }
 
-    @Override
-    public void defineParameters() {
-        
-    }
 }

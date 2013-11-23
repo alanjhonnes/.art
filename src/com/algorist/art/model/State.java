@@ -12,7 +12,6 @@ import com.alanjhonnes.event.EventDispatcher;
  */
 public class State extends EventDispatcher{
     
-    private Layers layers;
     
     
 }

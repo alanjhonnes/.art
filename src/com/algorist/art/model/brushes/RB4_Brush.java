@@ -65,10 +65,6 @@ public class RB4_Brush extends Brush {
     public void loadDefaultPresets() {
     }
 
-    @Override
-    public void defineParameters() {
-        
-    }
 
     
 }

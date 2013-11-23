@@ -18,12 +18,7 @@ public class SmallSprayHardcorePreset extends Preset{
         this.setName("Pequeno");
         this.setBrushClass(SprayHardcoreBrush.class);
         this.params = new HashMap<>();
-        params.put("bigOffset", 8);
-        params.put("smallOffset", 2);
-        params.put("red", 0.5f);
-        params.put("green", 1f);
-        params.put("blue", 0.1f);
-        params.put("alpha", 1f);
+        params.put("radius", 8);
     }
     
     

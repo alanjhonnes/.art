@@ -11,6 +11,7 @@ import com.algorist.art.model.brushes.parameters.DoubleParameter;
 import com.algorist.art.model.brushes.parameters.FloatParameter;
 import com.algorist.art.model.brushes.parameters.IntParameter;
 import com.algorist.art.model.brushes.parameters.Parameter;
+import com.algorist.art.model.brushes.presets.Preset;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -192,10 +193,6 @@ public class NeonParticles extends Brush {
         return canvas;
     }
 
-    @Override
-    public void defineParameters() {
-        
-    }
 
     @Override
     public List<Parameter> getParamTypes() {
@@ -215,8 +212,10 @@ public class NeonParticles extends Brush {
         params.add(new FloatParameter("opacity", 0, 1, opacity));
         return params;
     }
-    
-    
-    
+
+    @Override
+    public void loadPreset(Preset preset) {
+        //
+    }
     
 }

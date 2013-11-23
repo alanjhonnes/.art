@@ -46,9 +46,5 @@ public class RB2_Brush extends Brush {
     public void loadDefaultPresets() {
     }
 
-    @Override
-    public void defineParameters() {
-        
-    }
     
 }

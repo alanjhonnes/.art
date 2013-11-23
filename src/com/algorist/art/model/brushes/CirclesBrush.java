@@ -64,13 +64,6 @@ public class CirclesBrush extends Brush {
     }
 
     @Override
-    public void defineParameters() {
-        params.add(new IntParameter("thickness", 1, 100, thickness));
-        params.add(new FloatParameter("opacity", 0, 1, opacity));
-        //params.add(new FloatParameter("hardness", 0, 1));
-    }
-
-    @Override
     public List<Parameter> getParamTypes() {
         params.clear();
         params.add(new IntParameter("thickness", 1, 100, thickness));
