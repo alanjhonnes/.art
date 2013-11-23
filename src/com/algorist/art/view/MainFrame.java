@@ -4,9 +4,10 @@ package com.algorist.art.view;
 import com.algorist.art.ModelAcessor;
 import com.algorist.art.controller.BrushPanelController;
 import com.algorist.art.controller.DocumentsController;
-import com.algorist.art.controller.DrawingAreaController;
+import com.algorist.art.controller.DocumentController;
 import com.algorist.art.controller.LayerPanelController;
 import com.algorist.art.controller.MenuController;
+import com.algorist.art.controller.ParameterEditorController;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -38,6 +39,7 @@ public class MainFrame extends AbstractFrame {
     private DocumentsController documentsController;
     private BrushPanelController brushPanelController;
     private MenuController menuController;
+    private ParameterEditorController parameterController;
     
     
 
@@ -47,6 +49,7 @@ public class MainFrame extends AbstractFrame {
         documentsController = new DocumentsController(this, modelAcessor.getArt());
         brushPanelController = new BrushPanelController(this, modelAcessor.getArt());
         menuController = new MenuController(this, modelAcessor.getArt());
+        parameterController = new ParameterEditorController(this, modelAcessor.getArt());
         registerAllViews();
         registerAllControllers();
         this.frame = layout();
@@ -54,17 +57,19 @@ public class MainFrame extends AbstractFrame {
 
     @Override
     protected void registerAllViews() {
+        views.put(ParameterEditorView.class, new ParameterEditorView(this, parameterController));
         views.put(BrushPanelView.class, new BrushPanelView(this, brushPanelController, modelAcessor.getArt()));
         views.put(LayersPanelView.class, new LayersPanelView(this, modelAcessor.getArt().getCurrentDocument()));
         views.put(DocumentsView.class, new DocumentsView(this, modelAcessor.getArt(), documentsController));
         views.put(MenuView.class, new MenuView(this, menuController, modelAcessor.getArt()));
+        
     }
 
     @Override
     protected void registerAllControllers() {
         controllers.put(BrushPanelController.class, brushPanelController);
         controllers.put(LayerPanelController.class, new LayerPanelController(this));
-        controllers.put(DrawingAreaController.class, documentsController);
+        controllers.put(DocumentController.class, documentsController);
     }
 
     @Override
@@ -94,7 +99,8 @@ public class MainFrame extends AbstractFrame {
         panelContainer.setPreferredSize(new Dimension(200, 500));
         
         panelContainer.add(brushContainer);
-        panelContainer.add(layerContainer);
+        panelContainer.add(getView(ParameterEditorView.class).getContentPane());
+        //panelContainer.add(layerContainer);
         
         jFrame.add(panelContainer, BorderLayout.EAST);
         

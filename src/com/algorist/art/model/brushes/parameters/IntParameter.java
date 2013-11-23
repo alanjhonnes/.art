@@ -10,13 +10,43 @@ package com.algorist.art.model.brushes.parameters;
  */
 public class IntParameter extends Parameter {
 
-    public int min;
-    public int max;
+    private int min;
+    private int max;
+    private int value;
 
-    public IntParameter(String key, int min, int max) {
+    public IntParameter(String key, int min, int max, int value) {
         super(key);
         this.min = min;
         this.max = max;
+        this.value = value;
         this.type = int.class;
     }
+
+    public int getMin() {
+        return min;
+    }
+
+    public void setMin(int min) {
+        this.min = min;
+    }
+
+    public int getMax() {
+        return max;
+    }
+
+    public void setMax(int max) {
+        this.max = max;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+    
+    
+    
+    
 }

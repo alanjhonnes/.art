@@ -9,13 +9,42 @@ package com.algorist.art.model.brushes.parameters;
  * @author alan.jbssa
  */
 public class DoubleParameter extends Parameter {
-    public double min;
-    public double max;
+    private double min;
+    private double max;
+    private double value;
 
-    public DoubleParameter(String key, double min, double max) {
+    public DoubleParameter(String key, double min, double max, double value) {
         super(key);
         this.min = min;
         this.max = max;
+        this.value = value;
         this.type = double.class;
     }
+
+    public double getMin() {
+        return min;
+    }
+
+    public void setMin(double min) {
+        this.min = min;
+    }
+
+    public double getMax() {
+        return max;
+    }
+
+    public void setMax(double max) {
+        this.max = max;
+    }
+
+    public double getValue() {
+        return value;
+    }
+
+    public void setValue(double value) {
+        this.value = value;
+    }
+    
+    
+    
 }

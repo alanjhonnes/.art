@@ -8,6 +8,7 @@ import com.alanjhonnes.particles.SilkParticle;
 import com.algorist.art.model.Layer;
 import com.algorist.art.model.Movement;
 import com.algorist.art.model.brushes.parameters.BooleanParameter;
+import com.algorist.art.model.brushes.parameters.ColorParameter;
 import com.algorist.art.model.brushes.parameters.DoubleParameter;
 import com.algorist.art.model.brushes.parameters.FloatParameter;
 import com.algorist.art.model.brushes.parameters.IntParameter;
@@ -35,26 +36,26 @@ public class SilkBrush extends Brush {
     private List<SilkParticle> particles;
     private List<SilkParticle> shadowParticles;
     private BufferedImage bumpmap;
-    private int maxDist = 60;
-    private float opacity = 0.3f;
-    private double density = 1;
-    private int spread = 90;
-    private int bumpmapScale = 100;
-    private double bumpmapEffect = .4;
-    private int scatter = 0;
-    private int lifespan = 10;
+    public int maxDist = 60;
+    public float opacity = 0.3f;
+    public double density = 1;
+    public int spread = 90;
+    public int bumpmapScale = 100;
+    public double bumpmapEffect = .4;
+    public int scatter = 0;
+    public int lifespan = 10;
     //shadow
-    private int shadowMaxDist = 120;
-    private float shadowOpacity = 0.075f;
-    private double shadowDensity = 0.8;
-    private int shadowSpread = 300;
-    private int shadowScatter = 0;
-    private int shadowLifespan = 4;
-    private boolean useRandomColor = false;
-    private boolean useShadows = false;
-    private float red = 1f;
-    private float green = 1f;
-    private float blue = 1f;
+    public int shadowMaxDist = 120;
+    public float shadowOpacity = 0.075f;
+    public double shadowDensity = 0.8;
+    public int shadowSpread = 300;
+    public int shadowScatter = 0;
+    public int shadowLifespan = 4;
+    public boolean useRandomColor = false;
+    public boolean useShadows = false;
+    public float red = 1f;
+    public float green = 1f;
+    public float blue = 1f;
 
     public SilkBrush() {
         this.name = "Silkbrush";
@@ -216,14 +217,28 @@ public class SilkBrush extends Brush {
         int i = -1;
         int offsetX;
         int offsetY;
+        int dist;
+        double dens;
         Polygon polygon = new Polygon();
 
         List<Integer> distances = particle.getDistances();
+        
+        //normal particles
+        if(particles == this.particles){
+            dist = maxDist;
+            dens = density;
+        }
+        //shadow particles
+        else {
+            dist = shadowMaxDist;
+            dens = shadowDensity;
+        }
+        
         while (++i < distances.size()) {
             SilkParticle p2 = particles.get(i);
             int distance = distances.get(i).intValue();
             if (distances.get(i) != null) {
-                if (distance < maxDist && distance > 1 && Math.random() < density) {
+                if (distance < dist && distance > 1 && Math.random() < dens) {
                     g.setColor(particle.getColor());
 
                     offsetX = (int) (scatter * Math.random() - scatter / 2);
@@ -298,6 +313,11 @@ public class SilkBrush extends Brush {
             this.shadowOpacity = (float) params.get("shadowOpacity");
             this.shadowScatter = (int) params.get("shadowScatter");
             this.shadowSpread = (int) params.get("shadowSpread");
+            
+            this.red = (float) params.get("red");
+            this.green = (float) params.get("green");
+            this.blue = (float) params.get("blue");
+            
             this.useShadows = (boolean) params.get("useShadows");
             this.useRandomColor = (boolean) params.get("useRandomColor");
         }
@@ -306,19 +326,54 @@ public class SilkBrush extends Brush {
 
     @Override
     public void defineParameters() {
-        params.add(new IntParameter("maxDist",0, 500));
-        params.add(new DoubleParameter("density", 0, 1));
-        params.add(new IntParameter("lifespan",1, 50));
-        params.add(new FloatParameter("opacity",0, 1));
-        params.add(new IntParameter("scatter",0, 600));
-        params.add(new IntParameter("spread",0, 600));
-        params.add(new IntParameter("shadowMaxDist",0, 500));
-        params.add(new DoubleParameter("shadowDensity", 0, 1));
-        params.add(new IntParameter("shadowLifespan",1, 50));
-        params.add(new FloatParameter("shadowOpacity",0, 1));
-        params.add(new IntParameter("shadowScatter",0, 600));
-        params.add(new IntParameter("shadowSpread",0, 600));
-        params.add(new BooleanParameter("useShadows"));
-        params.add(new BooleanParameter("useRandomColor"));
+        params.add(new IntParameter("maxDist",0, 500, maxDist));
+        params.add(new DoubleParameter("density", 0, 1, density));
+        params.add(new IntParameter("lifespan",0, 50, lifespan));
+        params.add(new IntParameter("scatter",0, 600, scatter));
+        params.add(new IntParameter("spread",0, 600, spread));
+        params.add(new FloatParameter("red",0, 1, red));
+        params.add(new FloatParameter("green",0, 1, green));
+        params.add(new FloatParameter("blue",0, 1, blue));
+        params.add(new FloatParameter("opacity",0, 1, opacity));
+        params.add(new IntParameter("shadowMaxDist",0, 500, shadowMaxDist));
+        params.add(new DoubleParameter("shadowDensity", 0, 1, shadowDensity));
+        params.add(new IntParameter("shadowLifespan",0, 50, shadowLifespan));
+        params.add(new IntParameter("shadowScatter",0, 600, shadowScatter));
+        params.add(new IntParameter("shadowSpread",0, 600, shadowSpread));
+        params.add(new FloatParameter("shadowOpacity",0, 1, shadowOpacity));
+        
+        
+        params.add(new BooleanParameter("useShadows", true));
+        params.add(new BooleanParameter("useRandomColor", false));
     }
+
+    @Override
+    public List<Parameter> getParamTypes() {
+        params.clear();
+        
+        params.add(new IntParameter("maxDist",0, 500, maxDist));
+        params.add(new DoubleParameter("density", 0, 1, density));
+        params.add(new IntParameter("lifespan",0, 50, lifespan));
+        params.add(new IntParameter("scatter",0, 600, scatter));
+        params.add(new IntParameter("spread",0, 600, spread));
+        params.add(new FloatParameter("red",0, 1, red));
+        params.add(new FloatParameter("green",0, 1, green));
+        params.add(new FloatParameter("blue",0, 1, blue));
+        params.add(new FloatParameter("opacity",0, 1, opacity));
+        params.add(new IntParameter("shadowMaxDist",0, 500, shadowMaxDist));
+        params.add(new DoubleParameter("shadowDensity", 0, 1, shadowDensity));
+        params.add(new IntParameter("shadowLifespan",0, 50, shadowLifespan));
+        params.add(new IntParameter("shadowScatter",0, 600, shadowScatter));
+        params.add(new IntParameter("shadowSpread",0, 600, shadowSpread));
+        params.add(new FloatParameter("shadowOpacity",0, 1, shadowOpacity));
+        
+        
+        params.add(new BooleanParameter("useShadows", true));
+        params.add(new BooleanParameter("useRandomColor", false));
+        
+        
+        return params;
+    }
+    
+    
 }

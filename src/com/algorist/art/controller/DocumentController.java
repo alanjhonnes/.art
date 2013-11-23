@@ -22,7 +22,7 @@ import mvc.AbstractFrame;
  *
  * @author alanjhonnes
  */
-public class DrawingAreaController extends AbstractController {
+public class DocumentController extends AbstractController {
 
     private DocumentView view;
     private Brush brush;
@@ -31,7 +31,7 @@ public class DrawingAreaController extends AbstractController {
     
     private CallbackFunction movementTickCallback;
 
-    public DrawingAreaController(AbstractFrame mainFrame, Art art) {
+    public DocumentController(AbstractFrame mainFrame, Art art) {
         super(mainFrame);
         this.artModel = art;
         brush = art.getSelectedBrush();

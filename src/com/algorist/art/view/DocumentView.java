@@ -6,7 +6,7 @@ package com.algorist.art.view;
 
 import com.alanjhonnes.event.CallbackFunction;
 import com.alanjhonnes.event.Event;
-import com.algorist.art.controller.DrawingAreaController;
+import com.algorist.art.controller.DocumentController;
 import com.algorist.art.event.DocumentEvent;
 import com.algorist.art.model.Document;
 import com.algorist.art.model.Layer;
@@ -30,13 +30,13 @@ import mvc.AbstractView;
  */
 public class DocumentView extends AbstractView<JLayeredPane> implements ComponentListener {
 
-    private DrawingAreaController controller;
+    private DocumentController controller;
     private MouseListener mouseListener;
     private MouseMotionListener mouseMotionListener;
     private Document documentModel;
     private List<LayerPanel> layerPanels;
 
-    public DocumentView(AbstractFrame mainFrame, DrawingAreaController controller, final Document documentModel) {
+    public DocumentView(AbstractFrame mainFrame, DocumentController controller, final Document documentModel) {
         super(mainFrame);
         this.controller = controller;
         controller.setView(this);
@@ -65,7 +65,7 @@ public class DocumentView extends AbstractView<JLayeredPane> implements Componen
 
             @Override
             public void execute(Event e) {
-                contentPane.setPreferredSize(new Dimension(documentModel.getWidth(), documentModel.getHeight()));
+                contentPane.setSize(new Dimension(documentModel.getWidth(), documentModel.getHeight()));
             }
         });
     }
@@ -150,7 +150,8 @@ public class DocumentView extends AbstractView<JLayeredPane> implements Componen
     }
 
     public void componentResized(ComponentEvent e) {
-        documentModel.setSize(contentPane.getWidth(), contentPane.getHeight());    
+        documentModel.setSize(contentPane.getWidth(), contentPane.getHeight());
+        contentPane.setPreferredSize(new Dimension(contentPane.getWidth(), contentPane.getHeight()));
     }
 
     public void componentShown(ComponentEvent e) {

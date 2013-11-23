@@ -4,18 +4,23 @@
  */
 package com.algorist.art.view.display;
 
-import javax.swing.JCheckBox;
+import java.awt.Color;
+import javax.swing.JColorChooser;
 
 /**
  *
- * @author alan.jbssa
+ * @author user
  */
-public class BooleanCheckbox extends JCheckBox implements IParameterComponent {
-    private String key;
+public class ColorPicker extends JColorChooser implements IParameterComponent {
 
-    public BooleanCheckbox(String key, boolean value, String text) {
-        super(text);
-        this.setSelected(value);
+    private String key;
+    
+    public ColorPicker(String key) {
+        this.key = key;
+    }
+
+    public ColorPicker(String key, Color initialColor) {
+        super(initialColor);
         this.key = key;
     }
 

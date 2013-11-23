@@ -109,6 +109,8 @@ public class Document extends EventDispatcher implements Serializable {
     }
 
     public void setSize(int width, int height) {
+        this.width = width;
+        this.height = height;
         for (int i = 0; i < layers.size(); i++) {
             Layer layer = layers.get(i);
             layer.setSize(width, height);

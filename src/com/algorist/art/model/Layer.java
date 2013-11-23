@@ -69,7 +69,7 @@ public class Layer extends EventDispatcher implements Serializable {
         image = newImage;
         this.width = width;
         this.height = height;
-        System.out.println("Layer resized");
+        System.out.println("Layer resized: " + this.width + ", " + this.height);
         dispatchEvent(new LayerEvent(this, LayerEvent.SIZE_CHANGED));
     }
 

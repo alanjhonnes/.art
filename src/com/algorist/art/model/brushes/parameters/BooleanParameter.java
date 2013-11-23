@@ -9,9 +9,21 @@ package com.algorist.art.model.brushes.parameters;
  * @author alan.jbssa
  */
 public class BooleanParameter extends Parameter {
+    
+    private boolean value;
 
-    public BooleanParameter(String key) {
+    public BooleanParameter(String key, boolean value) {
         super(key);
+        this.value = value;
+        this.type = boolean.class;
+    }
+
+    public boolean getValue() {
+        return value;
+    }
+
+    public void setValue(boolean value) {
+        this.value = value;
     }
     
 }

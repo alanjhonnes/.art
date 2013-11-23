@@ -4,20 +4,20 @@
  */
 package com.algorist.art.model.brushes;
 
-import com.alanjhonnes.graphics.composition.BlendComposite;
 import com.alanjhonnes.particles.SimpleParticle;
 import com.algorist.art.model.Layer;
 import com.algorist.art.model.Movement;
+import com.algorist.art.model.brushes.parameters.DoubleParameter;
+import com.algorist.art.model.brushes.parameters.FloatParameter;
+import com.algorist.art.model.brushes.parameters.IntParameter;
 import com.algorist.art.model.brushes.parameters.Parameter;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
-import java.awt.image.Raster;
 import java.awt.image.WritableRaster;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
@@ -25,21 +25,23 @@ import java.util.Map;
  */
 public class NeonParticles extends Brush {
 
-    private double intensity;
-    private int noise;
-    private int spawn;
-    private double damping;
-    private int fuzz;
-    private int exposure;
-    private int initialXVelocity;
-    private int initialYVelocity;
-    private int maxAge;
-    private float red;
-    private float green;
-    private float blue;
+    public double intensity;
+    public int noise;
+    public int spawn;
+    public double damping;
+    public int fuzz;
+    public int exposure;
+    public int initialXVelocity;
+    public int initialYVelocity;
+    public int maxAge;
+    public float red;
+    public float green;
+    public float blue;
+    public float opacity;
     private List<SimpleParticle> particles;
     private BufferedImage noiseCanvas;
     private WritableRaster noiseData, data, hdrdata;
+    
 
     public NeonParticles() {
         super();
@@ -55,6 +57,7 @@ public class NeonParticles extends Brush {
         red = 1f;
         green = 0.1f;
         blue = 0.1f;
+        opacity = 0.2f;
         name = "Neon Particles";
     }
 
@@ -70,9 +73,6 @@ public class NeonParticles extends Brush {
     @Override
     public void startDrawing(Movement movement, Layer layer) {
         super.startDrawing(movement, layer); //To change body of generated methods, choose Tools | Templates.
-        red = (float) Math.random();
-        green = (float) Math.random();
-        blue = (float) Math.random();
     }
 
     @Override
@@ -90,7 +90,7 @@ public class NeonParticles extends Brush {
                 RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
 
-        g.setComposite(new BlendComposite());
+        //g.setComposite(new BlendComposite());
 
         for (int i = 0; i < spawn; i++) {
             particles.add(new SimpleParticle(fuzzy(initialXVelocity), fuzzy(initialYVelocity), movement.getNewPosition().x, movement.getNewPosition().y));
@@ -100,8 +100,7 @@ public class NeonParticles extends Brush {
             SimpleParticle p = particles.get(i);
 
             //g.setColor(new Color(tonemap(red), tonemap(green), tonemap(blue), 1f));
-            g.setColor(new Color((red), (green), (blue), 0.5f));
-            g.drawOval(p.getX(), p.getY(), 0, 1);
+            
             //System.out.println(getNoise(p.getX(), p.getY(), 0));
             //int newVx = (int) (p.getVx() * damping + getNoise(p.getX(), p.getY(), 0) * 4 * noise + fuzzy(0.1) * fuzz);
             //int newVy = (int) (p.getVy() * damping + getNoise(p.getX(), p.getY(), 0) * 4 * noise + fuzzy(0.1) * fuzz);
@@ -129,6 +128,9 @@ public class NeonParticles extends Brush {
             if (p.getX() < 0 || p.getX() >= w || p.getY() < 0 || p.getY() >= h) {
                 continue;
             }
+            
+            g.setColor(new Color(red, green, blue, opacity));
+            g.drawOval(p.getX(), p.getY(), 8, 8);
         }
         particles = alive;
     }
@@ -194,6 +196,40 @@ public class NeonParticles extends Brush {
     public void defineParameters() {
         
     }
+
+    @Override
+    public List<Parameter> getParamTypes() {
+        params.clear();
+//        public double intensity;
+//    public int noise;
+//    public int spawn;
+//    public double damping;
+//    public int fuzz;
+//    public int exposure;
+//    public int initialXVelocity;
+//    public int initialYVelocity;
+//    public int maxAge;
+//    public float red;
+//    public float green;
+//    public float blue;
+//    public float opacity;
+        params.add(new DoubleParameter("intensity", 0, 1, intensity));
+        params.add(new IntParameter("noise", 0, 10, noise));
+        params.add(new IntParameter("spawn", 0, 200, spawn));
+        params.add(new DoubleParameter("damping", 0, 1, damping));
+        params.add(new IntParameter("fuzz", 0, 10, fuzz));
+        params.add(new IntParameter("exposure", 0, 10, exposure));
+        params.add(new IntParameter("initialXVelocity", 0, 100, initialXVelocity));
+        params.add(new IntParameter("initialYVelocity", 0, 100, initialYVelocity));
+        params.add(new IntParameter("maxAge", 0, 150, maxAge));
+        params.add(new FloatParameter("red", 0, 1, red));
+        params.add(new FloatParameter("green", 0, 1, green));
+        params.add(new FloatParameter("blue", 0, 1, blue));
+        params.add(new FloatParameter("opacity", 0, 1, opacity));
+        return params;
+    }
+    
+    
     
     
 }

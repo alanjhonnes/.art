@@ -10,16 +10,18 @@ import javax.swing.JSlider;
  *
  * @author alan.jbssa
  */
-class DoubleSlider extends JSlider {
+public class DoubleSlider extends IntSlider {
 
     final int scale;
 
-    public DoubleSlider(int min, int max, int value, int scale) {
-        super(min, max, value);
+    public DoubleSlider(String key, int min, int max, int value, int scale) {
+        super(key, min, max, value);
         this.scale = scale;
     }
 
     public double getScaledValue() {
         return ((double) super.getValue()) / this.scale;
     }
+    
+    
 }

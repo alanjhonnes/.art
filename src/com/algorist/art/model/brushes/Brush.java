@@ -11,10 +11,14 @@ import com.algorist.art.model.Layer;
 import com.algorist.art.model.Movement;
 import com.algorist.art.model.brushes.parameters.Parameter;
 import com.algorist.art.model.brushes.presets.Preset;
+import java.awt.Color;
 import java.awt.image.BufferedImage;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -40,7 +44,7 @@ public abstract class Brush {
                 draw(movement);
             }
         };
-        defineParameters();
+        //defineParameters();
         loadDefaultPresets();
     }
 
@@ -65,12 +69,11 @@ public abstract class Brush {
     abstract public void draw(Movement movement);
 
     public abstract void loadDefaultPresets();
-    
+
     public abstract void defineParameters();
 
     public void loadPreset(Preset preset) {
         if (preset.getBrushClass() == this.getClass()) {
-
         } else {
             System.err.println("Error loading preset. Preset brushClass is diferent from brush class.");
         }
@@ -109,4 +112,58 @@ public abstract class Brush {
         return name;
     }
 
+    public void setField(String key, int value) {
+        try {
+            Field f = this.getClass().getDeclaredField(key);
+            f.setInt(this, value);
+        } catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException ex) {
+            Logger.getLogger(Brush.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void setField(String key, float value) {
+        try {
+            Field f = this.getClass().getDeclaredField(key);
+            f.setFloat(this, value);
+        } catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException ex) {
+            Logger.getLogger(Brush.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void setField(String key, double value) {
+        try {
+            Field f = this.getClass().getDeclaredField(key);
+            f.setDouble(this, value);
+        } catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException ex) {
+            Logger.getLogger(Brush.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void setField(String key, boolean value) {
+        try {
+            Field f = this.getClass().getDeclaredField(key);
+            f.setBoolean(this, value);
+        } catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException ex) {
+            Logger.getLogger(Brush.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void setField(String key, Color value) {
+        try {
+            Field f = this.getClass().getDeclaredField(key);
+            f.set(this, value);
+        } catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException ex) {
+            Logger.getLogger(Brush.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public Object getField(String key){
+        try {
+            Field f = this.getClass().getDeclaredField(key);
+            return f.get(this);
+        } catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException ex) {
+            Logger.getLogger(Brush.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }

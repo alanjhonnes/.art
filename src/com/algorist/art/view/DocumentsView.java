@@ -7,7 +7,7 @@ package com.algorist.art.view;
 import com.alanjhonnes.event.CallbackFunction;
 import com.alanjhonnes.event.Event;
 import com.algorist.art.controller.DocumentsController;
-import com.algorist.art.controller.DrawingAreaController;
+import com.algorist.art.controller.DocumentController;
 import com.algorist.art.event.ArtEvent;
 import com.algorist.art.model.Art;
 import com.algorist.art.model.Document;
@@ -52,7 +52,7 @@ public class DocumentsView extends AbstractView<JTabbedPane> {
                 ArtEvent ae = (ArtEvent) e;
 
                 Document doc = ae.getDocument();
-                DocumentView dwa = new DocumentView(getMainFrame(), new DrawingAreaController(getMainFrame(), getArtModel()), doc);
+                DocumentView dwa = new DocumentView(getMainFrame(), new DocumentController(getMainFrame(), getArtModel()), doc);
                 documentViews.add(dwa);
                 contentPane.add(doc.getName(), dwa.getContentPane());
                 contentPane.setSelectedIndex(documentViews.size() - 1);
@@ -98,9 +98,9 @@ public class DocumentsView extends AbstractView<JTabbedPane> {
         List<Document> docs = artModel.getDocuments();
         for (int i = 0; i < docs.size(); i++) {
             Document document = docs.get(i);
-            DocumentView dwa = new DocumentView(getMainFrame(), new DrawingAreaController(getMainFrame(), getArtModel()), document);
-            documentViews.add(dwa);
-            contentPane.add(document.getName(), dwa.getContentPane());
+            DocumentView dv = new DocumentView(getMainFrame(), new DocumentController(getMainFrame(), getArtModel()), document);
+            documentViews.add(dv);
+            contentPane.add(document.getName(), dv.getContentPane());
         }
     }
 
