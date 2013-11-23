@@ -200,19 +200,6 @@ public class NeonParticles extends Brush {
     @Override
     public List<Parameter> getParamTypes() {
         params.clear();
-//        public double intensity;
-//    public int noise;
-//    public int spawn;
-//    public double damping;
-//    public int fuzz;
-//    public int exposure;
-//    public int initialXVelocity;
-//    public int initialYVelocity;
-//    public int maxAge;
-//    public float red;
-//    public float green;
-//    public float blue;
-//    public float opacity;
         params.add(new DoubleParameter("intensity", 0, 1, intensity));
         params.add(new IntParameter("noise", 0, 10, noise));
         params.add(new IntParameter("spawn", 0, 200, spawn));

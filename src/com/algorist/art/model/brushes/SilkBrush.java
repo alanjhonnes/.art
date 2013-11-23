@@ -44,6 +44,7 @@ public class SilkBrush extends Brush {
     public double bumpmapEffect = .4;
     public int scatter = 0;
     public int lifespan = 10;
+    public boolean fill = true;
     //shadow
     public int shadowMaxDist = 120;
     public float shadowOpacity = 0.075f;
@@ -56,6 +57,7 @@ public class SilkBrush extends Brush {
     public float red = 1f;
     public float green = 1f;
     public float blue = 1f;
+    public boolean fillShadows = true;
 
     public SilkBrush() {
         this.name = "Silkbrush";
@@ -218,7 +220,10 @@ public class SilkBrush extends Brush {
         int offsetX;
         int offsetY;
         int dist;
+        int scatter;
+        int spread;
         double dens;
+        boolean fill;
         Polygon polygon = new Polygon();
 
         List<Integer> distances = particle.getDistances();
@@ -227,11 +232,17 @@ public class SilkBrush extends Brush {
         if(particles == this.particles){
             dist = maxDist;
             dens = density;
+            scatter = this.scatter;
+            spread = this.spread;
+            fill = this.fill;
         }
         //shadow particles
         else {
             dist = shadowMaxDist;
             dens = shadowDensity;
+            scatter = this.shadowScatter;
+            spread = this.shadowSpread;
+            fill = this.fillShadows;
         }
         
         while (++i < distances.size()) {
@@ -251,7 +262,13 @@ public class SilkBrush extends Brush {
                     polygon.addPoint(p2.px + offsetX, p2.py + offsetY);
                     polygon.addPoint(particle.px + offsetX, particle.py + offsetY);
 
-                    g.fillPolygon(polygon);
+                    if(fill == true){
+                        g.fillPolygon(polygon);
+                    }
+                    else {
+                        g.drawPolygon(polygon);
+                    }
+                    
                 }
             }
         }
@@ -367,10 +384,10 @@ public class SilkBrush extends Brush {
         params.add(new IntParameter("shadowSpread",0, 600, shadowSpread));
         params.add(new FloatParameter("shadowOpacity",0, 1, shadowOpacity));
         
-        
         params.add(new BooleanParameter("useShadows", true));
         params.add(new BooleanParameter("useRandomColor", false));
-        
+        params.add(new BooleanParameter("fill", true));
+        params.add(new BooleanParameter("fillShadows", true));
         
         return params;
     }

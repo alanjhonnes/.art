@@ -116,7 +116,7 @@ public class Layer extends EventDispatcher implements Serializable {
 
     public void clear() {
         Graphics2D g = image.createGraphics();
-        g.setBackground(new Color(1f, 1f, 1f, 1f));
+        g.setBackground(new Color(1f, 1f, 1f, 0f));
         g.clearRect(0, 0, image.getWidth(), image.getHeight());
         dispatchEvent(new LayerEvent(this, LayerEvent.IMAGE_CHANGED));
     }

@@ -33,6 +33,16 @@ public class LayerPanel extends JPanel {
                 invalidate();
             }
         });
+        
+        layer.addEventListener(LayerEvent.IMAGE_CHANGED, new CallbackFunction() {
+
+            @Override
+            public void execute(Event e) {
+                setSize(layer.getWidth(), layer.getHeight());
+                invalidate();
+                repaint();
+            }
+        });
     }
 
     @Override
