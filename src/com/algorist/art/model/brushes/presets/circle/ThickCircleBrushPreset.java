@@ -15,7 +15,7 @@ import com.algorist.art.model.brushes.presets.Preset;
 public class ThickCircleBrushPreset extends Preset {
 
     public ThickCircleBrushPreset() {
-        this.name = "Grosso";
+        this.name = "Grande";
         this.setBrushClass(CirclesBrush.class);
         params.put("thickness", 50);
     }
