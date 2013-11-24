@@ -86,7 +86,7 @@ public class MenuController extends AbstractController {
         Movement movement = new Movement(new Point( (int) (Math.random() * doc.getWidth()), (int) (Math.random() * doc.getHeight())));
         artModel.startMovement(movement);
         Point startPoint = new Point((int) (Math.random() * doc.getWidth()), (int) (Math.random() * doc.getHeight()));
-        FluidMovement fluidMovement = new FluidMovement(movement, startPoint, 10, 0.05, 2, 1500, doc.getWidth(), doc.getHeight());
+        FluidMovement fluidMovement = new FluidMovement(movement, startPoint, Math.random() * 8 + 5, 0.03, 10, 1500, doc.getWidth(), doc.getHeight());
         fluidMovements.add(fluidMovement);
     }
 
