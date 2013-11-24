@@ -12,7 +12,7 @@ public class ThickCircleBrushPreset extends Preset {
 
     public ThickCircleBrushPreset() {
         super();
-        this.name = "Grosso";
+        this.name = "Grande";
         params.put("thickness", new Float(1));
         params.put("opacity", new Float(1));
     }
