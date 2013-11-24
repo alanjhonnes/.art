@@ -10,9 +10,9 @@ import com.algorist.art.model.brushes.Brush;
 import com.algorist.art.model.brushes.CirclesBrush;
 import com.algorist.art.model.brushes.LinesBrush;
 import com.algorist.art.model.brushes.NeonParticles;
-import com.algorist.art.model.brushes.RB2_Brush;
-import com.algorist.art.model.brushes.RB3_Brush;
-import com.algorist.art.model.brushes.RB4_Brush;
+import com.algorist.art.model.brushes.PhynnaBrush;
+import com.algorist.art.model.brushes.AlchemyBrush;
+import com.algorist.art.model.brushes.Vintage;
 import com.algorist.art.model.brushes.SprayHardcoreBrush;
 import com.algorist.art.model.brushes.SilkBrush;
 import java.util.ArrayList;
@@ -39,9 +39,9 @@ public class Art extends EventDispatcher {
         brushes.add(new NeonParticles());
         brushes.add(new CirclesBrush());
         brushes.add(new LinesBrush());
-        brushes.add(new RB2_Brush());
-        brushes.add(new RB3_Brush());
-        brushes.add(new RB4_Brush());
+        brushes.add(new PhynnaBrush());
+        brushes.add(new AlchemyBrush());
+        brushes.add(new Vintage());
         brushes.add(new SprayHardcoreBrush());
            
         

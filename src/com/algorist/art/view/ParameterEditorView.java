@@ -118,6 +118,7 @@ public class ParameterEditorView extends AbstractView<JScrollPane> {
         }
         
         panel.revalidate();
+        panel.repaint();
     }
     
     private ChangeListener intChangeListener = new ChangeListener() {

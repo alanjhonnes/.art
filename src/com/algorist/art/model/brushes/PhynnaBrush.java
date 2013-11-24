@@ -9,9 +9,6 @@ import com.algorist.art.model.Movement;
 import com.algorist.art.model.brushes.parameters.Parameter;
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Polygon;
-import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.util.Map;
 
@@ -19,33 +16,31 @@ import java.util.Map;
  *
  * @author alan.jbssa
  */
-public class RB3_Brush extends Brush {
-
-    public RB3_Brush() {
-        name = "Alchemy";
-    }
+public class PhynnaBrush extends Brush {
+    
+     public PhynnaBrush() {
+        name = "Phynna";
+    }    
 
     @Override
     public void draw(Movement movement) {
-
-        Point p = movement.getNewPosition();
-        int size = 10;
-
         Graphics2D g = layer.getImage().createGraphics();
-        g.setColor(Color.darkGray);
+        g.setColor(Color.DARK_GRAY);
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        Rectangle r = new Rectangle();
-        int[] xpoints = new int[]{p.x, p.x + (size / 2), p.x + size};
-        int[] ypoints = new int[]{p.y, p.y + size, p.y};
-        Polygon pol = new Polygon(xpoints, ypoints, 3);
-        g.draw(pol);
-        r.setLocation(p);
-        r.width = size;
-        r.height = size;
+        int[] xs = {-50, 0, 50, 10, 50, 0, -50, -10, -50};
+        int[] ys = {-50, -10, -50, 0, 50, 10, 50, 0,-50};
+        for (int i = 0; i < xs.length; i++) {
+            int j = xs[i];
+            xs[i] = j + movement.getNewPosition().x;
+            j = ys[i];
+            ys[i] = j + movement.getNewPosition().y;
+        }
+        g.drawPolyline(xs, ys, 9);
     }
 
     @Override
     public void loadDefaultPresets() {
     }
 
+    
 }

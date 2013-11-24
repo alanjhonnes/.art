@@ -4,21 +4,18 @@
  */
 package com.algorist.art.model.brushes;
 
-import com.algorist.art.model.Layer;
 import com.algorist.art.model.Movement;
-import com.algorist.art.model.brushes.parameters.Parameter;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.util.Map;
 
 /**
  *
  * @author alan.jbssa
  */
-public class RB4_Brush extends Brush {
+public class Vintage extends Brush {
     
-       public RB4_Brush() {
+       public Vintage() {
         name = "Vintage";
     }
 
