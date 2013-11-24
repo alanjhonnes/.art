@@ -7,7 +7,6 @@ package com.algorist.art.model;
 import com.alanjhonnes.event.EventDispatcher;
 import com.algorist.art.event.DocumentEvent;
 import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -116,6 +115,23 @@ public class Document extends EventDispatcher implements Serializable {
             layer.setSize(width, height);
         }
         dispatchEvent(new DocumentEvent(this, DocumentEvent.SIZE_CHANGED));
+    }
+    
+    @Override
+    public void dispose(){
+        super.dispose();
+        for (int i = 0; i < layers.size(); i++) {
+            Layer layer = layers.get(i);
+            layer.dispose();
+        }
+        for (int i = 0; i < states.size(); i++) {
+            State state = states.get(i);
+            state.dispose();
+        }
+        layers.clear();
+        layers = null;
+        states.clear();
+        states = null;
     }
     
     

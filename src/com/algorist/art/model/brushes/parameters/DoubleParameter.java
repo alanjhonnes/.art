@@ -13,8 +13,8 @@ public class DoubleParameter extends Parameter {
     private double max;
     private double value;
 
-    public DoubleParameter(String key, double min, double max, double value) {
-        super(key);
+    public DoubleParameter(String key, String label, double min, double max, double value) {
+        super(key, label);
         this.min = min;
         this.max = max;
         this.value = value;

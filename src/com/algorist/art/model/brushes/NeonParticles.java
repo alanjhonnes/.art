@@ -63,7 +63,7 @@ public class NeonParticles extends Brush {
     }
 
     @Override
-    public void initialize(Layer layer) {
+    public void initialize(int width, int height) {
 //        noiseCanvas = makeOctaveNoise(layer.getWidth(), layer.getHeight(), 8);
 //        noiseData = noiseCanvas.getRaster();
 //        System.out.println(noiseData);
@@ -75,6 +75,18 @@ public class NeonParticles extends Brush {
     public void startDrawing(Movement movement, Layer layer) {
         super.startDrawing(movement, layer); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public void stopDrawing(Movement movement) {
+        super.stopDrawing(movement);
+        if(movements.isEmpty()){
+            particles.clear();
+        }
+    }
+    
+    
+    
+    
 
     @Override
     public void draw(Movement movement) {
@@ -197,19 +209,19 @@ public class NeonParticles extends Brush {
     @Override
     public List<Parameter> getParamTypes() {
         params.clear();
-        params.add(new DoubleParameter("intensity", 0, 1, intensity));
-        params.add(new IntParameter("noise", 0, 10, noise));
-        params.add(new IntParameter("spawn", 0, 200, spawn));
-        params.add(new DoubleParameter("damping", 0, 1, damping));
-        params.add(new IntParameter("fuzz", 0, 10, fuzz));
-        params.add(new IntParameter("exposure", 0, 10, exposure));
-        params.add(new IntParameter("initialXVelocity", 0, 100, initialXVelocity));
-        params.add(new IntParameter("initialYVelocity", 0, 100, initialYVelocity));
-        params.add(new IntParameter("maxAge", 0, 150, maxAge));
-        params.add(new FloatParameter("red", 0, 1, red));
-        params.add(new FloatParameter("green", 0, 1, green));
-        params.add(new FloatParameter("blue", 0, 1, blue));
-        params.add(new FloatParameter("opacity", 0, 1, opacity));
+        params.add(new DoubleParameter("intensity", "Intensidade", 0, 1, intensity));
+        params.add(new IntParameter("noise", "Fator distorção", 0, 10, noise));
+        params.add(new IntParameter("spawn", "Particulas por iteração", 0, 200, spawn));
+        params.add(new DoubleParameter("damping", "Taxa de amortecimento", 0, 1, damping));
+        params.add(new IntParameter("fuzz", "Fator de imprecisão", 0, 10, fuzz));
+        params.add(new IntParameter("exposure", "Exposição", 0, 10, exposure));
+        params.add(new IntParameter("initialXVelocity", "Velocidade horizontal inicial", 0, 100, initialXVelocity));
+        params.add(new IntParameter("initialYVelocity", "Velocidade vertical inicial", 0, 100, initialYVelocity));
+        params.add(new IntParameter("maxAge", "Vida máxima das particulas", 0, 150, maxAge));
+        params.add(new FloatParameter("red", "Porcentagem da cor vermelha",0, 1, red));
+        params.add(new FloatParameter("green", "Porcentagem da cor verde", 0, 1, green));
+        params.add(new FloatParameter("blue", "Porcentagem da cor azul", 0, 1, blue));
+        params.add(new FloatParameter("opacity", "Opacidade", 0, 1, opacity));
         return params;
     }
 

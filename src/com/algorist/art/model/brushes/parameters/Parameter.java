@@ -11,10 +11,12 @@ package com.algorist.art.model.brushes.parameters;
 public abstract class Parameter {
 
     protected String key;
+    protected String label;
     protected Class type;
 
-    public Parameter(String key) {
+    public Parameter(String key, String label) {
         this.key = key;
+        this.label = label;
     }
 
     public Class getType() {
@@ -32,4 +34,14 @@ public abstract class Parameter {
     public void setKey(String key) {
         this.key = key;
     }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+    
+    
 }

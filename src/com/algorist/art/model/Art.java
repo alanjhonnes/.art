@@ -19,7 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Main model class, contains the whole list of openned documents. 
+ * Main model class, contains the whole list of open documents, brushes and 
+ * active movements. 
  * @author alanjhonnes
  */
 public class Art extends EventDispatcher {
@@ -55,6 +56,7 @@ public class Art extends EventDispatcher {
     public void removeDocument(Document document){
         documents.remove(document);
         dispatchEvent(new ArtEvent(document, ArtEvent.DOCUMENT_REMOVED, document));
+        document.dispose();
     }
     
     public void startMovement(Movement movement){
@@ -64,8 +66,8 @@ public class Art extends EventDispatcher {
     
     public void endMovement(Movement movement){
         movements.remove(movement);
-        movement.stop();
         dispatchEvent(new ArtEvent(this, ArtEvent.MOVEMENT_ENDED, movement));
+        movement.stop();
     }
     
 
@@ -84,6 +86,7 @@ public class Art extends EventDispatcher {
 
     public void setCurrentDocument(Document currentDocument) {
         this.currentDocument = currentDocument;
+        selectedBrush.initialize(currentDocument.getWidth(), currentDocument.getHeight());
         dispatchEvent(new ArtEvent(this, ArtEvent.DOCUMENT_CHANGED, currentDocument));
     }
 

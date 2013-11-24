@@ -7,11 +7,16 @@ package com.algorist.art.controller;
 import com.algorist.art.FileManager;
 import com.algorist.art.model.Art;
 import com.algorist.art.model.Document;
+import com.algorist.art.model.Movement;
+import com.algorist.art.util.FluidMovement;
 import com.algorist.art.view.DocumentsView;
+import java.awt.Point;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTabbedPane;
@@ -25,6 +30,8 @@ import mvc.AbstractFrame;
 public class MenuController extends AbstractController {
 
     private Art artModel;
+    
+    private List<FluidMovement> fluidMovements = new ArrayList<>();
 
     public MenuController(AbstractFrame mainFrame, Art artModel) {
         super(mainFrame);
@@ -72,5 +79,39 @@ public class MenuController extends AbstractController {
 
     public void cleanLayer() {
         artModel.getCurrentDocument().getSelectedLayer().clear();
+    }
+
+    public void startMovement() {
+        Document doc = artModel.getCurrentDocument();
+        Movement movement = new Movement(new Point( (int) (Math.random() * doc.getWidth()), (int) (Math.random() * doc.getHeight())));
+        artModel.startMovement(movement);
+        Point startPoint = new Point((int) (Math.random() * doc.getWidth()), (int) (Math.random() * doc.getHeight()));
+        FluidMovement fluidMovement = new FluidMovement(movement, startPoint, 10, 0.05, 2, 1500, doc.getWidth(), doc.getHeight());
+        fluidMovements.add(fluidMovement);
+    }
+
+    public void stopMovements() {
+        List<Movement> movements = artModel.getMovements();
+        
+        for (int i = 0; i < fluidMovements.size(); i++) {
+            FluidMovement fluidMovement = fluidMovements.get(i);
+            fluidMovement.dispose();
+        }
+        
+        fluidMovements.clear();
+        
+        List<Movement> movementsToRemove = new ArrayList<>();
+        
+        for (int i = 0; i < movements.size(); i++) {
+            Movement movement = movements.get(i);
+            movementsToRemove.add(movement);
+        }
+        
+        for (int i = 0; i < movementsToRemove.size(); i++) {
+            Movement movement = movementsToRemove.get(i);
+            artModel.endMovement(movement);
+        }
+        
+        movementsToRemove.clear();
     }
 }

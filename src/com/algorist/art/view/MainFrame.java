@@ -96,7 +96,7 @@ public class MainFrame extends AbstractFrame {
         
         jFrame.add(getView(DocumentsView.class).getContentPane(), BorderLayout.CENTER);
         
-        panelContainer.setPreferredSize(new Dimension(200, 500));
+        panelContainer.setPreferredSize(new Dimension(240, 500));
         
         panelContainer.add(brushContainer);
         panelContainer.add(getView(ParameterEditorView.class).getContentPane());

@@ -75,4 +75,9 @@ public class EventDispatcher implements IEventDispatcher {
         }
     }
     
+    public void dispose(){
+        listeners.clear();
+        listeners = null;
+    }
+    
 }

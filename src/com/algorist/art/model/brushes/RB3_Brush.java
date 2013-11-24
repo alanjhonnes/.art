@@ -26,10 +26,6 @@ public class RB3_Brush extends Brush {
     }
 
     @Override
-    public void initialize(Layer layer) {
-    }
-
-    @Override
     public void draw(Movement movement) {
 
         Point p = movement.getNewPosition();

@@ -23,10 +23,6 @@ public class RB2_Brush extends Brush {
     }    
 
     @Override
-    public void initialize(Layer layer) {
-    }
-
-    @Override
     public void draw(Movement movement) {
         Graphics2D g = layer.getImage().createGraphics();
         g.setColor(Color.DARK_GRAY);

@@ -14,8 +14,8 @@ public class ColorParameter extends Parameter {
     
     private Color value;
 
-    public ColorParameter(String key, Color value) {
-        super(key);
+    public ColorParameter(String key, String label, Color value) {
+        super(key, label);
         this.value = value;
         this.type = Color.class;
     }

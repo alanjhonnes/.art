@@ -61,13 +61,58 @@ public class SilkBrush extends Brush {
 
     public SilkBrush() {
         this.name = "Silkbrush";
-    }
-
-    @Override
-    public void initialize(Layer layer) {
         particles = new ArrayList<>();
         shadowParticles = new ArrayList<>();
     }
+
+    @Override
+    public void initialize(int width, int height) {
+        particles.clear();
+        shadowParticles.clear();
+    }
+
+    @Override
+    public void stopDrawing(Movement movement) {
+        super.stopDrawing(movement); //To change body of generated methods, choose Tools | Templates.
+        if(movements.isEmpty()){
+            particles.clear();
+            shadowParticles.clear();
+        }
+    }
+    
+    
+
+    @Override
+    protected void draw() {
+        super.draw();
+        
+        Graphics2D g = layer.getImage().createGraphics();
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        
+        for (int i = 0; i < shadowParticles.size(); i++) {
+            SilkParticle particle = shadowParticles.get(i);
+            particle.getDistances().clear();
+            getDistances(particle, i, shadowParticles);
+            drawLines(particle, i, shadowParticles, g);
+            moveParticle(particle, i, shadowParticles);
+            if (particle.age > shadowLifespan) {
+                shadowParticles.remove(i);
+            }
+        }
+
+        for (int i = 0; i < particles.size(); i++) {
+            SilkParticle particle = particles.get(i);
+            particle.getDistances().clear();
+            getDistances(particle, i, particles);
+            drawLines(particle, i, particles, g);
+            moveParticle(particle, i, particles);
+            if (particle.age > lifespan) {
+                particles.remove(i);
+            }
+        }
+    }
+    
+    
 
     @Override
     public void draw(Movement movement) {
@@ -99,31 +144,6 @@ public class SilkBrush extends Brush {
                         shadowParticles);
             }
 
-        }
-
-        Graphics2D g = layer.getImage().createGraphics();
-        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-        for (int i = 0; i < particles.size(); i++) {
-            SilkParticle particle = particles.get(i);
-            particle.getDistances().clear();
-            getDistances(particle, i, particles);
-            drawLines(particle, i, particles, g);
-            moveParticle(particle, i, particles);
-            if (particle.age > lifespan) {
-                particles.remove(i);
-            }
-        }
-
-        for (int i = 0; i < shadowParticles.size(); i++) {
-            SilkParticle particle = shadowParticles.get(i);
-            particle.getDistances().clear();
-            getDistances(particle, i, shadowParticles);
-            drawLines(particle, i, shadowParticles, g);
-            moveParticle(particle, i, shadowParticles);
-            if (particle.age > shadowLifespan) {
-                shadowParticles.remove(i);
-            }
         }
 
     }
@@ -331,12 +351,22 @@ public class SilkBrush extends Brush {
             this.shadowScatter = (int) params.get("shadowScatter");
             this.shadowSpread = (int) params.get("shadowSpread");
             
-            this.red = (float) params.get("red");
-            this.green = (float) params.get("green");
-            this.blue = (float) params.get("blue");
-            
             this.useShadows = (boolean) params.get("useShadows");
-            this.useRandomColor = (boolean) params.get("useRandomColor");
+            
+            
+            if(params.get("useRandomColor") != null){
+                this.useRandomColor = (boolean) params.get("useRandomColor");
+            }
+            
+            if(params.get("red") != null){
+                this.red = (float) params.get("red");
+            }
+            if(params.get("green") != null){
+                this.green = (float) params.get("green");
+            }
+            if(params.get("blue") != null){
+                this.blue = (float) params.get("blue");
+            }
         }
 
     }
@@ -345,26 +375,26 @@ public class SilkBrush extends Brush {
     public List<Parameter> getParamTypes() {
         params.clear();
         
-        params.add(new IntParameter("maxDist",0, 500, maxDist));
-        params.add(new DoubleParameter("density", 0, 1, density));
-        params.add(new IntParameter("lifespan",0, 50, lifespan));
-        params.add(new IntParameter("scatter",0, 600, scatter));
-        params.add(new IntParameter("spread",0, 600, spread));
-        params.add(new FloatParameter("red",0, 1, red));
-        params.add(new FloatParameter("green",0, 1, green));
-        params.add(new FloatParameter("blue",0, 1, blue));
-        params.add(new FloatParameter("opacity",0, 1, opacity));
-        params.add(new IntParameter("shadowMaxDist",0, 500, shadowMaxDist));
-        params.add(new DoubleParameter("shadowDensity", 0, 1, shadowDensity));
-        params.add(new IntParameter("shadowLifespan",0, 50, shadowLifespan));
-        params.add(new IntParameter("shadowScatter",0, 600, shadowScatter));
-        params.add(new IntParameter("shadowSpread",0, 600, shadowSpread));
-        params.add(new FloatParameter("shadowOpacity",0, 1, shadowOpacity));
+        params.add(new IntParameter("maxDist","Distâcia máxima",0, 500, maxDist));
+        params.add(new DoubleParameter("density", "Densidade", 0, 1, density));
+        params.add(new IntParameter("lifespan", "Duração", 0, 50, lifespan));
+        params.add(new IntParameter("scatter", "Dispersão",0, 600, scatter));
+        params.add(new IntParameter("spread", "Propagação",0, 600, spread));
+        params.add(new FloatParameter("red", "Vermelha", 0, 1, red));
+        params.add(new FloatParameter("green", "Verde",0, 1, green));
+        params.add(new FloatParameter("blue", "Azul",0, 1, blue));
+        params.add(new FloatParameter("opacity", "Opacidade",0, 1, opacity));
+        params.add(new IntParameter("shadowMaxDist", "Distancia (sombra)",0, 500, shadowMaxDist));
+        params.add(new DoubleParameter("shadowDensity", "Densidade (sombra)", 0, 1, shadowDensity));
+        params.add(new IntParameter("shadowLifespan", "Duração (sombra)",0, 50, shadowLifespan));
+        params.add(new IntParameter("shadowScatter", "Dispersão (sombra)",0, 600, shadowScatter));
+        params.add(new IntParameter("shadowSpread", "Propagação (sombra)",0, 600, shadowSpread));
+        params.add(new FloatParameter("shadowOpacity", "Opacidade (sombra)",0, 1, shadowOpacity));
         
-        params.add(new BooleanParameter("useShadows", true));
-        params.add(new BooleanParameter("useRandomColor", false));
-        params.add(new BooleanParameter("fill", true));
-        params.add(new BooleanParameter("fillShadows", true));
+        params.add(new BooleanParameter("useShadows", "Usar sombras", useShadows));
+        params.add(new BooleanParameter("useRandomColor", "Cores aleatórias", useRandomColor));
+        params.add(new BooleanParameter("fill", "Preencher", fill));
+        params.add(new BooleanParameter("fillShadows", "Preencher sombras", fillShadows));
         
         return params;
     }

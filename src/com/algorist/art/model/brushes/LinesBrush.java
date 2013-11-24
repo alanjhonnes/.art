@@ -28,10 +28,6 @@ public class LinesBrush extends Brush {
     
 
     @Override
-    public void initialize(Layer layer) {
-    }
-
-    @Override
     public void draw(Movement movement) {
         Graphics2D g = (Graphics2D) layer.getImage().createGraphics();
         g.setColor(Color.BLACK);

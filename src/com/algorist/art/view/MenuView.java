@@ -41,12 +41,15 @@ public class MenuView extends AbstractView<JMenuBar> implements ActionListener {
     public final String SAVE_PRESET = "SavePreset";
     public final String NEW_PRESET = "NewPreset";
     public final String DELETE_PRESET = "DeletePreset";
-    public final String CLEAN_LAYER = "Limpar";
+    public final String CLEAN_LAYER = "cleanLayer";
+    public final String START_MOVEMENT = "startMovement";
+    public final String STOP_MOVEMENTS = "stopMovements";
     public ActionMap actionMap;
     public JMenu fileMenu;
     public JMenu layerMenu;
     public JMenu presetMenu;
     public JMenu actionsMenu;
+    public JMenu movementsMenu;
     public JMenuItem newDocumentItem;
     public JMenuItem closeDocumentItem;
     public JMenuItem openDocumentItem;
@@ -60,10 +63,11 @@ public class MenuView extends AbstractView<JMenuBar> implements ActionListener {
     public JMenuItem newPresetItem;
     public JMenuItem deletePresetItem;
     public JMenuItem undoItem;
-    public JMenuItem ccleanerLayerItem;
+    public JMenuItem cleanLayerItem;
+    public JMenuItem startMovementItem;
+    public JMenuItem stopMovementsItem;
     private MenuController controller;
     private Art model;
-    private BufferedImage image;
 
     public MenuView(AbstractFrame mainFrame, MenuController controller, Art artModel) {
         super(mainFrame);
@@ -81,6 +85,7 @@ public class MenuView extends AbstractView<JMenuBar> implements ActionListener {
         layerMenu = new JMenu("Camadas");
         presetMenu = new JMenu("Presets");
         actionsMenu = new JMenu("Ações");
+        movementsMenu = new JMenu("Movimentos");
 
         newDocumentItem = new JMenuItem("Novo");
         newDocumentItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
@@ -130,11 +135,11 @@ public class MenuView extends AbstractView<JMenuBar> implements ActionListener {
         duplicateLayerItem.setActionCommand(DUPLICATE_LAYER);
         duplicateLayerItem.addActionListener(this);
 
-        ccleanerLayerItem = new JMenuItem("Limpar camada");
-        ccleanerLayerItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, ActionEvent.CTRL_MASK | ActionEvent.SHIFT_MASK));
-        ccleanerLayerItem.setMnemonic(KeyEvent.VK_DELETE);
-        ccleanerLayerItem.setActionCommand(CLEAN_LAYER);
-        ccleanerLayerItem.addActionListener(this);
+        cleanLayerItem = new JMenuItem("Limpar camada");
+        cleanLayerItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, ActionEvent.CTRL_MASK | ActionEvent.SHIFT_MASK));
+        cleanLayerItem.setMnemonic(KeyEvent.VK_DELETE);
+        cleanLayerItem.setActionCommand(CLEAN_LAYER);
+        cleanLayerItem.addActionListener(this);
 
         deleteLayerItem = new JMenuItem("Deletar camada");
         deleteLayerItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK | ActionEvent.SHIFT_MASK));
@@ -165,6 +170,18 @@ public class MenuView extends AbstractView<JMenuBar> implements ActionListener {
         undoItem.setMnemonic(KeyEvent.VK_Z);
         undoItem.setActionCommand(UNDO);
         undoItem.addActionListener(this);
+        
+        startMovementItem = new JMenuItem("Adicionar movimento");
+        startMovementItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M, ActionEvent.CTRL_MASK));
+        startMovementItem.setMnemonic(KeyEvent.VK_Z);
+        startMovementItem.setActionCommand(START_MOVEMENT);
+        startMovementItem.addActionListener(this);
+        
+        stopMovementsItem = new JMenuItem("Parar movimentos");
+        stopMovementsItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M, ActionEvent.CTRL_MASK | ActionEvent.SHIFT_MASK));
+        stopMovementsItem.setMnemonic(KeyEvent.VK_M);
+        stopMovementsItem.setActionCommand(STOP_MOVEMENTS);
+        stopMovementsItem.addActionListener(this);
 
         fileMenu.add(newDocumentItem);
         fileMenu.add(closeDocumentItem);
@@ -176,19 +193,24 @@ public class MenuView extends AbstractView<JMenuBar> implements ActionListener {
 //        layerMenu.add(newLayerItem);
 //        layerMenu.add(duplicateLayerItem);
 //        layerMenu.add(deleteLayerItem);
-        layerMenu.add(ccleanerLayerItem);
+        layerMenu.add(cleanLayerItem);
 
         presetMenu.add(savePresetItem);
         presetMenu.add(newPresetItem);
         presetMenu.add(deletePresetItem);
 
         actionsMenu.add(undoItem);
+        
+        movementsMenu.add(startMovementItem);
+        movementsMenu.add(stopMovementsItem);
+        
 
         menuBar.add(fileMenu);
         menuBar.add(layerMenu);
         //menuBar.add(presetMenu);
         //menuBar.add(actionsMenu);
-
+        menuBar.add(movementsMenu);
+        
         return menuBar;
     }
 
@@ -242,7 +264,6 @@ public class MenuView extends AbstractView<JMenuBar> implements ActionListener {
                 frame.setVisible(true);
                 break;
             }
-
             case NEW_LAYER: {
                 
                 controller.addLayer();
@@ -251,6 +272,14 @@ public class MenuView extends AbstractView<JMenuBar> implements ActionListener {
 
             case CLEAN_LAYER: {
                 controller.cleanLayer();
+                break;
+            }
+            case START_MOVEMENT: {
+                controller.startMovement();
+                break;
+            }
+            case STOP_MOVEMENTS: {
+                controller.stopMovements();
                 break;
             }
         }

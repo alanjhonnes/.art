@@ -35,10 +35,6 @@ public class SprayHardcoreBrush extends Brush {
     }
 
     @Override
-    public void initialize(Layer layer) {
-    }
-
-    @Override
     public void draw(Movement movement) {
         int x = 0, y = 0, tempx, tempy;
         x = movement.getNewPosition().x;
@@ -73,11 +69,11 @@ public class SprayHardcoreBrush extends Brush {
     @Override
     public List<Parameter> getParamTypes() {
         params.clear();
-        params.add(new IntParameter("radius", 1, 100, radius));
-        params.add(new FloatParameter("red", 0, 1, red));
-        params.add(new FloatParameter("green", 0, 1, green));
-        params.add(new FloatParameter("blue", 0, 1, blue));
-        params.add(new FloatParameter("opacity", 0, 1, opacity));
+        params.add(new IntParameter("radius", "Raio da circunferência", 1, 100, radius));
+        params.add(new FloatParameter("red", "Porcentagem cor vermelha", 0, 1, red));
+        params.add(new FloatParameter("green", "Porcentagem cor verde", 0, 1, green));
+        params.add(new FloatParameter("blue", "Porcentagem cor azul", 0, 1, blue));
+        params.add(new FloatParameter("opacity", "Opacidade", 0, 1, opacity));
         return params;
     }
     

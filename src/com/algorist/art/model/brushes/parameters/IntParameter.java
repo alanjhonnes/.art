@@ -14,8 +14,8 @@ public class IntParameter extends Parameter {
     private int max;
     private int value;
 
-    public IntParameter(String key, int min, int max, int value) {
-        super(key);
+    public IntParameter(String key, String label, int min, int max, int value) {
+        super(key, label);
         this.min = min;
         this.max = max;
         this.value = value;

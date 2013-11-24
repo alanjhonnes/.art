@@ -33,9 +33,6 @@ public class RandomColorSilkBrushPreset extends Preset {
         params.put("shadowLifespan", 4);
         params.put("useShadows", true);
         params.put("useRandomColor", true);
-        params.put("red", 1f);
-        params.put("green", 1f);
-        params.put("blue", 1f);
         
     }
 }

@@ -69,7 +69,8 @@ public class ParameterEditorView extends AbstractView<JScrollPane> {
             if(parameter.getType() == int.class){
                 IntParameter intParameter = (IntParameter) parameter;
                 IntSlider intSlider = new IntSlider(intParameter.getKey(), intParameter.getMin(), intParameter.getMax(), intParameter.getValue());
-                JLabel label = new JLabel(parameter.getKey());
+                JLabel label = new JLabel(parameter.getLabel());
+                label.setSize(80, 14);
                 components.add(label);
                 panel.add(label);
                 components.add(intSlider);
@@ -80,7 +81,8 @@ public class ParameterEditorView extends AbstractView<JScrollPane> {
             else if(parameter.getType() == float.class){
                 FloatParameter floatParameter = (FloatParameter) parameter;
                 FloatSlider floatSlider = new FloatSlider(floatParameter.getKey(), (int) (floatParameter.getMin() * 100), (int) (floatParameter.getMax() * 100), (int) (floatParameter.getValue()* 100), 100);
-                JLabel label = new JLabel(parameter.getKey());
+                JLabel label = new JLabel(parameter.getLabel());
+                label.setSize(80, 14);
                 components.add(label);
                 panel.add(label);
                 components.add(floatSlider);
@@ -91,7 +93,8 @@ public class ParameterEditorView extends AbstractView<JScrollPane> {
             else if(parameter.getType() == double.class){
                 DoubleParameter doubleParameter = (DoubleParameter) parameter;
                 DoubleSlider doubleSlider = new DoubleSlider(doubleParameter.getKey(), (int) (doubleParameter.getMin() * 100), (int) (doubleParameter.getMax() * 100), (int) (doubleParameter.getValue() * 100), 100 );
-                JLabel label = new JLabel(parameter.getKey());
+                JLabel label = new JLabel(parameter.getLabel());
+                label.setSize(80, 14);
                 components.add(label);
                 panel.add(label);
                 components.add(doubleSlider);
@@ -100,7 +103,7 @@ public class ParameterEditorView extends AbstractView<JScrollPane> {
             }
             else if(parameter.getType() == boolean.class){
                 BooleanParameter booleanParameter = (BooleanParameter) parameter;
-                BooleanCheckbox booleanCheckbox = new BooleanCheckbox(booleanParameter.getKey(), booleanParameter.getValue(), booleanParameter.getKey());
+                BooleanCheckbox booleanCheckbox = new BooleanCheckbox(booleanParameter.getKey(), booleanParameter.getValue(), booleanParameter.getLabel());
                 components.add(booleanCheckbox);
                 panel.add(booleanCheckbox);
                 booleanCheckbox.addChangeListener(booleanChangeListener);

@@ -15,8 +15,8 @@ public class FloatParameter extends Parameter {
     public float max;
     private float value;
 
-    public FloatParameter(String key, float min, float max, float value) {
-        super(key);
+    public FloatParameter(String key, String label, float min, float max, float value) {
+        super(key, label);
         this.min = min;
         this.max = max;
         this.value = value;

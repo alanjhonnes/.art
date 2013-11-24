@@ -59,15 +59,12 @@ public class CirclesBrush extends Brush {
         g.fillOval(movement.getNewPosition().x - thickness /2, movement.getNewPosition().y - thickness / 2, thickness, thickness);
     }
 
-    @Override
-    public void initialize(Layer layer) {
-    }
 
     @Override
     public List<Parameter> getParamTypes() {
         params.clear();
-        params.add(new IntParameter("thickness", 1, 100, thickness));
-        params.add(new FloatParameter("opacity", 0, 1, opacity));
+        params.add(new IntParameter("thickness", "Grossura", 1, 100, thickness));
+        params.add(new FloatParameter("opacity", "Opacidade", 0, 1, opacity));
         return params;
     }
     

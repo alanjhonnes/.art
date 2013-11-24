@@ -80,14 +80,14 @@ public class DocumentView extends AbstractView<JLayeredPane> implements Componen
             @Override
             public void mousePressed(MouseEvent e) {
                 if (e.getButton() == MouseEvent.BUTTON1) {
-                    controller.movementStarted(e.getPoint());
+                    controller.mouseMovementStarted(e.getPoint());
                 }
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
                 if (e.getButton() == MouseEvent.BUTTON1) {
-                    controller.movementEnded();
+                    controller.mouseMovementEnded();
                 }
             }
         };
@@ -95,7 +95,7 @@ public class DocumentView extends AbstractView<JLayeredPane> implements Componen
         mouseMotionListener = new MouseMotionListener() {
             @Override
             public void mouseDragged(MouseEvent e) {
-                controller.movementUpdated(e.getPoint());
+                controller.mouseMovementUpdated(e.getPoint());
             }
 
             @Override
@@ -138,24 +138,18 @@ public class DocumentView extends AbstractView<JLayeredPane> implements Componen
         }
     }
     
-    
-    
-    
-     public void componentHidden(ComponentEvent e) {
-        System.out.println(e.getComponent().getClass().getName() + " --- Hidden");
-    }
+    @Override
+     public void componentHidden(ComponentEvent e) {}
 
-    public void componentMoved(ComponentEvent e) {
-        System.out.println(e.getComponent().getClass().getName() + " --- Moved");
-    }
+    @Override
+    public void componentMoved(ComponentEvent e) {}
 
+    @Override
     public void componentResized(ComponentEvent e) {
         documentModel.setSize(contentPane.getWidth(), contentPane.getHeight());
         contentPane.setPreferredSize(new Dimension(contentPane.getWidth(), contentPane.getHeight()));
     }
 
-    public void componentShown(ComponentEvent e) {
-        System.out.println(e.getComponent().getClass().getName() + " --- Shown");
-
-    }
+    @Override
+    public void componentShown(ComponentEvent e) {}
 }

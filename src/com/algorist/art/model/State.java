@@ -11,6 +11,10 @@ import com.alanjhonnes.event.EventDispatcher;
  * @author alanjhonnes
  */
 public class State extends EventDispatcher{
+
+    public void dispose() {
+        
+    }
     
     
     

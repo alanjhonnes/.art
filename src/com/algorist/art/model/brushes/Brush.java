@@ -12,13 +12,14 @@ import com.algorist.art.model.Movement;
 import com.algorist.art.model.brushes.parameters.Parameter;
 import com.algorist.art.model.brushes.presets.Preset;
 import java.awt.Color;
-import java.awt.image.BufferedImage;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Timer;
 
 /**
  *
@@ -30,17 +31,40 @@ public abstract class Brush {
     protected List<Preset> presets;
     protected Layer layer;
     protected CallbackFunction drawCallback;
+    protected CallbackFunction movEndedCallback;
     protected List<Parameter> params;
+    
+    protected List<Movement> movements;
+    
+    protected Timer timer;
+    protected int interval = 16;
+    protected ActionListener timerListener = new ActionListener() {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            draw();
+        }
+    };
 
     public Brush() {
         presets = new ArrayList<>();
         params = new ArrayList<>();
+        movements = new ArrayList<>();
+        timer = new Timer(interval, timerListener);
+        timer.setRepeats(true);
         drawCallback = new CallbackFunction() {
             @Override
             public void execute(Event e) {
                 MovementEvent me = (MovementEvent) e;
                 Movement movement = (Movement) e.getSource();
                 draw(movement);
+            }
+        };
+        movEndedCallback = new CallbackFunction() {
+            @Override
+            public void execute(Event e) {
+                MovementEvent me = (MovementEvent) e;
+                stopDrawing((Movement) me.getSource());
             }
         };
         //defineParameters();
@@ -51,18 +75,35 @@ public abstract class Brush {
         this.presets = presets;
     }
 
-    abstract public void initialize(Layer layer);
+    public void initialize(int width, int height){
+        
+    }
 
     public void startDrawing(Movement movement, Layer layer) {
         this.layer = layer;
-        movement.addEventListener(MovementEvent.TIMER_TICK, drawCallback);
+        movements.add(movement);
+        timer.start();
+        movement.addEventListener(MovementEvent.ENDED, movEndedCallback);
+        //movement.addEventListener(MovementEvent.TIMER_TICK, drawCallback);
         //movement.addEventListener(MovementEvent.POSITION_CHANGED, drawCallback);
     }
 
     public void stopDrawing(Movement movement) {
-        layer = null;
-        movement.removeEventListener(MovementEvent.TIMER_TICK, drawCallback);
+        //layer = null;
+        movements.remove(movement);
+        if(movements.isEmpty() && timer.isRunning()){
+            timer.stop();
+        }
+        movement.removeEventListener(MovementEvent.ENDED, movEndedCallback);
+        //movement.removeEventListener(MovementEvent.TIMER_TICK, drawCallback);
         //movement.removeEventListener(MovementEvent.POSITION_CHANGED, drawCallback);
+    }
+    
+    protected void draw(){
+        for (int i = 0; i < movements.size(); i++) {
+            Movement movement = movements.get(i);
+            draw(movement);
+        }
     }
 
     abstract public void draw(Movement movement);

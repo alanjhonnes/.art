@@ -10,8 +10,8 @@ package com.algorist.art.model.brushes.parameters;
  */
 public class GradientParameter extends Parameter {
 
-    public GradientParameter(String key) {
-        super(key);
+    public GradientParameter(String key, String label) {
+        super(key, label);
     }
     
 }

@@ -120,4 +120,11 @@ public class Layer extends EventDispatcher implements Serializable {
         g.clearRect(0, 0, image.getWidth(), image.getHeight());
         dispatchEvent(new LayerEvent(this, LayerEvent.IMAGE_CHANGED));
     }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        image.flush();
+        image = null;
+    }
 }

@@ -7,9 +7,6 @@ package com.algorist.art.model;
 import com.alanjhonnes.event.EventDispatcher;
 import com.algorist.art.event.MovementEvent;
 import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.Timer;
 
 /**
  *
@@ -28,29 +25,13 @@ public class Movement extends EventDispatcher {
     private double angle;
     private long startTime;
     private long duration;
-    private Timer timer;
+    public double rotation;
 
     public Movement(Point startPosition) {
         this.startPosition = startPosition;
         this.oldPosition = new Point(startPosition);
         this.newPosition = new Point(startPosition);
         startTime = System.currentTimeMillis();
-        
-        
-        timer = new Timer(16, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispatchTimerEvent();
-            }
-        });
-        
-        
-        
-        timer.start();
-    }
-
-    private void dispatchTimerEvent() {
-        dispatchEvent(new MovementEvent(this, MovementEvent.TIMER_TICK));
     }
 
     public void movePosition(Point newPosition) {
@@ -70,12 +51,23 @@ public class Movement extends EventDispatcher {
     }
     
     public void stop(){
-        timer.stop();
+        dispatchEvent(new MovementEvent(this, MovementEvent.ENDED));
+        dispose();
     }
 
     public long getDuration() {
         return System.currentTimeMillis() - startTime;
     }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        oldPosition = null;
+        newPosition = null;
+        startPosition = null;
+    }
+    
+    
 
     public Point getStartPosition() {
         return startPosition;

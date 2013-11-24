@@ -12,8 +12,8 @@ public class BooleanParameter extends Parameter {
     
     private boolean value;
 
-    public BooleanParameter(String key, boolean value) {
-        super(key);
+    public BooleanParameter(String key, String label, boolean value) {
+        super(key, label);
         this.value = value;
         this.type = boolean.class;
     }
