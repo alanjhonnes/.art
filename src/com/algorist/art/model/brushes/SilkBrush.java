@@ -380,7 +380,7 @@ public class SilkBrush extends Brush {
         params.add(new IntParameter("lifespan", "Duração", 0, 50, lifespan));
         params.add(new IntParameter("scatter", "Dispersão",0, 600, scatter));
         params.add(new IntParameter("spread", "Propagação",0, 600, spread));
-        params.add(new FloatParameter("red", "Vermelha", 0, 1, red));
+        params.add(new FloatParameter("red", "Vermelho", 0, 1, red));
         params.add(new FloatParameter("green", "Verde",0, 1, green));
         params.add(new FloatParameter("blue", "Azul",0, 1, blue));
         params.add(new FloatParameter("opacity", "Opacidade",0, 1, opacity));

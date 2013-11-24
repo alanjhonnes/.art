@@ -10,8 +10,8 @@ import com.algorist.art.model.brushes.parameters.FloatParameter;
 import com.algorist.art.model.brushes.parameters.IntParameter;
 import com.algorist.art.model.brushes.parameters.Parameter;
 import com.algorist.art.model.brushes.presets.Preset;
-import com.algorist.art.model.brushes.presets.SmallCircleBrushPreset;
-import com.algorist.art.model.brushes.presets.ThickCircleBrushPreset;
+import com.algorist.art.model.brushes.presets.circle.SmallCircleBrushPreset;
+import com.algorist.art.model.brushes.presets.circle.ThickCircleBrushPreset;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -47,7 +47,6 @@ public class CirclesBrush extends Brush {
         if(preset.getBrushClass() == this.getClass()){
             Map<String, Object> params = preset.getParams();
             this.thickness = (int) params.get("thickness");
-            this.opacity = (float) params.get("opacity");
         }
     }
 
@@ -64,6 +63,9 @@ public class CirclesBrush extends Brush {
     public List<Parameter> getParamTypes() {
         params.clear();
         params.add(new IntParameter("thickness", "Grossura", 1, 100, thickness));
+        params.add(new FloatParameter("red", "Vermelho", 0, 1, red));
+        params.add(new FloatParameter("green", "Verde", 0, 1, green));
+        params.add(new FloatParameter("blue", "Azul", 0, 1, blue));
         params.add(new FloatParameter("opacity", "Opacidade", 0, 1, opacity));
         return params;
     }
