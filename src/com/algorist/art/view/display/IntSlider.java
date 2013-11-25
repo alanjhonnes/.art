@@ -12,7 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JSlider;
 
 /**
- *
+ * Slider that stores the field name of the parameter it represents.
+ * Base class for DoubleSlider and FloatSlider.
  * @author alan.jbssa
  */
 public class IntSlider extends JSlider implements IParameterComponent {

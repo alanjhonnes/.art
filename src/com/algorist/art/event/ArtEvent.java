@@ -11,7 +11,9 @@ import com.algorist.art.model.Movement;
 import com.algorist.art.model.brushes.Brush;
 
 /**
- *
+ * Represents an event dispatched by the Art model.
+ * Can also hold a document, brush or movement object depending on the type of 
+ * event dispatched.
  * @author user
  */
 public class ArtEvent extends Event {

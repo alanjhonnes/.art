@@ -7,7 +7,9 @@ package com.alanjhonnes.event;
 import java.util.Objects;
 
 /**
- *
+ * Associative class to store the listener's event type and callback functions 
+ * to execute.
+ * Also implements the Comparable interface to order the listeners by priority.
  * @author user
  */
 public class EventData implements Comparable<EventData> {

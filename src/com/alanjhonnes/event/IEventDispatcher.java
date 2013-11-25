@@ -5,7 +5,8 @@
 package com.alanjhonnes.event;
 
 /**
- *
+ * Interface to be used by classes that need to use the event library but 
+ * already have another super class (being unable to extend EventDispatcher).
  * @author user
  */
 public interface IEventDispatcher {

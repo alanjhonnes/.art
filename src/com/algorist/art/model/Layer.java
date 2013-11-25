@@ -19,7 +19,7 @@ import java.io.Serializable;
 import javax.imageio.ImageIO;
 
 /**
- *
+ * Represents a drawing layer in a document.
  * @author alan.jbssa
  */
 public class Layer extends EventDispatcher implements Serializable {

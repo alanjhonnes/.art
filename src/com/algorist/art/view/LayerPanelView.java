@@ -5,7 +5,6 @@
 package com.algorist.art.view;
 
 import com.algorist.art.model.Layer;
-import javax.swing.GroupLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;

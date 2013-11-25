@@ -5,7 +5,8 @@
 package com.algorist.art.model.brushes.parameters;
 
 /**
- *
+ * Base class to represent a brush's parameter.
+ * Holds the field name, value and Class type of the parameter.
  * @author user
  */
 public abstract class Parameter {

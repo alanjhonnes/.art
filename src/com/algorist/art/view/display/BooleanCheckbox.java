@@ -7,7 +7,8 @@ package com.algorist.art.view.display;
 import javax.swing.JCheckBox;
 
 /**
- *
+ * A regular checkbox that stores the field name of the parameter it is 
+ * representing.
  * @author alan.jbssa
  */
 public class BooleanCheckbox extends JCheckBox implements IParameterComponent {

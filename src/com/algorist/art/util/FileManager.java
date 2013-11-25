@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.algorist.art;
+package com.algorist.art.util;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -13,7 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Utility class to save files.
  * @author user
  */
 public class FileManager {

@@ -5,7 +5,7 @@
 package com.alanjhonnes.particles;
 
 /**
- *
+ * Simple particle implementing age and velocity.
  * @author alan.jbssa
  */
 public class SimpleParticle extends Particle {

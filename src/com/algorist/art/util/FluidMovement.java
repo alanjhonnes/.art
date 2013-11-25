@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
 /**
- *
+ * Utility class to randomly move a Movement object around the specified area.
  * @author user
  */
 public class FluidMovement {

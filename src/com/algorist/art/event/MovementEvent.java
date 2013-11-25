@@ -8,7 +8,7 @@ import com.alanjhonnes.event.Event;
 import com.alanjhonnes.event.IEventDispatcher;
 
 /**
- *
+ * Represents an event dispatched by a Movement.
  * @author alanjhonnes
  */
 public class MovementEvent extends Event {

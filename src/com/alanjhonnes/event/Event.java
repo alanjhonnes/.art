@@ -5,7 +5,8 @@
 package com.alanjhonnes.event;
 
 /**
- *
+ * Represents an event dispatched by an IEventDispatcher.
+ * The Event contains both the type of event and the object that dispatched it.
  * @author user
  */
 public class Event {

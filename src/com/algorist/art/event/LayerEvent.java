@@ -8,7 +8,7 @@ import com.alanjhonnes.event.Event;
 import com.alanjhonnes.event.IEventDispatcher;
 
 /**
- *
+ * Represents an event dispatched by a Layer.
  * @author user
  */
 public class LayerEvent extends Event {

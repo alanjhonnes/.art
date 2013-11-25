@@ -4,16 +4,14 @@
  */
 package com.algorist.art.model.brushes.presets;
 
-import com.alanjhonnes.event.EventDispatcher;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Observable;
 
 /**
- *
+ * Represent a brush preset, containing a map of field names and parameters.
  * @author alan.jbssa
  */
-public class Preset extends EventDispatcher {
+public class Preset {
     protected String name;
     protected Class brushClass;
     protected Map<String, Object> params;

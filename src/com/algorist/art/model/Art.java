@@ -48,22 +48,40 @@ public class Art extends EventDispatcher {
         setSelectedBrush(brushes.get(0));
     }
     
+    /**
+     * Adds a document to the list of documents and dispatches a DOCUMENT_ADDED
+     * event.
+     * @param document 
+     */
     public void addDocument(Document document){
         documents.add(document);
         dispatchEvent(new ArtEvent(document, ArtEvent.DOCUMENT_ADDED, document));
     }
     
+    /**
+    * Removes a document to the list of documents and dispatches a 
+    * DOCUMENT_REMOVED event.
+    * @param document 
+    */
     public void removeDocument(Document document){
         documents.remove(document);
         dispatchEvent(new ArtEvent(document, ArtEvent.DOCUMENT_REMOVED, document));
         document.dispose();
     }
     
+    /**
+     * Adds a new movement to the list and dispatches a MOVEMENT_STARTED event
+     * @param movement 
+     */
     public void startMovement(Movement movement){
         movements.add(movement);
         dispatchEvent(new ArtEvent(this, ArtEvent.MOVEMENT_STARTED, movement));
     }
     
+    /**
+     * Removes and stops a movement, dispatching a MOVEMENT_ENDED event.
+     * @param movement 
+     */
     public void endMovement(Movement movement){
         movements.remove(movement);
         dispatchEvent(new ArtEvent(this, ArtEvent.MOVEMENT_ENDED, movement));
@@ -75,6 +93,10 @@ public class Art extends EventDispatcher {
         return selectedBrush;
     }
 
+    /**
+     * Sets the selected brush and dispatches a BRUSH_CHANGED event.
+     * @param selectedBrush 
+     */
     public void setSelectedBrush(Brush selectedBrush) {
         this.selectedBrush = selectedBrush;
         dispatchEvent(new ArtEvent(this, ArtEvent.BRUSH_CHANGED, selectedBrush));
@@ -84,6 +106,11 @@ public class Art extends EventDispatcher {
         return currentDocument;
     }
 
+    /**
+     * Sets the current document, initialize the selected brush with the new 
+     * dimensions and dispatches a DOCUMENT_CHANGED event.
+     * @param currentDocument 
+     */
     public void setCurrentDocument(Document currentDocument) {
         this.currentDocument = currentDocument;
         selectedBrush.initialize(currentDocument.getWidth(), currentDocument.getHeight());

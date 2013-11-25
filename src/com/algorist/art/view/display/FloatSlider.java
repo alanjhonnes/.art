@@ -5,7 +5,9 @@
 package com.algorist.art.view.display;
 
 /**
- *
+ * FloatSlider allows a float parameter to be represented by whole numbers and 
+ * then scaled onto its float version. ie: 0-100 with a scale of 100 will 
+ * represent a float value of 0-1
  * @author alan.jbssa
  */
 public class FloatSlider extends IntSlider {

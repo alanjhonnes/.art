@@ -9,7 +9,12 @@ import com.algorist.art.event.MovementEvent;
 import java.awt.Point;
 
 /**
- *
+ * Represents a movement used by the brushes to draw. It takes a position
+ * and moves to another position, calculation its speed, angle and velocity 
+ * automatically.
+ * It is meant to abstract the mouse and touch behavior, while also allowing
+ * movements to be created and manipulated by different algorithms without the 
+ * need of user input to draw.
  * @author alanjhonnes
  */
 public class Movement extends EventDispatcher {
@@ -24,7 +29,6 @@ public class Movement extends EventDispatcher {
     private double speed;
     private double angle;
     private long startTime;
-    private long duration;
     public double rotation;
 
     public Movement(Point startPosition) {
@@ -34,6 +38,11 @@ public class Movement extends EventDispatcher {
         startTime = System.currentTimeMillis();
     }
 
+    /**
+     * Moves the movement to a new position, calculation its speed, angle and velocity 
+ * automatically in relation to its previous position.
+     * @param newPosition The position the movement will move to.
+     */
     public void movePosition(Point newPosition) {
         this.oldPosition = this.newPosition;
         this.newPosition = newPosition;
@@ -50,6 +59,9 @@ public class Movement extends EventDispatcher {
         dispatchEvent(new MovementEvent(this, MovementEvent.POSITION_CHANGED));
     }
     
+    /**
+     * Stops and disposes of the movement.
+     */
     public void stop(){
         dispatchEvent(new MovementEvent(this, MovementEvent.ENDED));
         dispose();

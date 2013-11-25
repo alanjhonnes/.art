@@ -22,7 +22,10 @@ import java.util.logging.Logger;
 import javax.swing.Timer;
 
 /**
- *
+ * Base class for all brushes. Contains most of the implementation of a brush,
+ * subclasses are only required to implement the draw method at minimun.
+ * Stores the list of presets and the list of active movements to draw.
+ * Creates a 60FPS draw timer if active movements are present.
  * @author alan.jbssa
  */
 public abstract class Brush {
@@ -36,16 +39,16 @@ public abstract class Brush {
     
     protected List<Movement> movements;
     
+    //Timer and interval for a 60FPS loop.
     protected Timer timer;
     protected int interval = 16;
     protected ActionListener timerListener = new ActionListener() {
-
         @Override
         public void actionPerformed(ActionEvent e) {
             draw();
         }
     };
-
+    
     public Brush() {
         presets = new ArrayList<>();
         params = new ArrayList<>();
@@ -71,14 +74,21 @@ public abstract class Brush {
         loadDefaultPresets();
     }
 
-    public Brush(List<Preset> presets) {
-        this.presets = presets;
-    }
+    /**
+     * Overridable method that is called whenever the brush is selected, if it
+     * needs to perform additional operations based on the size of the document.
+     * @param width
+     * @param height 
+     */
+    public void initialize(int width, int height){}
 
-    public void initialize(int width, int height){
-        
-    }
-
+    /**
+     * Method to start drawing a movement. 
+     * Might need refactoring to allow drawing on different layers at the 
+     * same time.
+     * @param movement
+     * @param layer 
+     */
     public void startDrawing(Movement movement, Layer layer) {
         this.layer = layer;
         movements.add(movement);
@@ -88,6 +98,12 @@ public abstract class Brush {
         //movement.addEventListener(MovementEvent.POSITION_CHANGED, drawCallback);
     }
 
+    /**
+     * Stops drawing the particular movement, removing it from the list of 
+     * active movements and potentially stopping the draw loop if left with no 
+     * active movements.
+     * @param movement 
+     */
     public void stopDrawing(Movement movement) {
         //layer = null;
         movements.remove(movement);
@@ -99,6 +115,11 @@ public abstract class Brush {
         //movement.removeEventListener(MovementEvent.POSITION_CHANGED, drawCallback);
     }
     
+    /**
+     * Skeleton method to draw all active movements. May be overriden to
+     * implement more complex algorithms that are not related to 
+     * individual movements.
+     */
     protected void draw(){
         for (int i = 0; i < movements.size(); i++) {
             Movement movement = movements.get(i);
@@ -106,17 +127,33 @@ public abstract class Brush {
         }
     }
 
+    /**
+     * Main brush method to draw a movement.
+     * @param movement 
+     */
     abstract public void draw(Movement movement);
 
-    public abstract void loadDefaultPresets();
+    /**
+     * Overridable Method to populate the list of presets.
+     */
+    public void loadDefaultPresets(){};
 
+    /**
+     * Overridable method to load a brush preset. Preset must be verified like
+     * below to make sure the loaded preset is of the same brush.
+     * @param preset 
+     */
     public void loadPreset(Preset preset) {
         if (preset.getBrushClass() == this.getClass()) {
         } else {
             System.err.println("Error loading preset. Preset brushClass is diferent from brush class.");
         }
     }
-
+    
+    /**
+     * Overridable method to return the list of parameters the brush accepts.
+     * @return 
+     */
     public List<Parameter> getParamTypes() {
         return params;
     }
@@ -142,6 +179,12 @@ public abstract class Brush {
         return name;
     }
 
+    /**
+     * Method used to set the value of a public field of the brush 
+     * using reflection.
+     * @param key Field name
+     * @param value int value
+     */
     public void setField(String key, int value) {
         try {
             Field f = this.getClass().getDeclaredField(key);
@@ -150,7 +193,13 @@ public abstract class Brush {
             Logger.getLogger(Brush.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    /**
+     * Method used to set the value of a public field of the brush 
+     * using reflection.
+     * @param key Field name
+     * @param value float value
+     */
     public void setField(String key, float value) {
         try {
             Field f = this.getClass().getDeclaredField(key);
@@ -159,7 +208,13 @@ public abstract class Brush {
             Logger.getLogger(Brush.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    /**
+     * Method used to set the value of a public field of the brush 
+     * using reflection.
+     * @param key Field name
+     * @param value double value
+     */
     public void setField(String key, double value) {
         try {
             Field f = this.getClass().getDeclaredField(key);
@@ -169,6 +224,12 @@ public abstract class Brush {
         }
     }
     
+    /**
+     * Method used to set the value of a public field of the brush 
+     * using reflection.
+     * @param key Field name
+     * @param value boolean value
+     */
     public void setField(String key, boolean value) {
         try {
             Field f = this.getClass().getDeclaredField(key);
@@ -177,7 +238,13 @@ public abstract class Brush {
             Logger.getLogger(Brush.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    /**
+     * Method used to set the value of a public field of the brush 
+     * using reflection.
+     * @param key Field name
+     * @param value Color object
+     */
     public void setField(String key, Color value) {
         try {
             Field f = this.getClass().getDeclaredField(key);
@@ -187,6 +254,11 @@ public abstract class Brush {
         }
     }
     
+    /**
+     * Method used to get the value of a public field of the brush 
+     * using reflection.
+     * @param key Field name
+     */
     public Object getField(String key){
         try {
             Field f = this.getClass().getDeclaredField(key);

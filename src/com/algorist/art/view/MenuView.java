@@ -10,7 +10,6 @@ import com.algorist.art.model.Art;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
 import javax.swing.ActionMap;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;

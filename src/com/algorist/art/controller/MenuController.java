@@ -4,7 +4,7 @@
  */
 package com.algorist.art.controller;
 
-import com.algorist.art.FileManager;
+import com.algorist.art.util.FileManager;
 import com.algorist.art.model.Art;
 import com.algorist.art.model.Document;
 import com.algorist.art.model.Movement;

@@ -8,7 +8,8 @@ import com.alanjhonnes.event.EventDispatcher;
 import java.util.List;
 
 /**
- *
+ * Will represent the history of states of a particular document, allowing the 
+ * user to undo and/or redo his modifications.
  * @author alanjhonnes
  */
 public class History extends EventDispatcher {

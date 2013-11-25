@@ -7,11 +7,12 @@ package com.algorist.art.model;
 import com.alanjhonnes.event.EventDispatcher;
 
 /**
- *
+ * Will represent a document state that can be restored.
  * @author alanjhonnes
  */
 public class State extends EventDispatcher{
 
+    @Override
     public void dispose() {
         
     }

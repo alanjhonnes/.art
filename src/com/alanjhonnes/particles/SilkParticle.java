@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Particle used by the SilkBrush class.
  * @author user
  */
 public class SilkParticle extends SimpleParticle {

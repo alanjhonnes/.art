@@ -5,7 +5,8 @@
 package com.alanjhonnes.event;
 
 /**
- *
+ * Callback function to be executed whenever an EventListener receives the 
+ * respective event.
  * @author user
  */
 public interface CallbackFunction {

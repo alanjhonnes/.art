@@ -44,6 +44,7 @@ public class SilkBrush extends Brush {
     public double bumpmapEffect = .4;
     public int scatter = 0;
     public int lifespan = 10;
+    public double angleOffset = 0;
     public boolean fill = true;
     //shadow
     public int shadowMaxDist = 120;
@@ -52,12 +53,16 @@ public class SilkBrush extends Brush {
     public int shadowSpread = 300;
     public int shadowScatter = 0;
     public int shadowLifespan = 4;
-    public boolean useRandomColor = false;
-    public boolean useShadows = false;
+    public double shadowAngleOffset = 0;
+    
     public float red = 1f;
     public float green = 1f;
     public float blue = 1f;
+    
+    public boolean useRandomColor = false;
+    public boolean useShadows = false;
     public boolean fillShadows = true;
+    public boolean useRandomAngleOffset = false;
 
     public SilkBrush() {
         this.name = "Silkbrush";
@@ -85,27 +90,29 @@ public class SilkBrush extends Brush {
     @Override
     protected void draw() {
         super.draw();
-        
+        //turn on anti-aliasing
         Graphics2D g = layer.getImage().createGraphics();
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         
+        //render shadow particles
         for (int i = 0; i < shadowParticles.size(); i++) {
             SilkParticle particle = shadowParticles.get(i);
             particle.getDistances().clear();
-            getDistances(particle, i, shadowParticles);
-            drawLines(particle, i, shadowParticles, g);
-            moveParticle(particle, i, shadowParticles);
+            getDistances(particle, shadowParticles);
+            drawLines(particle, shadowParticles, g);
+            moveParticle(particle, shadowParticles);
             if (particle.age > shadowLifespan) {
                 shadowParticles.remove(i);
             }
         }
 
+        //render normal particles
         for (int i = 0; i < particles.size(); i++) {
             SilkParticle particle = particles.get(i);
             particle.getDistances().clear();
-            getDistances(particle, i, particles);
-            drawLines(particle, i, particles, g);
-            moveParticle(particle, i, particles);
+            getDistances(particle, particles);
+            drawLines(particle, particles, g);
+            moveParticle(particle, particles);
             if (particle.age > lifespan) {
                 particles.remove(i);
             }
@@ -148,38 +155,52 @@ public class SilkBrush extends Brush {
 
     }
 
-    public void moveParticle(SilkParticle particle, int id, List<SilkParticle> particles) {
+    public void moveParticle(SilkParticle particle, List<SilkParticle> particles) {
         particle.px = particle.x;
         particle.py = particle.y;
-        if (particle.x < 0 || particle.x > layer.getWidth() || particle.y < 0 || particle.y > layer.getHeight()) {
-        } else {
-            int propX = particle.x / layer.getWidth();
-            int propY = particle.y / layer.getHeight();
-            //var colorVal = 0x80; //bumpmap.bitmapData.getPixel(propX * 100, propY * 100);
+        particle.x += Math.cos(particle.angle) * particle.speed;
+        particle.y += Math.sin(particle.angle) * particle.speed;
+        particle.age++;
+        
+        if(particles == this.particles){
+            //particle.angle += Math.random() * angleOffset - angleOffset / 2; 
+            //particle.angle += 0.2;
+            if(useRandomAngleOffset == false){
+                particle.angle += angleOffset; 
+            }
+            else {
+                particle.angle += angleOffset * Math.random() - angleOffset / 2; 
+            }
+            
+        }
+        else {
+            if(useRandomAngleOffset == false){
+                particle.angle += shadowAngleOffset; 
+            }
+            else {
+                particle.angle += shadowAngleOffset * Math.random() - shadowAngleOffset / 2; 
+            }
+            //particle.angle += Math.random() * shadowAngleOffset - shadowAngleOffset / 2; 
+        }
+        
+//        if (particle.x < 0 || particle.x > layer.getWidth() || particle.y < 0 || particle.y > layer.getHeight()) {
+//        } else {
+//            int propX = particle.x / layer.getWidth();
+//            int propY = particle.y / layer.getHeight();
+            //double colorVal = 0x80; //bumpmap.bitmapData.getPixel(propX * 100, propY * 100);
             //colorVal = (colorVal & 0xff) - 0x80;
-            //var angleOffset = bumpmapEffect * (colorVal / 0x80);
-
-
-
-
+            //double angleOffset = bumpmapEffect * (colorVal / 0x80);
 //            colorVal = bumpmap.noise((bumpmap.offsetX + particle.x) / bumpmap.scale, (bumpmap.offsetY + particle.y) / bumpmap.scale);
 //            var angleOffset = bumpmapEffect * colorVal;
 //            particle.angle += angleOffset;
-
-
 //            if (particles == this.particles) {
 //                
 //                
 //            } else if (particles == shadowParticles) {
 //                particle.setColor(new Color(0f, 0f, 0f, (float) shadowOpacity));
 //            }
-
             //particle.angle += 0.2;
-        }
-        particle.x += Math.cos(particle.angle) * particle.speed;
-        particle.y += Math.sin(particle.angle) * particle.speed;
-        particle.age++;
-
+//        }
 //        if(particles == this.particles){
 //            Color c = particle.getColor();
 //        float lifeRatio = particle.age / lifespan;
@@ -192,16 +213,9 @@ public class SilkBrush extends Brush {
 ////        float blue =  (float) (c.getBlue() / 256);
 //        particle.setColor(new Color(red, green, blue, opacity));
 //        }
-
-
-
     }
 
-    public void resetDistances(SilkParticle particle, int id) {
-        particle.getDistances().clear();
-    }
-
-    public void getDistances(SilkParticle particle, int id, List<SilkParticle> particles) {
+    public void getDistances(SilkParticle particle, List<SilkParticle> particles) {
         List<Integer> distances = particle.getDistances();
         int dx;
         int dy;
@@ -214,7 +228,7 @@ public class SilkBrush extends Brush {
     }
 
     private void makeParticle(int x, int y, double angle, double speed, List<SilkParticle> group) {
-        SilkParticle p = new SilkParticle(speed, opacity, x, y);
+        SilkParticle p = new SilkParticle(speed, speed, x, y);
         group.add(p);
         p.angle = angle;
         p.speed = speed;
@@ -235,7 +249,7 @@ public class SilkBrush extends Brush {
 
     }
 
-    public void drawLines(SilkParticle particle, int id, List<SilkParticle> particles, Graphics2D g) {
+    public void drawLines(SilkParticle particle, List<SilkParticle> particles, Graphics2D g) {
         int i = -1;
         int offsetX;
         int offsetY;
@@ -294,39 +308,6 @@ public class SilkBrush extends Brush {
         }
     }
 
-    public void drawShadows(SilkParticle particle, int id, List<SilkParticle> particles, Graphics2D g) {
-        int i = -1;
-
-        int offsetX;
-        int offsetY;
-
-        Polygon polygon = new Polygon();
-
-        List<Integer> distances = particle.getDistances();
-
-        while (++i < distances.size()) {
-            SilkParticle p2 = particles.get(i);
-            int distance = distances.get(i).intValue();
-            if (distances.get(i) != null) {
-                if (distance < shadowMaxDist && distance > 1 && Math.random() < shadowDensity) {
-                    g.setColor(particle.getColor());
-
-                    offsetX = (int) (scatter * Math.random() - scatter / 2);
-                    offsetY = (int) (scatter * Math.random() - scatter / 2);
-
-                    polygon.reset();
-
-                    polygon.addPoint(particle.x + offsetX, particle.y + offsetY);
-                    polygon.addPoint(p2.x + offsetX, p2.y + offsetY);
-                    polygon.addPoint(p2.px + offsetX, p2.py + offsetY);
-                    polygon.addPoint(particle.px + offsetX, particle.py + offsetY);
-
-                    g.fillPolygon(polygon);
-                }
-            }
-        }
-    }
-
     @Override
     public void loadDefaultPresets() {
         presets.add(new DefaultSilkBrushPreset());
@@ -380,6 +361,7 @@ public class SilkBrush extends Brush {
         params.add(new IntParameter("lifespan", "Duração", 0, 50, lifespan));
         params.add(new IntParameter("scatter", "Dispersão",0, 600, scatter));
         params.add(new IntParameter("spread", "Propagação",0, 600, spread));
+        params.add(new DoubleParameter("angleOffset", "Distorção de ângulo", -1, 1, angleOffset));
         params.add(new FloatParameter("red", "Vermelho", 0, 1, red));
         params.add(new FloatParameter("green", "Verde",0, 1, green));
         params.add(new FloatParameter("blue", "Azul",0, 1, blue));
@@ -390,12 +372,12 @@ public class SilkBrush extends Brush {
         params.add(new IntParameter("shadowScatter", "Dispersão (sombra)",0, 600, shadowScatter));
         params.add(new IntParameter("shadowSpread", "Propagação (sombra)",0, 600, shadowSpread));
         params.add(new FloatParameter("shadowOpacity", "Opacidade (sombra)",0, 1, shadowOpacity));
-        
+        params.add(new DoubleParameter("shadowAngleOffset", "Distorção de ângulo (sombra)", -1, 1, shadowAngleOffset));
         params.add(new BooleanParameter("useShadows", "Usar sombras", useShadows));
         params.add(new BooleanParameter("useRandomColor", "Cores aleatórias", useRandomColor));
         params.add(new BooleanParameter("fill", "Preencher", fill));
         params.add(new BooleanParameter("fillShadows", "Preencher sombras", fillShadows));
-        
+        params.add(new BooleanParameter("useRandomAngleOffset", "Distorcer ângulo", useRandomAngleOffset));
         return params;
     }
     

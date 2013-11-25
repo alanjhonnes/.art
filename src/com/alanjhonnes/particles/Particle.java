@@ -5,7 +5,7 @@
 package com.alanjhonnes.particles;
 
 /**
- *
+ * Base particle class containing just the position of the particle.
  * @author alan.jbssa
  */
 public abstract class Particle {

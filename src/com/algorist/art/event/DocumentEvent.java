@@ -9,7 +9,8 @@ import com.alanjhonnes.event.IEventDispatcher;
 import com.algorist.art.model.Layer;
 
 /**
- *
+ * Represents an event dispatched by a Document. 
+ * Can also hold a layer object depending on the type of event.
  * @author user
  */
 public class DocumentEvent extends Event {

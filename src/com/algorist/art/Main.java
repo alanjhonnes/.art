@@ -4,16 +4,14 @@
  */
 package com.algorist.art;
 
+import com.algorist.art.util.FileManager;
 import com.algorist.art.view.MainFrame;
-import com.algorist.art.view.MainView;
 
 /**
  *
  * @author alan.jbssa
  */
 public class Main {
-
-    public static MainView nav;
 
     /**
      * @param args the command line arguments

@@ -13,7 +13,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Represents an opened file
+ * Represents an opened file. Holds the list of layers.
  * @author alan.jbssa
  */
 public class Document extends EventDispatcher implements Serializable {

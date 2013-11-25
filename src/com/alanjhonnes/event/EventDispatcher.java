@@ -5,14 +5,14 @@
 package com.alanjhonnes.event;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 /**
- *
+ * Concrete implementation of IEventDispatcher. Objects can dispatch events and 
+ * store a list of listeners to be notified whenever the particular type of 
+ * event is dispatched.
  * @author user
  */
 public class EventDispatcher implements IEventDispatcher {

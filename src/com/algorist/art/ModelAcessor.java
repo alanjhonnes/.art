@@ -9,7 +9,7 @@ import com.algorist.art.model.Document;
 import com.algorist.art.model.History;
 
 /**
- * 
+ * Initializes the model and provides access to it.
  * @author alan.jbssa
  */
 public class ModelAcessor {
