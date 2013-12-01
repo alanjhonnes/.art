@@ -64,8 +64,8 @@ public class FluidMovement {
         double deltaAngle = getDegreeDistance(movement.rotation, angle);
 
         movement.rotation += deltaAngle * turnEase + (Math.random() * twitch * 2) - twitch;
-        int x = pos.x + (int) (Math.cos(movement.rotation * D2R) * speed);
-        int y = pos.y + (int) (Math.sin(movement.rotation * D2R) * speed);
+        int x = pos.x + (int) (Math.cos(movement.rotation * D2R) * speed * Math.random());
+        int y = pos.y + (int) (Math.sin(movement.rotation * D2R) * speed * Math.random() + 1);
 
         movement.movePosition(new Point(x, y));
     }

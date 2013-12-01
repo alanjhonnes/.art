@@ -4,11 +4,10 @@
  */
 package com.algorist.art.model.brushes;
 
+import com.alanjhonnes.graphics.noise.SimplexNoise;
 import com.alanjhonnes.particles.SilkParticle;
-import com.algorist.art.model.Layer;
 import com.algorist.art.model.Movement;
 import com.algorist.art.model.brushes.parameters.BooleanParameter;
-import com.algorist.art.model.brushes.parameters.ColorParameter;
 import com.algorist.art.model.brushes.parameters.DoubleParameter;
 import com.algorist.art.model.brushes.parameters.FloatParameter;
 import com.algorist.art.model.brushes.parameters.IntParameter;
@@ -21,9 +20,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,12 +32,10 @@ public class SilkBrush extends Brush {
 
     private List<SilkParticle> particles;
     private List<SilkParticle> shadowParticles;
-    private BufferedImage bumpmap;
     public int maxDist = 60;
     public float opacity = 0.3f;
     public double density = 1;
     public int spread = 90;
-    public int bumpmapScale = 100;
     public double bumpmapEffect = .4;
     public int scatter = 0;
     public int lifespan = 10;
@@ -74,6 +69,7 @@ public class SilkBrush extends Brush {
     public void initialize(int width, int height) {
         particles.clear();
         shadowParticles.clear();
+        
     }
 
     @Override
@@ -162,57 +158,25 @@ public class SilkBrush extends Brush {
         particle.y += Math.sin(particle.angle) * particle.speed;
         particle.age++;
         
+        double noiseValue = SimplexNoise.noise(particle.x, particle.y);
+        
         if(particles == this.particles){
-            //particle.angle += Math.random() * angleOffset - angleOffset / 2; 
-            //particle.angle += 0.2;
             if(useRandomAngleOffset == false){
-                particle.angle += angleOffset; 
+                particle.angle += angleOffset + bumpmapEffect * noiseValue; 
             }
             else {
-                particle.angle += angleOffset * Math.random() - angleOffset / 2; 
+                particle.angle += angleOffset * Math.random() - angleOffset / 2 + bumpmapEffect * noiseValue; 
             }
             
         }
         else {
             if(useRandomAngleOffset == false){
-                particle.angle += shadowAngleOffset; 
+                particle.angle += shadowAngleOffset + bumpmapEffect * noiseValue; 
             }
             else {
-                particle.angle += shadowAngleOffset * Math.random() - shadowAngleOffset / 2; 
+                particle.angle += shadowAngleOffset * Math.random() - shadowAngleOffset / 2 + bumpmapEffect * noiseValue; 
             }
-            //particle.angle += Math.random() * shadowAngleOffset - shadowAngleOffset / 2; 
         }
-        
-//        if (particle.x < 0 || particle.x > layer.getWidth() || particle.y < 0 || particle.y > layer.getHeight()) {
-//        } else {
-//            int propX = particle.x / layer.getWidth();
-//            int propY = particle.y / layer.getHeight();
-            //double colorVal = 0x80; //bumpmap.bitmapData.getPixel(propX * 100, propY * 100);
-            //colorVal = (colorVal & 0xff) - 0x80;
-            //double angleOffset = bumpmapEffect * (colorVal / 0x80);
-//            colorVal = bumpmap.noise((bumpmap.offsetX + particle.x) / bumpmap.scale, (bumpmap.offsetY + particle.y) / bumpmap.scale);
-//            var angleOffset = bumpmapEffect * colorVal;
-//            particle.angle += angleOffset;
-//            if (particles == this.particles) {
-//                
-//                
-//            } else if (particles == shadowParticles) {
-//                particle.setColor(new Color(0f, 0f, 0f, (float) shadowOpacity));
-//            }
-            //particle.angle += 0.2;
-//        }
-//        if(particles == this.particles){
-//            Color c = particle.getColor();
-//        float lifeRatio = particle.age / lifespan;
-////        int red = (int) (c.getRed()* lifeRatio);
-////        int green = (int) (c.getGreen() * lifeRatio);
-////        int blue = (int) (c.getBlue() * lifeRatio);
-//        
-////        float red = (float) (c.getRed() / 256);
-////        float green = (float) (c.getGreen() / 256);
-////        float blue =  (float) (c.getBlue() / 256);
-//        particle.setColor(new Color(red, green, blue, opacity));
-//        }
     }
 
     public void getDistances(SilkParticle particle, List<SilkParticle> particles) {
@@ -332,6 +296,8 @@ public class SilkBrush extends Brush {
             this.shadowScatter = (int) params.get("shadowScatter");
             this.shadowSpread = (int) params.get("shadowSpread");
             
+            this.bumpmapEffect = (double) params.get("bumpmapEffect");
+            
             this.useShadows = (boolean) params.get("useShadows");
             
             
@@ -357,22 +323,25 @@ public class SilkBrush extends Brush {
         params.clear();
         
         params.add(new IntParameter("maxDist","Distâcia máxima",0, 500, maxDist));
-        params.add(new DoubleParameter("density", "Densidade", 0, 1, density));
-        params.add(new IntParameter("lifespan", "Duração", 0, 50, lifespan));
-        params.add(new IntParameter("scatter", "Dispersão",0, 600, scatter));
-        params.add(new IntParameter("spread", "Propagação",0, 600, spread));
-        params.add(new DoubleParameter("angleOffset", "Distorção de ângulo", -1, 1, angleOffset));
-        params.add(new FloatParameter("red", "Vermelho", 0, 1, red));
-        params.add(new FloatParameter("green", "Verde",0, 1, green));
-        params.add(new FloatParameter("blue", "Azul",0, 1, blue));
-        params.add(new FloatParameter("opacity", "Opacidade",0, 1, opacity));
         params.add(new IntParameter("shadowMaxDist", "Distancia (sombra)",0, 500, shadowMaxDist));
-        params.add(new DoubleParameter("shadowDensity", "Densidade (sombra)", 0, 1, shadowDensity));
+        params.add(new DoubleParameter("density", "% Densidade", 0, 1, density));
+        params.add(new DoubleParameter("shadowDensity", "% Densidade (sombra)", 0, 1, shadowDensity));
+        params.add(new IntParameter("lifespan", "Duração", 0, 50, lifespan));
         params.add(new IntParameter("shadowLifespan", "Duração (sombra)",0, 50, shadowLifespan));
-        params.add(new IntParameter("shadowScatter", "Dispersão (sombra)",0, 600, shadowScatter));
+        params.add(new IntParameter("scatter", "Dispersão",0, 400, scatter));
+        params.add(new IntParameter("shadowScatter", "Dispersão (sombra)",0, 400, shadowScatter));
+        params.add(new IntParameter("spread", "Propagação",0, 600, spread));
         params.add(new IntParameter("shadowSpread", "Propagação (sombra)",0, 600, shadowSpread));
-        params.add(new FloatParameter("shadowOpacity", "Opacidade (sombra)",0, 1, shadowOpacity));
+        params.add(new DoubleParameter("angleOffset", "Distorção de ângulo", -1, 1, angleOffset));
         params.add(new DoubleParameter("shadowAngleOffset", "Distorção de ângulo (sombra)", -1, 1, shadowAngleOffset));
+        params.add(new FloatParameter("opacity", "% Opacidade",0, 1, opacity));
+        params.add(new FloatParameter("shadowOpacity", "% Opacidade (sombra)",0, 1, shadowOpacity));
+        params.add(new FloatParameter("red", "% Vermelho", 0, 1, red));
+        params.add(new FloatParameter("green", "% Verde",0, 1, green));
+        params.add(new FloatParameter("blue", "% Azul",0, 1, blue));
+        
+        params.add(new DoubleParameter("bumpmapEffect", "% Distorção por bumpmap", 0, 1, bumpmapEffect));
+        
         params.add(new BooleanParameter("useShadows", "Usar sombras", useShadows));
         params.add(new BooleanParameter("useRandomColor", "Cores aleatórias", useRandomColor));
         params.add(new BooleanParameter("fill", "Preencher", fill));

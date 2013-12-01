@@ -21,7 +21,6 @@ public class RandomColorSilkBrushPreset extends Preset {
         params.put("opacity", 0.2f);
         params.put("density", 1d);
         params.put("spread", 90);
-        params.put("bumpmapScale", 100);
         params.put("bumpmapEffect", 0.4d);
         params.put("scatter", 0);
         params.put("lifespan", 10);
