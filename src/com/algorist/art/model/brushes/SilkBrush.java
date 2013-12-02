@@ -89,7 +89,6 @@ public class SilkBrush extends Brush {
         //turn on anti-aliasing
         Graphics2D g = layer.getImage().createGraphics();
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        
         //render shadow particles
         for (int i = 0; i < shadowParticles.size(); i++) {
             SilkParticle particle = shadowParticles.get(i);
@@ -97,11 +96,10 @@ public class SilkBrush extends Brush {
             getDistances(particle, shadowParticles);
             drawLines(particle, shadowParticles, g);
             moveParticle(particle, shadowParticles);
-            if (particle.age > shadowLifespan) {
+            if (particle.age > lifespan) {
                 shadowParticles.remove(i);
             }
         }
-
         //render normal particles
         for (int i = 0; i < particles.size(); i++) {
             SilkParticle particle = particles.get(i);
@@ -152,13 +150,18 @@ public class SilkBrush extends Brush {
     }
 
     public void moveParticle(SilkParticle particle, List<SilkParticle> particles) {
-        particle.px = particle.x;
-        particle.py = particle.y;
-        particle.x += Math.cos(particle.angle) * particle.speed;
-        particle.y += Math.sin(particle.angle) * particle.speed;
-        particle.age++;
         
         double noiseValue = SimplexNoise.noise(particle.x, particle.y);
+        
+        double speedDistortion = noiseValue * bumpmapEffect * 10;
+        
+        particle.px = particle.x;
+        particle.py = particle.y;
+        particle.x += Math.cos(particle.angle) * particle.speed + speedDistortion;
+        particle.y += Math.sin(particle.angle) * particle.speed + speedDistortion;
+        particle.age++;
+        
+        
         
         if(particles == this.particles){
             if(useRandomAngleOffset == false){
