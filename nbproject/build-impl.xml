@@ -1,24 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-*** GENERATED FROM project.xml - DO NOT EDIT  ***
-***         EDIT ../build.xml INSTEAD         ***
 
-For the purpose of easier reading the script
-is divided into following sections:
-
-  - initialization
-  - compilation
-  - jar
-  - execution
-  - debugging
-  - javadoc
-  - test compilation
-  - test execution
-  - test debugging
-  - applet
-  - cleanup
-
-        -->
 <project xmlns:j2seproject1="http://www.netbeans.org/ns/j2se-project/1" xmlns:j2seproject3="http://www.netbeans.org/ns/j2se-project/3" xmlns:jaxrpc="http://www.netbeans.org/ns/j2se-project/jax-rpc" basedir=".." default="default" name="art-impl">
     <import file="jnlp-impl.xml"/>
     <fail message="Please build using Ant 1.8.0 or higher.">

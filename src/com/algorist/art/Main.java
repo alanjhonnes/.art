@@ -9,7 +9,7 @@ import com.algorist.art.view.MainFrame;
 
 /**
  *
- * @author alan.jbssa
+ * @author alan.jbssa 
  */
 public class Main {
 
